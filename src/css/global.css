@@ -1,0 +1,4 @@
+.custom-blur {
+  background-color: #8903ff91 !important;
+  backdrop-filter: blur(300px);
+}
