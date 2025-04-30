@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Procesadores",
+    "background": "processors/processors_bg.png",
+    "svg": "",
+    "path": "procesadores"
+  },
+  {
+    "id": 2,
+    "name": "Memorias RAM",
+    "background": "memory/memory_bg.png",
+    "svg": "",
+    "path": "memorias-ram"
+  },
+  {
+    "id": 3,
+    "name": "Motherboards",
+    "background": "motherboards/motherboards_bg.png",
+    "svg": "",
+    "path": "motherboards"
+  }
+]

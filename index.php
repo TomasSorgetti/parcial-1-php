@@ -27,7 +27,7 @@
             "title" => "Productos",
             "description" => "Completar con saraza.",
         ]
-    ];http://localhost/davinci/ecommerce/index.php#
+    ];
 
     if (!in_array($pageQuery, array_column($pageList, 'page'))) {
         $pageQuery = '404';
@@ -39,7 +39,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="css/global.css">
     <title>
         <?php echo $pageList[array_search($pageQuery, array_column($pageList, 'page'))]['title']; ?>
     </title>
@@ -81,7 +81,7 @@
     </header>
 
     <?php 
-        include_once 'src/pages/' . $pageQuery . '.php';
+        include_once 'pages/' . $pageQuery . '.php';
     ?>
 
     <footer>

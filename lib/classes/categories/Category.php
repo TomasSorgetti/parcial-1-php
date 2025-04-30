@@ -1,0 +1,125 @@
+<?php
+
+class Category {
+    private $id;
+    private $name;
+    private $background;
+    private $svg;
+    private $path;
+
+    /** 
+     * 
+     */
+    public static function getAllCategories() {
+        $categoriesData = json_decode(file_get_contents('lib/data/categories.json'), true);
+
+        $categories = [];
+        
+        foreach ($categoriesData as $category) {
+            //? deberia retornar un error si no encuentra nada o algun dato erroneo
+            $categories[] = new Category($category['id'], $category['name'], $category['background'], $category['svg']);
+        }
+
+        return $categories;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of background
+     */ 
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    /**
+     * Set the value of background
+     *
+     * @return  self
+     */ 
+    public function setBackground($background)
+    {
+        $this->background = $background;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of svg
+     */ 
+    public function getSvg()
+    {
+        return $this->svg;
+    }
+
+    /**
+     * Set the value of svg
+     *
+     * @return  self
+     */ 
+    public function setSvg($svg)
+    {
+        $this->svg = $svg;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of path
+     */ 
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set the value of path
+     *
+     * @return  self
+     */ 
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+}

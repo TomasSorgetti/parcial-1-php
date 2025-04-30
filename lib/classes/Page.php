@@ -6,7 +6,7 @@ class Page {
     private $path;
 
     private function getAllPages(): array {
-        return json_decode(file_get_contents('src/data/pages.json'), true) ?? [];
+        return json_decode(file_get_contents('lib/data/pages.json'), true) ?? [];
     }
 
     private function isValidPath(string $pagePath): bool {
