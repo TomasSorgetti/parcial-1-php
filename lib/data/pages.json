@@ -1,7 +1,37 @@
 [
-    {
-        "path": "home",
-        "title": "Bienvenido a RetroByte Shop",
-        "description": "Completar con saraza."
-    }
+  {
+    "path": "home",
+    "title": "Bienvenido",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
+  },
+  {
+    "path": "products",
+    "title": "Productos",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
+  },
+  {
+    "path": "product",
+    "title": "Producto",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
+  },
+  {
+    "path": "community",
+    "title": "Comunidad",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
+  },
+  {
+    "path": "build",
+    "title": "Armá tu pc",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
+  }
 ]

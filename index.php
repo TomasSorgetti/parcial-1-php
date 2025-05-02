@@ -1,37 +1,8 @@
 <?php 
+    require_once 'lib/classes/Page.php';
     $pageQuery = $_GET['page'] ?? 'home';
 
-    $pageList = [
-        [
-            "page" => "home",
-            "title" => "Bienvenido a Code Crafters",
-            "description" => "Completar con saraza.",
-        ],
-        [
-            "page" => "404",
-            "title" => "Error 404",
-            "description" => "Completar con saraza.",
-        ],
-        [
-            "page" => "categories",
-            "title" => "Categorias",
-            "description" => "Completar con saraza.",
-        ],
-        [
-            "page" => "category",
-            "title" => "Categoría",
-            "description" => "Completar con saraza.",
-        ],
-        [
-            "page" => "productos",
-            "title" => "Productos",
-            "description" => "Completar con saraza.",
-        ]
-    ];
-
-    if (!in_array($pageQuery, array_column($pageList, 'page'))) {
-        $pageQuery = '404';
-    };
+    $page = Page::getPage($pageQuery);
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/global.css">
     <title>
-        <?php echo $pageList[array_search($pageQuery, array_column($pageList, 'page'))]['title']; ?>
+        <?php echo($page->getTitle()); ?>
     </title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -51,9 +22,10 @@
         --background-color: #000000;
         --light-text-color: #ffffff;
         --dark-text-color: #C2C2C2;
-
+        
         --light-dark-color: #171717;
         --primary-color: #8803FF;
+        --transparent-black-color:rgba(0, 0, 0, 0.76);
 
         --font-size-base: 16px;
         --font-size-lg: 18px;
@@ -68,24 +40,36 @@
 </head>
 
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
-    <header class="absolute top-0 left-0 w-full">
-        <nav class="max-w-[1280px] mx-auto border-b-2 border-b-[var(--primary-color)] flex justify-between items-center py-6">
-        <a href="index.php">Code Crafters</a>
-        <ul class="flex gap-4">
-            <li>Inicio</li>
-            <li>Productos</li>
-            <li>Comunidad</li>
-            <li>Armá tu pc</li>
-        </ul>
+    <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
+        <nav class="max-w-[1280px] mx-auto border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out">
+            <div class="flex justify-between items-center py-6 max-w-[1280px] mx-auto">
+                <a href="index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)]">Code Crafters</a>
+                <ul class="flex gap-4">
+                    <li>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=home">Inicio</a>
+                    </li>
+                    <li>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=products">Productos</a>
+                    </li>
+                    <li>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=community">Comunidad</a>
+                    </li>
+                    <li>
+                        <a class="uppercase text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full" href="index.php?page=build">Armá tu pc</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <?php 
-        include_once 'pages/' . $pageQuery . '.php';
+        include_once 'pages/' . $page->getPath() . '.php';
     ?>
 
-    <footer>
-        <p>&copy; 2023 RetroByte Shop. Todos los derechos reservados.</p>
+    <footer class="h-60 flex justify-center items-center">
+        <?php echo("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
     </footer>
+
+    <script src="scripts/navbar.js"></script>
 </body>
 </html>

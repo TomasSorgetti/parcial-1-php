@@ -2,3 +2,7 @@
   background-color: #8903ff91 !important;
   backdrop-filter: blur(300px);
 }
+
+#header.isScrolled nav {
+  max-width: 100vw;
+}

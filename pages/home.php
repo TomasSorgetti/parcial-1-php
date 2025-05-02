@@ -2,10 +2,10 @@
 <main>
     <!-- Hero -->
     <section>
-        <div class="flex justify-between items-center max-w-[1280px] mx-auto py-20">
-            <div class="flex flex-col gap-8">
+        <div class="flex justify-between items-center max-w-[1280px] mx-auto py-20 h-[80vh]">
+            <div class="flex flex-col gap-12">
                 <h1 class="text-5xl font-bold uppercase">Armá la Máquina que la Rompe en el Silicio</h1>
-                <p class="text-base max-w-[600px]">En Code Crafters, armás tu equipo con procesadores potentes, GPUs de vanguardia y placas madre sólidas. Personalizá tu PC en un estilo negro y violeta. ¡Hacelo realidad!</p>
+                <p class="text-base max-w-[560px] text-[var(--dark-text-color)]">En Code Crafters, armás tu equipo con procesadores potentes, GPUs de vanguardia y placas madre sólidas. Personalizá tu PC a tu estilo. ¡Hacelo realidad!</p>
                 <div class="flex gap-4">
                     <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white h-[58px] px-6 rounded-full">productos</a>
                     <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] h-[58px] px-6 rounded-full">arma tu pc</a>
@@ -29,7 +29,7 @@
                 <div class="absolute top-0 left-0 w-full h-full flex items-end overflow-hidden">
                     <div class="relative flex items-center justify-center mt-10">
                         <img src="assets/images/categories/processors/processors_bg.png" alt="procesadores bg" class="w-full" draggable="false"/>
-                        <svg class="absolute z-10 w-full h-auto group-hover:translate-y-[-0.5rem] transition duration-500" preserveAspectRatio="none" width="546" height="484" viewBox="0 0 546 484" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="absolute z-10 w-full h-auto group-hover:translate-y-[-0.5rem] transition duration-500 ease-in-out" preserveAspectRatio="none" width="546" height="484" viewBox="0 0 546 484" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M261.699 82.1076L47.4025 231.907C38.23 238.319 38.3053 251.925 47.5481 258.235L263.982 405.993C269.484 409.749 276.737 409.703 282.191 405.879L495.794 256.079C504.94 249.665 504.864 236.091 495.648 229.779L279.907 82.0206C274.412 78.2566 267.159 78.2913 261.699 82.1076Z" stroke="#A8A8A8" class="group-hover:stroke-[var(--primary-color)] transition duration-300"/>
                             <path d="M261.699 58.5782L47.4025 208.378C38.23 214.79 38.3053 228.396 47.5481 234.706L263.982 382.464C269.484 386.219 276.737 386.174 282.191 382.349L495.794 232.55C504.94 226.136 504.864 212.561 495.648 206.249L279.907 58.4911C274.412 54.7272 267.159 54.7619 261.699 58.5782Z" fill="black"/>
                             <path d="M261.699 58.5782L47.4025 208.378C38.23 214.79 38.3053 228.396 47.5481 234.706L263.982 382.464C269.484 386.219 276.737 386.174 282.191 382.349L495.794 232.55C504.94 226.136 504.864 212.561 495.648 206.249L279.907 58.4911C274.412 54.7272 267.159 54.7619 261.699 58.5782Z" fill="url(#paint0_linear_56_30)" fill-opacity="0.2"/>
@@ -64,7 +64,7 @@
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[4rem] translate-y-[1rem]">
                         <img src="assets/images/categories/motherboards/motherboards_bg.png" alt="motherboards bg" draggable="false"/>
-                        <svg class="absolute z-10  w-full h-auto group-hover:translate-x-[-1rem] transition duration-500" width="627" height="447" viewBox="0 0 627 447" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="absolute z-10  w-full h-auto group-hover:translate-x-[-1rem] transition duration-500 ease-in-out" width="627" height="447" viewBox="0 0 627 447" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_56_28" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="627" height="447">
                             <rect x="0.831299" y="0.252441" width="626" height="446" fill="#D9D9D9"/>
                             </mask>
@@ -334,7 +334,7 @@
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[1rem] translate-y-[1rem]">                        
                         <img  src="assets/images/categories/memory/memory_bg.png" alt="memorias ram bg" draggable="false"/>
-                        <svg class="absolute z-10  w-full h-auto group-hover:scale-105 transition duration-400" width="550" height="389" viewBox="0 0 550 389" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="absolute z-10  w-full h-auto group-hover:scale-105 transition duration-500 ease-in-out" width="550" height="389" viewBox="0 0 550 389" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g class="group-hover:-translate-x-2 group-hover:translate-y-2 transition duration-400">
                                 <path d="M153.247 237.279L368.25 86.5891C370.729 84.8519 373.999 84.7799 376.546 86.3812L376.79 86.5408L457.684 141.889C461.939 144.801 462.041 151.016 457.951 154.077L457.753 154.221L242.75 304.911C240.271 306.648 237.001 306.72 234.455 305.118L234.211 304.958L225.29 298.855L225.355 298.793C226.302 297.884 226.311 296.391 225.422 295.469L225.232 295.292L225.067 295.155C224.222 294.451 222.993 294.51 222.219 295.258L222.071 295.417C221.719 295.834 221.124 295.938 220.656 295.678L220.564 295.621L216.45 292.807C216.121 292.581 216.022 292.145 216.211 291.804L216.252 291.737C216.74 291.032 216.648 290.087 216.055 289.489L215.93 289.374L215.035 288.629C214.2 287.933 213.028 287.832 212.092 288.356L211.908 288.469C211.396 288.815 210.734 288.834 210.205 288.528L210.101 288.463L153.317 249.611C149.061 246.699 148.959 240.484 153.049 237.422L153.247 237.279Z" stroke="#5D5D5D" class="group-hover:stroke-[var(--primary-color)] transition duration-300"/>
                                 <path d="M370.488 85.9421C371.348 85.3392 372.301 85.2029 373.164 85.2882C374.031 85.3738 374.778 85.6818 375.188 85.9275L453.121 139.503L243.214 285.758C241.547 286.919 239.472 287.18 237.508 287.003C235.566 286.828 233.791 286.229 232.751 285.733L158.873 234.258L370.488 85.9421Z" stroke="#5D5D5D" class="group-hover:stroke-[var(--primary-color)] transition duration-300"/>
