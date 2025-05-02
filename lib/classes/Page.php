@@ -47,9 +47,15 @@ class Page {
                     $page->title = $p['title'];
                     $page->description = $p['description'];
                     $page->path = $p['path'];
-                    $page->active = $p['active'];
-                    $page->restricted = $p['restricted'];
+                    $page->active = isset($p['active']) ? (bool) $p['active'] : false;
+                    $page->restricted = isset($p['restricted']) ? (bool) $p['restricted'] : false;
                 }
+            }
+            if(!$page->active) {
+                return $page->createErrorPage(503);
+            }
+            if($page->restricted) {
+                return $page->createErrorPage(403);
             }
             return $page;
         }
@@ -76,7 +82,7 @@ class Page {
                 $page->title = 'Ups! El servidor tiene problemas';
                 break;
             case 503:
-                $page->title = 'El servidor no esta disponible';
+                $page->title = 'Ups! El servicio no esta disponible';
                 break;
             default:
                 $page->title = 'Ups! Ocurrio un error';
