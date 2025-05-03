@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Ryzen 3 2200G",
+    "description": "Procesador",
+    "list_price": 300,
+    "sale_price": 100,
+    "image": "ryzen_3_2200g.png",
+    "category": "processors"
+  },
+  {
+    "id": 2,
+    "title": "Ryzen 5 3600",
+    "description": "Procesador",
+    "list_price": 500,
+    "sale_price": 200,
+    "image": "ryzen/ryzen_5_3600.png",
+    "category": "processors"
+  },
+  {
+    "id": 3,
+    "title": "Ryzen 7 3700X",
+    "description": "Procesador",
+    "list_price": 700,
+    "sale_price": 300,
+    "image": "ryzen/ryzen_7_3700x.png",
+    "category": "processors"
+  },
+  {
+    "id": 4,
+    "title": "Ryzen 9 3900X",
+    "description": "Procesador",
+    "list_price": 900,
+    "sale_price": 400,
+    "image": "ryzen/ryzen_9_3900x.png",
+    "category": "processors"
+  },
+  {
+    "id": 5,
+    "title": "Intel Core i3-10100",
+    "description": "Procesador",
+    "list_price": 1000,
+    "sale_price": 500,
+    "image": "intel/i3-10100.png",
+    "category": "processors"
+  },
+  {
+    "id": 6,
+    "title": "Intel Core i5-10400",
+    "description": "Procesador",
+    "list_price": 1200,
+    "sale_price": 600,
+    "image": "intel/i5-10400.png",
+    "category": "processors"
+  },
+  {
+    "id": 7,
+    "title": "Intel Core i7-10700",
+    "description": "Procesador",
+    "list_price": 1400,
+    "sale_price": 700,
+    "image": "intel/i7-10700.png",
+    "category": "processors"
+  },
+  {
+    "id": 8,
+    "title": "Intel Core i9-10900",
+    "description": "Procesador",
+    "list_price": 1600,
+    "sale_price": 800,
+    "image": "intel/i9-10900.png",
+    "category": "processors"
+  },
+  {
+    "id": 9,
+    "title": "AMD A10-3200X",
+    "description": "Procesador",
+    "list_price": 200,
+    "sale_price": 100,
+    "image": "amd/a10_3200x.png",
+    "category": "processors"
+  },
+  {
+    "id": 10,
+    "title": "AMD A12-3800X",
+    "description": "Procesador",
+    "list_price": 300,
+    "sale_price": 150,
+    "image": "amd/a12_3800x.png",
+    "category": "processors"
+  }
+]

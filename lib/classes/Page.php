@@ -47,6 +47,7 @@ class Page {
                     $page->title = $p['title'];
                     $page->description = $p['description'];
                     $page->path = $p['path'];
+                    // todo => convertir binario a boolean para luego validar
                     $page->active = isset($p['active']) ? (bool) $p['active'] : false;
                     $page->restricted = isset($p['restricted']) ? (bool) $p['restricted'] : false;
                 }
@@ -90,8 +91,6 @@ class Page {
         }
         $page->path = $type;
         $page->description = 'Error' . $type;
-        $page->active = 1;
-        $page->restricted = 0;
         return $page;
     }
 

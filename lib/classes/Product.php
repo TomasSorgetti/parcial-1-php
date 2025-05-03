@@ -8,7 +8,125 @@ class Product {
     private $image;
     private $category;
 
-    
+    /**
+     * Obtiene la lista de productos existentes
+     * @param string $categoryQuery
+     * @param string $orderQuery
+     * @param int $pageQuery
+     * @return array 
+     */
+    public static function getAllProducts(string $search="", string $categoryQuery= "all", string $orderQuery = "price_asc", int $pageQuery= 1): array {
+        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+        $prodPerPage = 9;
+
+        //* el filter basicamente compara y si es true lo incluye en el array
+        $filtredProducts = array_filter($productList, function ($product) use ($search, $categoryQuery) {
+            if ($search != "") {
+                $search = strtolower(trim($search));
+                $title = strtolower($product["title"]);
+                
+                if (strpos($title, $search) === false) {
+                    return false;
+                }
+            }
+            
+            //TODO => agregar filtro por categoria
+            if ($categoryQuery != "all") {
+                if ($product["category"] !== $categoryQuery) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        //* usort seria el equivalente a sort de js usort(array &$array, callable $value_compare_func): bool
+        // orderQuery puede ser price_asc | price_desc | name_asc | name_desc
+        usort($filtredProducts, function ($a, $b) use ($orderQuery) {
+            switch ($orderQuery) {
+                case "price_asc":
+                    if ($a["list_price"] < $b["list_price"]) {
+                        return -1;
+                    } elseif ($a["list_price"] > $b["list_price"]) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+
+                case "price_desc":
+                    if ($b["list_price"] < $a["list_price"]) {
+                        return -1;
+                    } elseif ($b["list_price"] > $a["list_price"]) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+
+                case "name_asc":
+                    return strcmp($a["title"], $b["title"]);
+
+                case "name_desc":
+                    return strcmp($b["title"], $a["title"]);
+
+                default:
+                    if ($a["list_price"] < $b["list_price"]) {
+                        return -1;
+                    } elseif ($a["list_price"] > $b["list_price"]) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+            }
+        });
+
+        $products = [];
+
+        foreach ($filtredProducts as $product) {
+            $newProduct = new self();
+            $newProduct->id = $product["id"];
+            $newProduct->title = $product["title"];
+            $newProduct->list_price = $product["list_price"];
+            $newProduct->sale_price = $product["sale_price"];
+            $newProduct->description = $product["description"];
+            $newProduct->image = $product["image"];
+            $newProduct->category = $product["category"];
+
+            $products[] = $newProduct;
+        }
+
+        return [
+            "total_pages" => ceil(count($products) / $prodPerPage),
+            "current_page" => $pageQuery,
+            "products" => $products,
+            "total_products" => count($products)
+        ];
+    }
+
+    /**
+     * Obtiene un producto por su id
+     * @param string $id
+     * @return Product
+     */
+    public static function getProductById(string $id): ?self {
+        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+
+        foreach ($productList as $product) {
+            if ($product["id"] === intval($id)) {
+                $newProduct = new self();
+                $newProduct->id = $product["id"];
+                $newProduct->title = $product["title"];
+                $newProduct->list_price = $product["list_price"];
+                $newProduct->sale_price = $product["sale_price"];
+                $newProduct->description = $product["description"];
+                $newProduct->image = $product["image"];
+                $newProduct->category = $product["category"];
+
+                return $newProduct;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Get the value of id

@@ -1,5 +1,6 @@
 <?php 
     require_once 'lib/classes/Page.php';
+
     $pageQuery = $_GET['page'] ?? 'home';
 
     $page = Page::getPage($pageQuery);
@@ -71,5 +72,6 @@
     </footer>
 
     <script src="scripts/navbar.js"></script>
+    <script src="scripts/products.js"></script>
 </body>
 </html>
