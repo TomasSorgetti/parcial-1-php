@@ -15,9 +15,8 @@ class Product {
      * @param int $pageQuery
      * @return array 
      */
-    public static function getAllProducts(string $search="", string $categoryQuery= "all", string $orderQuery = "price_asc", int $pageQuery= 1): array {
+    public static function getAllProducts(string $search="", string $categoryQuery= "all", string $orderQuery = "price_asc", int $pageQuery= 1, int $prodPerPage = 9): array {
         $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
-        $prodPerPage = 9;
 
         //* el filter basicamente compara y si es true lo incluye en el array
         $filtredProducts = array_filter($productList, function ($product) use ($search, $categoryQuery) {
@@ -32,7 +31,7 @@ class Product {
             
             //TODO => agregar filtro por categoria
             if ($categoryQuery != "all") {
-                if ($product["category"] !== $categoryQuery) {
+                if (strtolower($product["category"]) !== strtolower($categoryQuery)) {
                     return false;
                 }
             }

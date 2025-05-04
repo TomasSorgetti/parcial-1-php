@@ -16,11 +16,37 @@ class Category {
         $categories = [];
         
         foreach ($categoriesData as $category) {
-            //? deberia retornar un error si no encuentra nada o algun dato erroneo
-            $categories[] = new Category($category['id'], $category['name'], $category['background'], $category['svg']);
+            //? deberia retornar un error si no encuentra nada
+            $newCategory = new self();
+            $newCategory->id = $category["id"];
+            $newCategory->name = $category["name"];
+            $newCategory->background = $category["background"];
+            $newCategory->svg = $category["svg"];
+            $newCategory->path = $category["path"];
+
+            $categories[] = $newCategory;
         }
 
         return $categories;
+    }
+
+    public static function getCategoryByName($categoryName) {
+        $categoriesData = json_decode(file_get_contents('lib/data/categories.json'), true);
+
+        foreach ($categoriesData as $category) {
+            if ($category["name"] === intval($categoryName)) {
+                $newCategory = new self();
+                $newCategory->id = $category["id"];
+                $newCategory->name = $category["name"];
+                $newCategory->background = $category["background"];
+                $newCategory->svg = $category["svg"];
+                $newCategory->path = $category["path"];
+
+                return $newCategory;
+            }
+        }
+
+        return null;
     }
 
     /**

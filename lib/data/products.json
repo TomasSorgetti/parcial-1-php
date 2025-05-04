@@ -1,92 +1,209 @@
 [
   {
     "id": 1,
-    "title": "Ryzen 3 2200G",
-    "description": "Procesador",
-    "list_price": 300,
-    "sale_price": 100,
-    "image": "ryzen_3_2200g.png",
-    "category": "processors"
+    "title": "Procesador AMD RYZEN 3 3200G 4.0GHz",
+    "description": "Procesador AMD Ryzen 3 3200G con 4 núcleos y 4 hilos, ideal para tareas diarias y gaming ligero. Incluye gráficos integrados Radeon Vega 8, perfecto para sistemas compactos sin GPU dedicada. Velocidad máxima de 4.0 GHz y arquitectura Zen+ para un rendimiento eficiente.",
+    "list_price": 180000,
+    "sale_price": 120000,
+    "image": "processors/amd/ryzen_3.png",
+    "category": 1
   },
   {
     "id": 2,
-    "title": "Ryzen 5 3600",
-    "description": "Procesador",
-    "list_price": 500,
-    "sale_price": 200,
-    "image": "ryzen/ryzen_5_3600.png",
-    "category": "processors"
+    "title": "Procesador AMD Ryzen 5 5500 4.2GHz",
+    "description": "El AMD Ryzen 5 5500 ofrece 6 núcleos y 12 hilos, optimizado para gaming y multitarea. Con una frecuencia boost de 4.2 GHz y arquitectura Zen 3, asegura un rendimiento sólido para aplicaciones exigentes y juegos modernos a un precio accesible.",
+    "list_price": 300000,
+    "sale_price": 200000,
+    "image": "processors/amd/ryzen_5.png",
+    "category": 1
   },
   {
     "id": 3,
-    "title": "Ryzen 7 3700X",
-    "description": "Procesador",
-    "list_price": 700,
-    "sale_price": 300,
-    "image": "ryzen/ryzen_7_3700x.png",
-    "category": "processors"
+    "title": "Procesador AMD Ryzen 7 5700X 4.6GHz",
+    "description": "Potente AMD Ryzen 7 5700X con 8 núcleos y 16 hilos, diseñado para creadores de contenido y gamers. Alcanza hasta 4.6 GHz con arquitectura Zen 3, ofreciendo un rendimiento excepcional en edición de video, streaming y juegos AAA. Compatible con PCIe 4.0.",
+    "list_price": 420000,
+    "sale_price": 280000,
+    "image": "processors/amd/ryzen_7_5700.png",
+    "category": 1
   },
   {
     "id": 4,
-    "title": "Ryzen 9 3900X",
-    "description": "Procesador",
-    "list_price": 900,
-    "sale_price": 400,
-    "image": "ryzen/ryzen_9_3900x.png",
-    "category": "processors"
+    "title": "Procesador AMD Ryzen 7 7700 5.3GHz",
+    "description": "El AMD Ryzen 7 7700 cuenta con 8 núcleos y 16 hilos, ideal para cargas de trabajo intensivas y gaming de alto nivel. Con arquitectura Zen 4 y un boost de 5.3 GHz, ofrece eficiencia energética y soporte para DDR5 y PCIe 5.0, perfecto para sistemas modernos.",
+    "list_price": 600000,
+    "sale_price": 400000,
+    "image": "processors/amd/ryzen_7_7700.png",
+    "category": 1
   },
   {
     "id": 5,
-    "title": "Intel Core i3-10100",
-    "description": "Procesador",
-    "list_price": 1000,
-    "sale_price": 500,
-    "image": "intel/i3-10100.png",
-    "category": "processors"
+    "title": "Procesador AMD Ryzen 9 7900 5.4GHz",
+    "description": "Procesador de élite AMD Ryzen 9 7900 con 12 núcleos y 24 hilos, diseñado para profesionales y entusiastas. Con arquitectura Zen 4 y hasta 5.4 GHz, destaca en renderizado 3D, edición de video y gaming extremo. Soporta DDR5 y PCIe 5.0 para máxima conectividad.",
+    "list_price": 780000,
+    "sale_price": 520000,
+    "image": "processors/amd/ryzen_9.png",
+    "category": 1
   },
   {
     "id": 6,
-    "title": "Intel Core i5-10400",
-    "description": "Procesador",
-    "list_price": 1200,
-    "sale_price": 600,
-    "image": "intel/i5-10400.png",
-    "category": "processors"
+    "title": "Procesador AMD Athlon 3000G 3.5GHz",
+    "description": "El AMD Athlon 3000G es un procesador económico con 2 núcleos y 4 hilos, ideal para PCs de oficina o multimedia. Incluye gráficos Radeon Vega 3 y alcanza 3.5 GHz. Perfecto para tareas básicas y sistemas de bajo costo con buen rendimiento gráfico integrado.",
+    "list_price": 120000,
+    "sale_price": 80000,
+    "image": "processors/amd/athlon.png",
+    "category": 1
   },
   {
     "id": 7,
-    "title": "Intel Core i7-10700",
-    "description": "Procesador",
-    "list_price": 1400,
-    "sale_price": 700,
-    "image": "intel/i7-10700.png",
-    "category": "processors"
+    "title": "Procesador Intel Core i3 12100F 4.3GHz",
+    "description": "Intel Core i3 12100F con 4 núcleos y 8 hilos, ideal para gaming y productividad básica. Con arquitectura Alder Lake y hasta 4.3 GHz, ofrece gran rendimiento por su precio. No incluye gráficos integrados, perfecto para sistemas con GPU dedicada.",
+    "list_price": 216000,
+    "sale_price": 144000,
+    "image": "processors/intel/i3.png",
+    "category": 1
   },
   {
     "id": 8,
-    "title": "Intel Core i9-10900",
-    "description": "Procesador",
-    "list_price": 1600,
-    "sale_price": 800,
-    "image": "intel/i9-10900.png",
-    "category": "processors"
+    "title": "Procesador Intel Core i5 12600KF 4.90GHz",
+    "description": "El Intel Core i5 12600KF ofrece 10 núcleos (6P+4E) y 16 hilos, ideal para gaming y tareas exigentes. Con arquitectura Alder Lake y un boost de 4.9 GHz, asegura un rendimiento sobresaliente. Sin gráficos integrados, perfecto para configuraciones con GPU de alto nivel.",
+    "list_price": 450000,
+    "sale_price": 300000,
+    "image": "processors/intel/i5.png",
+    "category": 1
   },
   {
     "id": 9,
-    "title": "AMD A10-3200X",
-    "description": "Procesador",
-    "list_price": 200,
-    "sale_price": 100,
-    "image": "amd/a10_3200x.png",
-    "category": "processors"
+    "title": "Procesador Intel Core i7 10700K 5.1GHz",
+    "description": "Intel Core i7 10700K con 8 núcleos y 16 hilos, diseñado para gaming y creación de contenido. Alcanza hasta 5.1 GHz con arquitectura Comet Lake y desbloqueado para overclocking. Incluye gráficos UHD 630, ideal para sistemas versátiles de alto rendimiento.",
+    "list_price": 540000,
+    "sale_price": 360000,
+    "image": "processors/intel/i7.png",
+    "category": 1
   },
   {
     "id": 10,
-    "title": "AMD A12-3800X",
-    "description": "Procesador",
-    "list_price": 300,
-    "sale_price": 150,
-    "image": "amd/a12_3800x.png",
-    "category": "processors"
+    "title": "Procesador Intel Core i9 14900F 5.8GHz",
+    "description": "El Intel Core i9 14900F es un procesador tope de gama con 24 núcleos (8P+16E) y 32 hilos, perfecto para profesionales y gamers extremos. Con arquitectura Raptor Lake Refresh y hasta 5.8 GHz, ofrece potencia inigualable. Sin gráficos integrados, ideal para GPUs dedicadas.",
+    "list_price": 960000,
+    "sale_price": 640000,
+    "image": "processors/intel/i9.png",
+    "category": 1
+  },
+  {
+    "id": 11,
+    "title": "Memoria Team DDR5 64GB (2x32GB) Black Intel",
+    "description": "Kit de memoria Team DDR5 de 64GB (2x32GB) en color negro, optimizado para plataformas Intel. Ofrece alta velocidad y baja latencia para gaming, edición de video y aplicaciones pesadas. Compatible con XMP para overclocking sencillo y rendimiento estable.",
+    "list_price": 480000,
+    "sale_price": 320000,
+    "image": "memory/black_intel.png",
+    "category": 2
+  },
+  {
+    "id": 12,
+    "title": "Memoria Team DDR5 64GB (2x32GB) RGB Black Intel",
+    "description": "Memoria Team DDR5 de 64GB (2x32GB) con iluminación RGB personalizable, diseñada para Intel. Ideal para sistemas de alto rendimiento, ofrece velocidades rápidas y gran capacidad para multitarea intensiva. Soporta XMP y disipadores para mantener temperaturas óptimas.",
+    "list_price": 510000,
+    "sale_price": 340000,
+    "image": "memory/rgb_black_intel.png",
+    "category": 2
+  },
+  {
+    "id": 13,
+    "title": "Memoria Team DDR5 64GB (2x32GB) Red Intel",
+    "description": "Kit de memoria Team DDR5 de 64GB (2x32GB) en color rojo, optimizado para procesadores Intel. Proporciona alto rendimiento para gaming y creación de contenido, con soporte para perfiles XMP y disipadores térmicos para una operación estable bajo cargas pesadas.",
+    "list_price": 480000,
+    "sale_price": 320000,
+    "image": "memory/red_intel.png",
+    "category": 2
+  },
+  {
+    "id": 14,
+    "title": "Memoria Team DDR5 64GB (2x32GB) White Intel",
+    "description": "Memoria Team DDR5 de 64GB (2x32GB) en color blanco, diseñada para plataformas Intel. Ofrece gran capacidad y velocidad para aplicaciones exigentes como edición 3D y streaming. Compatible con XMP y con disipadores para un estilo elegante y rendimiento confiable.",
+    "list_price": 480000,
+    "sale_price": 320000,
+    "image": "memory/white_intel.png",
+    "category": 2
+  },
+  {
+    "id": 15,
+    "title": "Mother ASUS ROG STRIX X870-A GAMING WIFI DDR5 AM5",
+    "description": "Placa base ASUS ROG STRIX X870-A con socket AM5, compatible con procesadores AMD Ryzen 7000/8000. Soporta DDR5 y PCIe 5.0, ideal para gaming y overclocking. Incluye WiFi 6E, USB 4.0 y un robusto VRM para máxima estabilidad en configuraciones de alto rendimiento.",
+    "list_price": 720000,
+    "sale_price": 480000,
+    "image": "motherboards/amd/asus_rog.png",
+    "category": 3
+  },
+  {
+    "id": 16,
+    "title": "Mother Asrock B550M Pro4 AM4",
+    "description": "La Asrock B550M Pro4 es una placa base Micro ATX con socket AM4, compatible con procesadores AMD Ryzen de 3ra y 4ta generación. Soporta DDR4, PCIe 4.0 y M.2 NVMe, ideal para PCs gamer compactos con buena relación calidad-precio.",
+    "list_price": 180000,
+    "sale_price": 120000,
+    "image": "motherboards/amd/b550m.png",
+    "category": 3
+  },
+  {
+    "id": 17,
+    "title": "Mother Asrock B550 Phantom Gaming 4",
+    "description": "Placa base Asrock B550 Phantom Gaming 4 con socket AM4, diseñada para gamers. Compatible con Ryzen 3000/5000, soporta DDR4 hasta 4733 MHz y PCIe 4.0. Incluye conectividad M.2 y un diseño robusto para un rendimiento estable en juegos y multitarea.",
+    "list_price": 210000,
+    "sale_price": 140000,
+    "image": "motherboards/amd/b550_phantom.png",
+    "category": 3
+  },
+  {
+    "id": 18,
+    "title": "Mother ASUS PRIME A520M-K DDR4 AM4",
+    "description": "La ASUS PRIME A520M-K es una placa base Micro ATX con socket AM4, ideal para PCs económicos con procesadores Ryzen 3000/5000. Soporta DDR4 y PCIe 3.0, con conectividad M.2 y USB 3.2 Gen 1, perfecta para configuraciones básicas y fiables.",
+    "list_price": 150000,
+    "sale_price": 100000,
+    "image": "motherboards/amd/a550m_k.png",
+    "category": 3
+  },
+  {
+    "id": 19,
+    "title": "Mother ASUS ROG MAXIMUS Z890 HERO LGA1851",
+    "description": "Placa base premium ASUS ROG MAXIMUS Z890 HERO con socket LGA1851 para procesadores Intel Core de 15ta generación. Soporta DDR5, PCIe 5.0 y WiFi 7. Con VRM avanzado y refrigeración optimizada, es ideal para gaming extremo y overclocking profesional.",
+    "list_price": 960000,
+    "sale_price": 640000,
+    "image": "motherboards/intel/asus_rog_maximus.png",
+    "category": 3
+  },
+  {
+    "id": 20,
+    "title": "Mother Asrock Z890 TAICHI LGA1851 DDR5",
+    "description": "La Asrock Z890 TAICHI con socket LGA1851 es una placa base de alta gama para procesadores Intel Core de última generación. Soporta DDR5, PCIe 5.0 y múltiples M.2. Con WiFi 7 y un diseño elegante, es perfecta para entusiastas y creadores de contenido.",
+    "list_price": 840000,
+    "sale_price": 560000,
+    "image": "motherboards/intel/asrock_taichi.png",
+    "category": 3
+  },
+  {
+    "id": 21,
+    "title": "Mother ASUS ROG STRIX Z890-E GAMING WIFI LGA1851",
+    "description": "Placa base ASUS ROG STRIX Z890-E con socket LGA1851, diseñada para Intel Core de 15ta generación. Ofrece soporte para DDR5, PCIe 5.0, WiFi 6E y USB 4.0. Con un VRM robusto, es ideal para gaming de alto nivel y configuraciones personalizadas.",
+    "list_price": 780000,
+    "sale_price": 520000,
+    "image": "motherboards/intel/asus_rog_strix.png",
+    "category": 3
+  },
+  {
+    "id": 22,
+    "title": "Mother ASUS ROG MAXIMUS Z790 HERO LGA1700 DDR5",
+    "description": "La ASUS ROG MAXIMUS Z790 HERO con socket LGA1700 es compatible con procesadores Intel Core de 12ta/13ta generación. Soporta DDR5, PCIe 5.0 y WiFi 6E. Con refrigeración avanzada y conectividad premium, es perfecta para gaming y workstations de alto rendimiento.",
+    "list_price": 900000,
+    "sale_price": 600000,
+    "image": "motherboards/intel/asus_rog_maximus_hero.png",
+    "category": 3
+  },
+  {
+    "id": 23,
+    "title": "Mother ASUS ROG STRIX Z890-F GAMING WIFI LGA1851",
+    "description": "Placa base ASUS ROG STRIX Z890-F con socket LGA1851 para procesadores Intel Core de última generación. Soporta DDR5, PCIe 5.0 y WiFi 7, con un diseño optimizado para gaming. Incluye conectividad avanzada y refrigeración eficiente para un rendimiento estable.",
+    "list_price": 750000,
+    "sale_price": 500000,
+    "image": "motherboards/intel/asus_rog_strix_gaming.png",
+    "category": 3
   }
 ]

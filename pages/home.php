@@ -24,7 +24,7 @@
         </div>
         <div class="relative grid grid-cols-5 gap-4 max-w-[800px] mx-auto py-20 grid-rows-2 h-[600px]">
             <!-- Procesadores -->
-            <a href="index.php?page=products&category=procesadores" class="relative col-span-2 row-span-2 bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=1" class="relative col-span-2 row-span-2 bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">Procesadores</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex items-end overflow-hidden">
                     <div class="relative flex items-center justify-center mt-10">
@@ -59,7 +59,7 @@
             </a>
 
             <!-- Motherboards -->
-            <a href="index.php?page=products&category=motherboards" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=3" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">motherboards</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[4rem] translate-y-[1rem]">
@@ -329,7 +329,7 @@
             </a>
             
             <!-- Memorias RAM -->
-            <a href="index.php?page=products&category=memorias-ram" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=2" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">memorias ram</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[1rem] translate-y-[1rem]">                        
@@ -488,8 +488,8 @@
 
     <!-- Community -->
     <section class="bg-[url(assets/images/home_community_bg.webp)] bg-cover bg-center flex flex-col items-center justify-center min-h-[900px] text-center gap-12 mt-40">
-        <h2 class="text-4xl font-bold uppercase max-w-[640px]">Dream Big with Bespoke Software Solutions</h2>
-        <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">From startups to dreamers, we blend user-centered design with bespoke software development to bring your ideas to life, scalable, affordable, and uniquely yours.</p>
+        <h2 class="text-4xl font-bold uppercase max-w-[640px]">Unite a nuestra comunidad y obtené beneficios exclusivos</h2>
+        <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">En Code Crafters, te ofrecemos una amplia gama de componentes para construir tu PC perfecta. Unite a nuestra comunidad y obtené beneficios exclusivos.</p>
         
         <!-- Social Icons -->
         <div class="flex gap-8">

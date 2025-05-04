@@ -67,7 +67,7 @@
         include_once 'pages/' . $page->getPath() . '.php';
     ?>
 
-    <footer class="h-60 flex justify-center items-center">
+    <footer class="h-60 flex justify-center items-center border-t-1 border-t-[var(--light-dark-color)]">
         <?php echo("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
     </footer>
 
