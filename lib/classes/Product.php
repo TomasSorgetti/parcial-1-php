@@ -129,6 +129,39 @@ class Product {
     }
 
     /**
+     * Obtiene productos por su categoria
+     * @param string $category
+     * @return array
+     */
+    public static function getProductsByCategory(int $category): array {
+        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+
+        $products = [];
+
+        foreach ($productList as $product) {
+            if ($product["category"] === $category) {
+                $newProduct = new self();
+                $newProduct->id = $product["id"];
+                $newProduct->title = $product["title"];
+                $newProduct->list_price = $product["list_price"];
+                $newProduct->sale_price = $product["sale_price"];
+                $newProduct->description = $product["description"];
+                $newProduct->image = $product["image"];
+                $newProduct->category = $product["category"];
+
+
+                $products[] = $newProduct;
+            }
+        }
+
+        return $products;
+    }
+
+    public function getQuotePrice(int $quote = 12): int {
+        return $this->list_price * $quote + ($this->list_price % $quote > 0 ? 1 : 0);
+    }
+
+    /**
      * Get the value of id
      */ 
     public function getId()

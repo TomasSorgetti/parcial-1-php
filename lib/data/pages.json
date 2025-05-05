@@ -33,5 +33,12 @@
     "description": "Completar con saraza.",
     "active": 1,
     "restricted": 0
+  },
+  {
+    "path": "success",
+    "title": "Se enviaron los datos",
+    "description": "Completar con saraza.",
+    "active": 1,
+    "restricted": 0
   }
 ]

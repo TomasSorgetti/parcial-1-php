@@ -5,9 +5,9 @@
             <img src="assets/images/alumno.png" alt="foto del alumno" draggable="false" loading="lazy">
             <div class="flex flex-col gap-2 text-xl text-[var(--dark-text-color)]">
                 <p>Alumno: <span class="text-[var(--light-text-color)] font-bold">Tomás Sorgetti</span></p>
-                <p>Año: <span class="text-[var(--light-text-color)] font-bold">2025</span></p>
-                <p>Institución: <span class="text-[var(--light-text-color)] font-bold">Escuela DaVinci</span></p>
-                <p>Materia: <span class="text-[var(--light-text-color)] font-bold">Programación 2</span></p>
+                <p>Año de nacimiento: <span class="text-[var(--light-text-color)] font-bold">08/04/1998</span></p>
+                <p>email: <span class="text-[var(--light-text-color)] font-bold">tomassorgetti456@gmail.com</span></p>
+                <p>Materia: <span class="text-[var(--light-text-color)] font-bold">Programación 2 - Escuela DaVinci</span></p>
             </div>
         </div>
     </section>
