@@ -50,31 +50,48 @@
                     ?>
                 </ul>
             </aside>
-            <div class="w-full flex flex-wrap gap-4 pt-4">
-                <?php 
-                if(count($responseProducts["products"]) === 0) {
-                    echo("<p class='mt-10 text-[var(--dark-text-color)] w-full text-center'>No se encontraron productos</p>");
-                }else{
-                    foreach ($responseProducts["products"] as $product) {
-                        echo("
-                            <div class='w-full max-w-[300px] border-1 border-[var(--light-dark-color)] cursor-pointer rounded-md flex flex-col gap-2 min-h-[460px] shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out group'>
-                                <div class='h-1/2 w-full flex justify-center items-center overflow-hidden rounded-t-md'>
-                                    <img src='assets/images/products/" . $product->getImage() . "' alt='" . $product->getTitle() . "' class='group-hover:scale-110 transition-all duration-500 ease-in-out object-cover'>
-                                </div>
-                                <div class='p-4 h-1/2 flex flex-col justify-between'>
-                                    <div class='flex flex-col gap-2'>
-                                        <h3 class='font-bold'>" . $product->getTitle() . "</h3>
-                                        <p class='text-[var(--dark-text-color)]'>" . cutText($product->getDescription(), 50) . "</p>
-                                        <p class='text-[var(--dark-text-color)]'>$ <span class='font-bold text-[var(--light-text-color)] text-2xl'>" . $product->getSale_price() . "</span></p>
+            <div class="flex flex-col w-full gap-8">
+                <div class="w-full flex flex-wrap gap-4 pt-4">
+                    <?php 
+                    if(count($responseProducts["products"]) === 0) {
+                        echo("<p class='mt-10 text-[var(--dark-text-color)] w-full text-center'>No se encontraron productos</p>");
+                    }else{
+                        foreach ($responseProducts["products"] as $product) {
+                            echo("
+                                <div class='w-full max-w-[300px] border-1 border-[var(--light-dark-color)] cursor-pointer rounded-md flex flex-col gap-2 min-h-[460px] shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-500 ease-in-out group'>
+                                    <div class='h-1/2 w-full flex justify-center items-center overflow-hidden rounded-t-md'>
+                                        <img src='assets/images/products/" . $product->getImage() . "' alt='" . $product->getTitle() . "' class='group-hover:scale-110 transition-all duration-500 ease-in-out object-cover'>
                                     </div>
-                                    <a class='text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full text-center uppercase font-bold' href='index.php?page=product&id=" . $product->getId() . "'>ver producto</a>
-                                </div>
-                            </div>"
-                        );
+                                    <div class='p-4 h-1/2 flex flex-col justify-between'>
+                                        <div class='flex flex-col gap-2'>
+                                            <h3 class='font-bold'>" . $product->getTitle() . "</h3>
+                                            <p class='text-[var(--dark-text-color)]'>" . cutText($product->getDescription(), 50) . "</p>
+                                            <p class='text-[var(--dark-text-color)]'>$ <span class='font-bold text-[var(--light-text-color)] text-2xl'>" . $product->getSale_price() . "</span></p>
+                                        </div>
+                                        <a class='text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full text-center uppercase font-bold' href='index.php?page=product&id=" . $product->getId() . "'>ver producto</a>
+                                    </div>
+                                </div>"
+                            );
+                        }
                     }
-                }
-            ?>
-        </div>
+                ?>
+                </div>
+                <?php 
+                    if($responseProducts["total_pages"] > 1){
+                        echo("
+                            <div class='flex justify-center items-center gap-4'>
+                                <a href='index.php?page=products&sec=" . ($pageQuery - 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Anterior</a>
+                                <div>
+                                <a>1</a>
+                                <a>2</a>
+                                <a>3</a>
+                                </div>
+                                <a href='index.php?page=products&sec=" . ($pageQuery + 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Siguiente</a>
+                            </div>
+                        ");
+                    }
+                ?>
+            </div>
     </div>
     </section>
 </main>

@@ -13,7 +13,7 @@ class Product {
      * @param string $categoryQuery
      * @param string $orderQuery
      * @param int $pageQuery
-     * @return array 
+     * @return array []
      */
     public static function getAllProducts(string $search="", string $categoryQuery= "all", string $orderQuery = "price_asc", int $pageQuery= 1, int $prodPerPage = 9): array {
         $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
