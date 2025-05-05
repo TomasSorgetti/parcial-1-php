@@ -21,15 +21,15 @@
     "restricted": 0
   },
   {
-    "path": "community",
-    "title": "Comunidad",
+    "path": "build",
+    "title": "Armá tu pc",
     "description": "Completar con saraza.",
     "active": 1,
     "restricted": 0
   },
   {
-    "path": "build",
-    "title": "Armá tu pc",
+    "path": "data",
+    "title": "Datos del Alumno",
     "description": "Completar con saraza.",
     "active": 1,
     "restricted": 0

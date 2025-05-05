@@ -42,10 +42,19 @@
 
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
     <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
-        <nav class="max-w-[1280px] mx-auto border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out">
+        <nav class="max-w-[1280px] mx-auto px-4 border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out lg:px-0">
             <div class="flex justify-between items-center py-6 max-w-[1280px] mx-auto">
-                <a href="index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)]">Code Crafters</a>
-                <ul class="flex gap-4">
+                <!-- Logo -->
+                <a href="index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)] z-60">Code Crafters</a>
+                <!-- Hamburger -->
+                <button id="hamburger" class="z-60 flex flex-col items-center justify-center gap-2 lg:hidden">
+                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
+                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
+                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
+                </button>
+                
+                <!-- Menu -->
+                <ul id="menu" class="fixed top-0 right-0 w-full h-screen bg-[var(--background-color)] flex flex-col items-center justify-center gap-12 z-40 lg:static lg:w-auto lg:h-auto lg:flex-row lg:bg-transparent">
                     <li>
                         <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=home">Inicio</a>
                     </li>
@@ -53,7 +62,7 @@
                         <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=products">Productos</a>
                     </li>
                     <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=community">Comunidad</a>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=data">Datos</a>
                     </li>
                     <li>
                         <a class="uppercase text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full" href="index.php?page=build">Armá tu pc</a>
@@ -67,7 +76,7 @@
         include_once 'pages/' . $page->getPath() . '.php';
     ?>
 
-    <footer class="h-60 flex justify-center items-center border-t-1 border-t-[var(--light-dark-color)]">
+    <footer class="h-60 text-center flex justify-center items-center border-t-1 border-t-[var(--light-dark-color)]">
         <?php echo("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
     </footer>
 

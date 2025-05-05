@@ -2,29 +2,30 @@
 <main>
     <!-- Hero -->
     <section>
-        <div class="flex justify-between items-center max-w-[1280px] mx-auto py-20 h-[80vh]">
-            <div class="flex flex-col gap-12">
-                <h1 class="text-5xl font-bold uppercase">Armá la Máquina que la Rompe en el Silicio</h1>
+        <div class="flex justify-center items-center max-w-[1280px] mx-auto px-4 py-32 md:px-8 lg:px-0 lg:h-[70vh] lg:pb-0 lg:px-16 lg:justify-between xl:px-0">
+            <div class="flex flex-col items-center gap-12 text-center lg:text-left lg:items-start">
+                <h1 class="text-3xl font-bold uppercase max-w-[500px] lg:max-w-[600px] lg:text-4xl xl:text-5xl">Armá la Máquina que la Rompe en el Silicio</h1>
                 <p class="text-base max-w-[560px] text-[var(--dark-text-color)]">En Code Crafters, armás tu equipo con procesadores potentes, GPUs de vanguardia y placas madre sólidas. Personalizá tu PC a tu estilo. ¡Hacelo realidad!</p>
-                <div class="flex gap-4">
-                    <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white h-[58px] px-6 rounded-full">productos</a>
-                    <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] h-[58px] px-6 rounded-full">arma tu pc</a>
+                <div class="flex flex-col items-center gap-4 md:flex-row">
+                    <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">productos</a>
+                    <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">arma tu pc</a>
                 </div>
             </div>
-            <img src="assets/images/home_banner.webp" alt="ilustración minimalista con cuadriculas">
+            <img class="hidden lg:block lg:max-w-1/2" src="assets/images/home_banner.webp" alt="ilustración minimalista con cuadriculas">
         </div>
     </section>
 
     <!-- Categories -->
     <section class="relative">
         <img src="assets/images/home_categories.webp" alt="luz violeta en fondo negro" class="absolute top-0 left-0 w-full -z-10">
-        <div class="text-center flex flex-col gap-8 items-center pt-90">
-            <h2 class="text-4xl font-bold uppercase max-w-[640px]">Encontrá el Componente Perfecto</h2>
+        <div class="text-center flex flex-col gap-8 items-center pt-32 px-4 md:px-8 lg:px-0 lg:pt-90">
+            <h2 class="text-2xl font-bold uppercase max-w-[640px] md:text-3xl lg:text-4xl">Encontrá el Componente Perfecto</h2>
             <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">Explorá las distintas categorías que tenemos para vos y armá una PC que supere todos los límites. Calidad, rendimiento y estilo en cada componente.</p>
         </div>
-        <div class="relative grid grid-cols-5 gap-4 max-w-[800px] mx-auto py-20 grid-rows-2 h-[600px]">
+
+        <div class="relative px-4 grid gap-4 max-w-[800px] mx-auto py-20 grid-rows-3 grid-cols-1 md:grid-cols-5 md:grid-rows-2 h-[700px] md:px-8 md:h-[600px]">
             <!-- Procesadores -->
-            <a href="index.php?page=products&cat=1" class="relative col-span-2 row-span-2 bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=1" class="relative bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-2 md:row-span-2">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">Procesadores</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex items-end overflow-hidden">
                     <div class="relative flex items-center justify-center mt-10">
@@ -59,7 +60,7 @@
             </a>
 
             <!-- Motherboards -->
-            <a href="index.php?page=products&cat=3" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=3" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">motherboards</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[4rem] translate-y-[1rem]">
@@ -329,7 +330,7 @@
             </a>
             
             <!-- Memorias RAM -->
-            <a href="index.php?page=products&cat=2" class="relative col-span-3 row-span-1 bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group">
+            <a href="index.php?page=products&cat=2" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">memorias ram</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[1rem] translate-y-[1rem]">                        
@@ -469,30 +470,30 @@
                 </div>
             </a>
 
-            <div class="absolute -z-10 block w-[700px] h-[300px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:rgba(137, 3, 255, 0.23); backdrop-filter: blur(300px); box-shadow: 0 0 100px rgba(137, 3, 255, 0.5);"></div>
+            <div class="absolute -z-10 block w-full max-w-[700px] h-[300px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full" style="background:rgba(137, 3, 255, 0.23); backdrop-filter: blur(300px); box-shadow: 0 0 100px rgba(137, 3, 255, 0.5);"></div>
         </div>
     </section>
 
     <!-- Cta -->
-     <section class="relative flex items-center justify-center min-h-[874px]">
-        <img src="assets/images/home_cta.webp" alt="fondo cuadriculado decorativo" class="w-full absolute max-w-[1440px] -z-10">
-        <div class="text-center flex flex-col gap-8 items-center pt-30">
-            <h2 class="text-4xl font-bold uppercase max-w-[640px]">Descubrí qué te ofrece Code Crafters</h2>
+     <section class="relative flex items-center justify-center md:min-h-[600px] lg:min-h-[874px] max-w-[1280px] mx-auto">
+        <img src="assets/images/home_cta.webp" alt="fondo cuadriculado decorativo" class="w-full absolute top-0 -z-10">
+        <div class="text-center flex flex-col gap-8 items-center pt-30 md:pt-60 lg:pt-30 px-4 lg:px-0 xl:pt-70">
+            <h2 class="text-2xl font-bold uppercase max-w-[640px] lg:text-4xl">Descubrí qué te ofrece Code Crafters</h2>
             <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">Armá tu PC con la mejor calidad y rendimiento. En Code Crafters, te ofrecemos una amplia gama de componentes para construir tu PC perfecta.</p>
-            <div class="flex gap-4">
-                    <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white h-[58px] px-6 rounded-full">productos</a>
-                    <a href="#" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] h-[58px] px-6 rounded-full">arma tu pc</a>
-                </div>
+            <div class="flex flex-col items-center gap-4 md:flex-row">
+                <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">productos</a>
+                <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">arma tu pc</a>
+            </div>
         </div>
      </section>
 
     <!-- Community -->
-    <section class="bg-[url(assets/images/home_community_bg.webp)] bg-cover bg-center flex flex-col items-center justify-center min-h-[900px] text-center gap-12 mt-40">
-        <h2 class="text-4xl font-bold uppercase max-w-[640px]">Unite a nuestra comunidad y obtené beneficios exclusivos</h2>
+    <section class="bg-[url(assets/images/home_community_bg.webp)] bg-cover bg-center flex flex-col items-center justify-center min-h-[600px] px-4 lg:min-h-[800px] text-center gap-12 mt-40 lg:px-0">
+        <h2 class="text-2xl font-bold uppercase max-w-[640px] lg:text-4xl">Unite a nuestra comunidad y obtené beneficios exclusivos</h2>
         <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">En Code Crafters, te ofrecemos una amplia gama de componentes para construir tu PC perfecta. Unite a nuestra comunidad y obtené beneficios exclusivos.</p>
         
         <!-- Social Icons -->
-        <div class="flex gap-8">
+        <div class="flex flex-wrap justify-center gap-8">
             <a href="#" class="inline-flex items-center justify-center group hover:scale-115 duration-300" target="_blank">
                 <svg width="38" height="37" viewBox="0 0 38 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.7328 19.9714H22.7732L23.5893 16.666H20.7328V15.0132C20.7328 14.1621 20.7328 13.3605 22.3651 13.3605H23.5893V10.584C23.3233 10.5484 22.3186 10.4683 21.2576 10.4683C19.0417 10.4683 17.4681 11.8375 17.4681 14.3522V16.666H15.0197V19.9714H17.4681V26.9955H20.7328V19.9714Z" fill="white" class="group-hover:fill-[var(--primary-color)]"/>
