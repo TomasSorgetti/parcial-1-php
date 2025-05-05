@@ -12,25 +12,35 @@
     $categories = Category::getAllCategories();
 ?>
 <main>
-    <section class="h-[60vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.png')] bg-center bg-no-repeat">
-        <h1 class="text-5xl uppercase font-bold max-w-[700px]">Encendé la Chispa en Tu Máquina Soñada</h1>
+    <section class="h-[60vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.png')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
+        <h1 class="uppercase font-bold max-w-[700px] text-3xl md:text-4xl lg:text-5xl">Encendé la Chispa en Tu Máquina Soñada</h1>
         <p class=" max-w-[600px]">Tu PC es más que hardware, es una extensión de ti. Explorá nuestra colección de componentes de élite. ¡Encendé la chispa!</p>
     </section>
     <section class=" max-w-[1280px] mx-auto">
-        <div class="flex items-center justify-between py-4 border-b-1 border-[var(--primary-color)]">
-            <h2 class="uppercase font-bold text-2xl">Destacados</h2>
-            <input type="text" class="border-2 border-[var(--primary-color)]">
+        <div class="flex flex-col gap-4 justify-center text-center py-4 border-b-1 border-[var(--primary-color)] lg:flex-row lg:justify-between lg:items-center lg:text-left">
+            <h2 class="uppercase font-bold text-2xl">
+                <?php 
+                if ($categoryQuery == "all") {
+                    echo("Todos los productos");
+                } else {
+                    echo( $categories[$categoryQuery - 1]->getName());
+                }
+                ?>
+            </h2>
+            <input type="text" class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px] mx-auto" placeholder="Buscar producto...">
             <div >
                 <p>Ordenar por</p>
+                <!-- TODO=> Agregar los otros filtros al url (categoria, search, etc) -->
                 <a href="index.php?page=products&order=price_desc">Mayor precio</a>
                 <a href="index.php?page=products&order=price_asc">Menor precio</a>
                 <a href="index.php?page=products&order=name_asc">Nombre A-Z</a>
                 <a href="index.php?page=products&order=name_desc">Nombre Z-A</a>
             </div>
         </div>
-        <div class="flex gap-4 justify-between mt-4">
-            <aside class="w-full max-w-[300px] p-4 border-r-1 border-[var(--light-dark-color)]">
-                <h3 class="uppercase font-bold text-1xl">Categorías</h3>
+        
+        <div class="flex gap-4 flex-col w-full mt-4 lg:flex-row lg:justify-between">
+            <aside class="w-full p-4 border-r-1 border-[var(--light-dark-color)] flex flex-col items-center text-center lg:max-w-[300px] lg:items-start lg:text-left">
+                <span class="uppercase font-bold text-1xl">Categorías</span>
                 <ul class="flex flex-col gap-2 mt-2">
                     <li><a href="index.php?page=products&cat=all" class='hover:text-[var(--primary-color)] text-[var(--dark-text-color)]'>Todos los productos</a></li>
                     <?php 
@@ -40,7 +50,7 @@
                     ?>
                 </ul>
             </aside>
-            <div class="w-full flex flex-wrap gap-4">
+            <div class="w-full flex flex-wrap gap-4 pt-4">
                 <?php 
                 if(count($responseProducts["products"]) === 0) {
                     echo("<p class='mt-10 text-[var(--dark-text-color)] w-full text-center'>No se encontraron productos</p>");

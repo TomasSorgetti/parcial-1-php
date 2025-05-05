@@ -7,11 +7,11 @@
                 <h1 class="text-3xl font-bold uppercase max-w-[500px] lg:max-w-[600px] lg:text-4xl xl:text-5xl">Armá la Máquina que la Rompe en el Silicio</h1>
                 <p class="text-base max-w-[560px] text-[var(--dark-text-color)]">En Code Crafters, armás tu equipo con procesadores potentes, GPUs de vanguardia y placas madre sólidas. Personalizá tu PC a tu estilo. ¡Hacelo realidad!</p>
                 <div class="flex flex-col items-center gap-4 md:flex-row">
-                    <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">productos</a>
-                    <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">arma tu pc</a>
+                    <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white hover:bg-white hover:text-[var(--background-color)] transition-all duration-500 ease-in-out px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">productos</a>
+                    <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] hover:bg-[var(--alter-color)] hover:border-[var(--alter-color)] transition-all duration-500 ease-in-out px-4 rounded-full h-[48px] lg:h-[58px] lg:px-6">arma tu pc</a>
                 </div>
             </div>
-            <img class="hidden lg:block lg:max-w-1/2" src="assets/images/home_banner.webp" alt="ilustración minimalista con cuadriculas">
+            <img class="hidden lg:block lg:max-w-1/2" src="assets/images/home_banner.webp" alt="ilustración minimalista con cuadriculas" draggable="false" loading="eager">
         </div>
     </section>
 
@@ -23,7 +23,7 @@
             <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">Explorá las distintas categorías que tenemos para vos y armá una PC que supere todos los límites. Calidad, rendimiento y estilo en cada componente.</p>
         </div>
 
-        <div class="relative px-4 grid gap-4 max-w-[800px] mx-auto py-20 grid-rows-3 grid-cols-1 md:grid-cols-5 md:grid-rows-2 h-[700px] md:px-8 md:h-[600px]">
+        <div class="relative px-4 grid gap-4 max-w-[800px] mx-auto py-20 grid-rows-3 grid-cols-1 md:grid-cols-5 md:grid-rows-2 h-[700px] md:px-8 md:h-[600px] lg:h-[700px] lg:max-w-[1000px]">
             <!-- Procesadores -->
             <a href="index.php?page=products&cat=1" class="relative bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-2 md:row-span-2">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">Procesadores</h3>
@@ -477,12 +477,12 @@
     <!-- Cta -->
      <section class="relative flex items-center justify-center md:min-h-[600px] lg:min-h-[874px] max-w-[1280px] mx-auto">
         <img src="assets/images/home_cta.webp" alt="fondo cuadriculado decorativo" class="w-full absolute top-0 -z-10">
-        <div class="text-center flex flex-col gap-8 items-center pt-30 md:pt-60 lg:pt-30 px-4 lg:px-0 xl:pt-70">
+        <div class="text-center flex flex-col gap-8 items-center pt-30 md:pt-60 lg:pt-30 px-4 lg:px-0 xl:pt-80">
             <h2 class="text-2xl font-bold uppercase max-w-[640px] lg:text-4xl">Descubrí qué te ofrece Code Crafters</h2>
             <p class="max-w-[600px] text-[var(--dark-text-color)] text-base">Armá tu PC con la mejor calidad y rendimiento. En Code Crafters, te ofrecemos una amplia gama de componentes para construir tu PC perfecta.</p>
             <div class="flex flex-col items-center gap-4 md:flex-row">
-                <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">productos</a>
-                <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">arma tu pc</a>
+                <a href="index.php?page=products" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-transparent border-2 border-white hover:bg-white hover:text-[var(--background-color)] transition-all duration-500 ease-in-out h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">productos</a>
+                <a href="index.php?page=build" class="inline-flex items-center justify-center uppercase min-w-[200px] font-bold text-lg bg-[var(--primary-color)] border-2 border-[var(--primary-color)] hover:bg-[var(--alter-color)] hover:border-[var(--alter-color)] transition-all duration-500 ease-in-out h-[48px] px-4 rounded-full lg:px-6 lg:h-[58px]">arma tu pc</a>
             </div>
         </div>
      </section>

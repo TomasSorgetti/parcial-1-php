@@ -25,7 +25,8 @@
         --dark-text-color: #C2C2C2;
         
         --light-dark-color: #171717;
-        --primary-color: #8803FF;
+        --primary-color:rgb(116, 12, 207);
+        --alter-color:#8803FF;
         --transparent-black-color:rgba(0, 0, 0, 0.76);
 
         --font-size-base: 16px;
@@ -65,7 +66,7 @@
                         <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=data">Datos</a>
                     </li>
                     <li>
-                        <a class="uppercase text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full" href="index.php?page=build">Armá tu pc</a>
+                        <a class="uppercase text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] transition-all duration-500 ease-in-out hover:bg-[var(--alter-color)] hover:border-[var(--alter-color)] rounded-full" href="index.php?page=build">Armá tu pc</a>
                     </li>
                 </ul>
             </div>

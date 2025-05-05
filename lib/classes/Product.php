@@ -20,6 +20,7 @@ class Product {
 
         //* el filter basicamente compara y si es true lo incluye en el array
         $filtredProducts = array_filter($productList, function ($product) use ($search, $categoryQuery) {
+            //TODO=> verificar el trim en el condicional no en el toLowerCase
             if ($search != "") {
                 $search = strtolower(trim($search));
                 $title = strtolower($product["title"]);
