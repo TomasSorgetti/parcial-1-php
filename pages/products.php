@@ -27,15 +27,31 @@
                 }
                 ?>
             </h2>
-            <input type="text" class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px] mx-auto" placeholder="Buscar producto...">
-            <div >
-                <p>Ordenar por</p>
-                <!-- TODO => Agregar los otros filtros al url (categoria, search, etc) -->
-                <a href="index.php?page=products&order=price_desc">Mayor precio</a>
-                <a href="index.php?page=products&order=price_asc">Menor precio</a>
-                <a href="index.php?page=products&order=name_asc">Nombre A-Z</a>
-                <a href="index.php?page=products&order=name_desc">Nombre Z-A</a>
-            </div>
+            <form id="filtersForm" method="GET" action="index.php" class="flex gap-4 items-end justify-between w-full">
+                <input type="hidden" name="page" value="products">
+                <input type="hidden" name="cat" value="<?= htmlspecialchars($categoryQuery) ?>">
+                
+                <!-- SearchBar -->
+                <input
+                    type="text"
+                    id="searchInput"
+                    name="search"
+                    placeholder="Buscar producto..."
+                    value="<?= htmlspecialchars($searchQuery ?? '') ?>"
+                    class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px] mx-auto"
+                />
+                
+                <!-- Order -->
+                <div class="flex flex-col items-start">
+                    <label for="orderSelect" class="text-sm">Ordenar por</label>
+                    <select name="order" id="orderSelect" class="border p-2 rounded-md">
+                        <option value="price_asc" <?= $orderQuery === 'price_asc' ? 'selected' : '' ?>>Menor precio</option>
+                        <option value="price_desc" <?= $orderQuery === 'price_desc' ? 'selected' : '' ?>>Mayor precio</option>
+                        <option value="name_asc" <?= $orderQuery === 'name_asc' ? 'selected' : '' ?>>Nombre A-Z</option>
+                        <option value="name_desc" <?= $orderQuery === 'name_desc' ? 'selected' : '' ?>>Nombre Z-A</option>
+                    </select>
+                </div>
+            </form>
         </div>
         
         <div class="flex gap-4 flex-col w-full mt-4 lg:flex-row lg:justify-between">
