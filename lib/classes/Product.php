@@ -94,10 +94,14 @@ class Product {
             $products[] = $newProduct;
         }
 
+        // todo => paginacion
+        // aray_slice(array $array, int $offset, int $length = 0, bool $preserve_keys = false): array
+        $paginatedProductList = array_slice($products, ($pageQuery - 1) * $prodPerPage, $prodPerPage);
+
         return [
             "total_pages" => ceil(count($products) / $prodPerPage),
             "current_page" => $pageQuery,
-            "products" => $products,
+            "products" => $paginatedProductList,
             "total_products" => count($products)
         ];
     }

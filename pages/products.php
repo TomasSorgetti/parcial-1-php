@@ -12,7 +12,7 @@
     $categories = Category::getAllCategories();
 ?>
 <main>
-    <section class="h-[60vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.png')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
+    <section class="h-[70vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.png')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
         <h1 class="uppercase font-bold max-w-[700px] text-3xl md:text-4xl lg:text-5xl">Encendé la Chispa en Tu Máquina Soñada</h1>
         <p class=" max-w-[600px]">Tu PC es más que hardware, es una extensión de ti. Explorá nuestra colección de componentes de élite. ¡Encendé la chispa!</p>
     </section>
@@ -30,7 +30,7 @@
             <input type="text" class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px] mx-auto" placeholder="Buscar producto...">
             <div >
                 <p>Ordenar por</p>
-                <!-- TODO=> Agregar los otros filtros al url (categoria, search, etc) -->
+                <!-- TODO => Agregar los otros filtros al url (categoria, search, etc) -->
                 <a href="index.php?page=products&order=price_desc">Mayor precio</a>
                 <a href="index.php?page=products&order=price_asc">Menor precio</a>
                 <a href="index.php?page=products&order=name_asc">Nombre A-Z</a>
@@ -39,6 +39,7 @@
         </div>
         
         <div class="flex gap-4 flex-col w-full mt-4 lg:flex-row lg:justify-between">
+            <!-- CATEGORIAS -->
             <aside class="w-full p-4 border-r-1 border-[var(--light-dark-color)] flex flex-col items-center text-center lg:max-w-[300px] lg:items-start lg:text-left">
                 <span class="uppercase font-bold text-1xl">Categorías</span>
                 <ul class="flex flex-col gap-2 mt-2">
@@ -50,7 +51,9 @@
                     ?>
                 </ul>
             </aside>
+            
             <div class="flex flex-col w-full gap-8">
+                <!-- PRODUCTOS -->
                 <div class="w-full flex flex-wrap gap-4 pt-4">
                     <?php 
                     if(count($responseProducts["products"]) === 0) {
@@ -76,21 +79,42 @@
                     }
                 ?>
                 </div>
-                <?php 
-                    if($responseProducts["total_pages"] > 1){
-                        echo("
-                            <div class='flex justify-center items-center gap-4'>
-                                <a href='index.php?page=products&sec=" . ($pageQuery - 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Anterior</a>
-                                <div>
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                </div>
-                                <a href='index.php?page=products&sec=" . ($pageQuery + 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Siguiente</a>
-                            </div>
-                        ");
-                    }
-                ?>
+
+                <!-- PAGINATION -->
+                    <?php 
+                        if($responseProducts["total_pages"] > 1) {
+                            
+                            $pageUrl = "index.php?page=products&cat=" . urlencode($categoryQuery) . "&order=" . urlencode($orderQuery) . "&search=" . urlencode($searchQuery);
+                            
+                            echo("<div class='flex justify-center items-center gap-4 my-4'>");
+                                // prev
+                                if ($pageQuery > 1) {
+                                    echo "<a href='" . $pageUrl . "&sec=" . ($pageQuery - 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Anterior</a>";
+                                } else {
+                                    echo "<span class='px-4 py-2 uppercase bg-[var(--primary-color)] opacity-50 cursor-not-allowed'>Anterior</span>";
+                                }
+                                
+                                echo ("<div class='flex gap-2'>");
+                                    // paginacion
+                                    for ($i = 1; $i <= $responseProducts["total_pages"]; $i++) {
+                                        if( $i !== $pageQuery) {
+                                            echo ("<a href='" . $pageUrl . "&sec=" . $i . "' class='block px-4 py-2 border-1 border-[var(--light-dark-color)] hover:border-[var(--primary-color)]'>" . $i . "</a>");
+                                        } else{
+                                            echo ("<span class='block px-4 py-2 border-1 border-[var(--primary-color)]'>" . $i . "</span>");
+                                        }
+                                        
+                                    }
+                                echo ("</div>");
+                                
+                                // next
+                                if ($pageQuery < $responseProducts["total_pages"]) {
+                                    echo "<a href='" . $pageUrl . "&sec=" . ($pageQuery + 1) . "' class='px-4 py-2 uppercase bg-[var(--primary-color)]'>Siguiente</a>";
+                                } else {
+                                    echo "<span class='px-4 py-2 uppercase bg-[var(--primary-color)] opacity-50 cursor-not-allowed'>Siguiente</span>";
+                                }
+                            echo("</div>");
+                        }
+                    ?>                
             </div>
     </div>
     </section>

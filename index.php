@@ -17,7 +17,7 @@
     </title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    
     <style type="text/tailwindcss">
       @theme {
         --background-color: #000000;
