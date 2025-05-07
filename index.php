@@ -19,25 +19,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
     <style type="text/tailwindcss">
-      @theme {
-        --background-color: #000000;
-        --light-text-color: #ffffff;
-        --dark-text-color: #C2C2C2;
-        
-        --light-dark-color: #171717;
-        --primary-color:rgb(116, 12, 207);
-        --alter-color:#8803FF;
-        --transparent-black-color:rgba(0, 0, 0, 0.76);
+    :root {
+      --background-color: #000000;
+      --light-text-color: #ffffff;
+      --dark-text-color: #C2C2C2;
+      
+      --light-dark-color: #171717;
+      --primary-color:rgb(116, 12, 207);
+      --alter-color:#8803FF;
+      --transparent-black-color:rgba(0, 0, 0, 0.76);
 
-        --font-size-base: 16px;
-        --font-size-lg: 18px;
-        --font-size-xl: 24px;
-        --font-size-2xl: 32px;
-        --font-size-3xl: 38px;
-        --font-size-4xl: 52px;
-        --font-size-5xl: 56px;
-
-      }
+      --font-size-base: 16px;
+      --font-size-lg: 18px;
+      --font-size-xl: 24px;
+      --font-size-2xl: 32px;
+      --font-size-3xl: 38px;
+      --font-size-4xl: 52px;
+      --font-size-5xl: 56px;
+    }
     </style>
 </head>
 
@@ -83,5 +82,6 @@
 
     <script src="scripts/navbar.js"></script>
     <script src="scripts/products.js"></script>
+    <script src="scripts/buildForm.js"></script>
 </body>
 </html>

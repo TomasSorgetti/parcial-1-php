@@ -1,7 +1,7 @@
 <?php 
     require_once "lib/classes/Product.php";
 
-    $procesador = Product::getProductById($_POST["procesador"]);
+    $procesador = Product::getProductById($_POST["processor"]);
     $ram = Product::getProductById($_POST["ram"]);
     $motherboard = Product::getProductById($_POST["motherboard"]);
 
@@ -12,10 +12,10 @@
         <h1 class="uppercase font-bold text-5xl">Gracias por tu compra</h1>
         <p class="text-[var(--dark-text-color)]">Tu compra ha sido realizada con exito.</p>
     </section>
-    <section class="max-w-[1280px] mx-auto">
-        <p class="font-bold text-3xl uppercase">Total: $<?= $totalPrice ?></p>
+    <section class="max-w-[1200px] mx-auto p-4 flex flex-col gap-8 items-center text-center md:text-left md:items-start md:p-8 lg:p-0">
+        <p class="font-bold text-3xl uppercase">Total: <span class="text-[var(--primary-color)] font-bold text-4xl uppercase">$<?= $totalPrice ?></span></p>
         <h2 class="font-bold text-3xl uppercase">Tu orden es:</h2>
-        <ul class="flex flex-wrap gap-4 my-8">
+        <ul class="flex justify-center flex-wrap gap-4 my-8 md:justify-start">
             <li class="w-[300px] border-1 border-[var(--light-dark-color)] flex flex-col items-start justify-between py-6 px-4 rounded-md gap-4">
                 <div>
                     <h3 class="uppercase font-bold text-[var(--dark-text-color)]"><?= $procesador->getTitle() ?></h3>

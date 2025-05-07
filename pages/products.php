@@ -17,8 +17,8 @@
         <p class=" max-w-[600px]">Tu PC es más que hardware, es una extensión de ti. Explorá nuestra colección de componentes de élite. ¡Encendé la chispa!</p>
     </section>
     <section class=" max-w-[1280px] mx-auto">
-        <div class="flex flex-col gap-4 justify-center text-center py-4 border-b-1 border-[var(--primary-color)] lg:flex-row lg:justify-between lg:items-center lg:text-left">
-            <h2 class="uppercase font-bold text-2xl">
+        <div class="flex flex-col gap-4 justify-center text-center py-4 border-b-1 border-[var(--primary-color)] lg:flex-row lg:justify-between lg:items-end lg:text-left">
+            <h2 class="uppercase font-bold text-2xl w-full lg:max-w-[450px]">
                 <?php 
                 if ($categoryQuery == "all") {
                     echo("Todos los productos");
@@ -27,9 +27,8 @@
                 }
                 ?>
             </h2>
-            <form id="filtersForm" method="GET" action="index.php" class="flex gap-4 items-end justify-between w-full">
+            <form id="filtersForm" method="GET" action="index.php" class="flex gap-4 items-end justify-between w-full px-4 lg:px-0">
                 <input type="hidden" name="page" value="products">
-                <input type="hidden" name="cat" value="<?= htmlspecialchars($categoryQuery) ?>">
                 
                 <!-- SearchBar -->
                 <input
@@ -38,13 +37,13 @@
                     name="search"
                     placeholder="Buscar producto..."
                     value="<?= htmlspecialchars($searchQuery ?? '') ?>"
-                    class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px] mx-auto"
+                    class="border-1 border-[var(--primary-color)] p-2 rounded-md w-full max-w-[400px]"
                 />
                 
                 <!-- Order -->
                 <div class="flex flex-col items-start">
                     <label for="orderSelect" class="text-sm">Ordenar por</label>
-                    <select name="order" id="orderSelect" class="border p-2 rounded-md">
+                    <select name="order" id="orderSelect" class="border-1 p-2 rounded-md border-[var(--primary-color)] bg-[var(--background-color)] text-[var(--light-text-color)]">
                         <option value="price_asc" <?= $orderQuery === 'price_asc' ? 'selected' : '' ?>>Menor precio</option>
                         <option value="price_desc" <?= $orderQuery === 'price_desc' ? 'selected' : '' ?>>Mayor precio</option>
                         <option value="name_asc" <?= $orderQuery === 'name_asc' ? 'selected' : '' ?>>Nombre A-Z</option>
@@ -116,7 +115,7 @@
                                         if( $i !== $pageQuery) {
                                             echo ("<a href='" . $pageUrl . "&sec=" . $i . "' class='block px-4 py-2 border-1 border-[var(--light-dark-color)] hover:border-[var(--primary-color)]'>" . $i . "</a>");
                                         } else{
-                                            echo ("<span class='block px-4 py-2 border-1 border-[var(--primary-color)]'>" . $i . "</span>");
+                                            echo ("<span class='block px-4 py-2 border-1 border-[var(--primary-color)] cursor-not-allowed'>" . $i . "</span>");
                                         }
                                         
                                     }
