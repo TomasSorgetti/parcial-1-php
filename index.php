@@ -80,8 +80,8 @@
         <?php echo("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
     </footer>
 
-    <script src="scripts/navbar.js"></script>
-    <script src="scripts/products.js"></script>
-    <script src="scripts/buildForm.js"></script>
+    <script src="lib/scripts/navbar.js"></script>
+    <script src="lib/scripts/products.js"></script>
+    <script src="lib/scripts/buildForm.js"></script>
 </body>
 </html>
