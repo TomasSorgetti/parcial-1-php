@@ -12,7 +12,7 @@ $responseProducts = Product::getAllProducts($searchQuery, $categoryQuery, $order
 $categories = Category::getAllCategories();
 ?>
 <main>
-    <section class="h-[70vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.png')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
+    <section class="h-[70vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.webp')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
         <h1 class="uppercase font-bold max-w-[700px] text-3xl md:text-4xl lg:text-5xl">Encendé la Chispa en Tu Máquina Soñada</h1>
         <p class=" max-w-[600px]">Tu PC es más que hardware, es una extensión de ti. Explorá nuestra colección de componentes de élite. ¡Encendé la chispa!</p>
     </section>

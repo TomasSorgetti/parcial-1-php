@@ -1,25 +1,26 @@
-<?php 
-    require_once 'lib/classes/Page.php';
+<?php
+require_once 'lib/classes/Page.php';
 
-    $pageQuery = $_GET['page'] ?? 'home';
+$pageQuery = $_GET['page'] ?? 'home';
 
-    $page = Page::getPage($pageQuery);
+$page = Page::getPage($pageQuery);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/global.css">
     <title>
-        <?php echo($page->getTitle()); ?>
+        <?php echo ($page->getTitle()); ?>
     </title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
+
     <style type="text/tailwindcss">
-    :root {
+        :root {
       --background-color: #000000;
       --light-text-color: #ffffff;
       --dark-text-color: #C2C2C2;
@@ -48,11 +49,11 @@
                 <a href="index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)] z-60">Code Crafters</a>
                 <!-- Hamburger -->
                 <button id="hamburger" class="z-60 flex flex-col items-center justify-center gap-2 lg:hidden">
-                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
-                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
-                    <div class="w-8 h-1 bg-[var(--light-text-color)]"></div>
+                    <div class="bar w-8 h-1 bg-[var(--light-text-color)]"></div>
+                    <div class="bar w-8 h-1 bg-[var(--light-text-color)]"></div>
+                    <div class="bar w-8 h-1 bg-[var(--light-text-color)]"></div>
                 </button>
-                
+
                 <!-- Menu -->
                 <ul id="menu" class="fixed top-0 right-0 w-full h-screen bg-[var(--background-color)] flex flex-col items-center justify-center gap-12 z-40 lg:static lg:w-auto lg:h-auto lg:flex-row lg:bg-transparent">
                     <li>
@@ -72,16 +73,17 @@
         </nav>
     </header>
 
-    <?php 
-        include_once 'pages/' . $page->getPath() . '.php';
+    <?php
+    include_once 'pages/' . $page->getPath() . '.php';
     ?>
 
     <footer class="h-60 text-center flex justify-center items-center border-t-1 border-t-[var(--light-dark-color)]">
-        <?php echo("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
+        <?php echo ("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
     </footer>
 
     <script src="lib/scripts/navbar.js"></script>
     <script src="lib/scripts/products.js"></script>
     <script src="lib/scripts/buildForm.js"></script>
 </body>
+
 </html>

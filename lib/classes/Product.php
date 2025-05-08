@@ -1,5 +1,6 @@
 <?php
-class Product {
+class Product
+{
     private $id;
     private $title;
     private $list_price;
@@ -15,8 +16,9 @@ class Product {
      * @param int $pageQuery
      * @return array []
      */
-    public static function getAllProducts(string $search="", string $categoryQuery= "all", string $orderQuery = "price_asc", int $pageQuery= 1, int $prodPerPage = 9): array {
-        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+    public static function getAllProducts(string $search = "", string $categoryQuery = "all", string $orderQuery = "price_asc", int $pageQuery = 1, int $prodPerPage = 9): array
+    {
+        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
 
         //* el filter basicamente compara y si es true lo incluye en el array
         $filtredProducts = array_filter($productList, function ($product) use ($search, $categoryQuery) {
@@ -24,13 +26,13 @@ class Product {
             if ($search != "") {
                 $search = strtolower(trim($search));
                 $title = strtolower($product["title"]);
-                
+
                 if (strpos($title, $search) === false) {
                     return false;
                 }
             }
-            
-            //TODO => agregar filtro por categoria
+
+            //TODO => agregar filtro por categoria solo si no es all
             if ($categoryQuery != "all") {
                 if (strtolower($product["category"]) !== strtolower($categoryQuery)) {
                     return false;
@@ -111,8 +113,9 @@ class Product {
      * @param string $id
      * @return Product
      */
-    public static function getProductById(string $id): ?self {
-        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+    public static function getProductById(string $id): ?self
+    {
+        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
 
         foreach ($productList as $product) {
             if ($product["id"] === intval($id)) {
@@ -137,8 +140,9 @@ class Product {
      * @param string $category
      * @return array
      */
-    public static function getProductsByCategory(int $category): array {
-        $productList = json_decode(file_get_contents('lib/data/products.json'), true) ?? [];
+    public static function getProductsByCategory(int $category): array
+    {
+        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
 
         $products = [];
 
@@ -161,13 +165,19 @@ class Product {
         return $products;
     }
 
-    public function getQuotePrice(int $quote = 12): int {
+    /**
+     * Obtiene el precio de un producto segun sus cuotas
+     * @param int $quote
+     * @return int
+     */
+    public function getQuotePrice(int $quote = 12): int
+    {
         return $this->list_price * $quote + ($this->list_price % $quote > 0 ? 1 : 0);
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -177,7 +187,7 @@ class Product {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -187,7 +197,7 @@ class Product {
 
     /**
      * Get the value of title
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -197,7 +207,7 @@ class Product {
      * Set the value of title
      *
      * @return  self
-     */ 
+     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -207,7 +217,7 @@ class Product {
 
     /**
      * Get the value of list_price
-     */ 
+     */
     public function getList_price()
     {
         return $this->list_price;
@@ -217,7 +227,7 @@ class Product {
      * Set the value of list_price
      *
      * @return  self
-     */ 
+     */
     public function setList_price($list_price)
     {
         $this->list_price = $list_price;
@@ -227,7 +237,7 @@ class Product {
 
     /**
      * Get the value of sale_price
-     */ 
+     */
     public function getSale_price()
     {
         return $this->sale_price;
@@ -237,7 +247,7 @@ class Product {
      * Set the value of sale_price
      *
      * @return  self
-     */ 
+     */
     public function setSale_price($sale_price)
     {
         $this->sale_price = $sale_price;
@@ -247,7 +257,7 @@ class Product {
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -257,7 +267,7 @@ class Product {
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -267,7 +277,7 @@ class Product {
 
     /**
      * Get the value of image
-     */ 
+     */
     public function getImage()
     {
         return $this->image;
@@ -277,7 +287,7 @@ class Product {
      * Set the value of image
      *
      * @return  self
-     */ 
+     */
     public function setImage($image)
     {
         $this->image = $image;
@@ -287,7 +297,7 @@ class Product {
 
     /**
      * Get the value of category
-     */ 
+     */
     public function getCategory()
     {
         return $this->category;
@@ -297,7 +307,7 @@ class Product {
      * Set the value of category
      *
      * @return  self
-     */ 
+     */
     public function setCategory($category)
     {
         $this->category = $category;

@@ -1,6 +1,7 @@
 <?php
 
-class Page {
+class Page
+{
     private $path;
     private $title;
     private $description;
@@ -11,17 +12,18 @@ class Page {
      * Obtiene la lista de páginas existentes
      * @return array
      */
-    private function getAllPages(): array {
-        // todo => deberia validar que exista el archivo
+    private function getAllPages(): array
+    {
         return json_decode(file_get_contents('lib/data/pages.json'), true) ?? [];
     }
 
     /**
-     * Valida que la página sea válida
+     * Verifica que la página sea válida
      * @param string $pagePath
      * @return bool
      */
-    private function isValidPath(string $pagePath): bool {
+    private function isValidPath(string $pagePath): bool
+    {
         $pages = $this->getAllPages();
 
         foreach ($pages as $page) {
@@ -37,9 +39,10 @@ class Page {
      * @param string $pagePath 
      * @return Page
      */
-    public static function getPage(string $pagePath):Page {
+    public static function getPage(string $pagePath): Page
+    {
         $page = new self();
-        
+
         if ($page->isValidPath($pagePath)) {
             $pages = $page->getAllPages();
             foreach ($pages as $p) {
@@ -52,10 +55,10 @@ class Page {
                     $page->restricted = isset($p['restricted']) ? (bool) $p['restricted'] : false;
                 }
             }
-            if(!$page->active) {
+            if (!$page->active) {
                 return $page->createErrorPage(503);
             }
-            if($page->restricted) {
+            if ($page->restricted) {
                 return $page->createErrorPage(403);
             }
             return $page;
@@ -69,7 +72,8 @@ class Page {
      * @param int $type 
      * @return Page
      */
-    private function createErrorPage(int $type=404):Page {
+    private function createErrorPage(int $type = 404): Page
+    {
         // TODO => deberia validar que exista el archivo de error
         $page = new self();
         switch ($type) {
@@ -96,7 +100,7 @@ class Page {
 
     /**
      * Get the value of restricted
-     */ 
+     */
     public function getRestricted()
     {
         return $this->restricted;
@@ -106,7 +110,7 @@ class Page {
      * Set the value of restricted
      *
      * @return  self
-     */ 
+     */
     public function setRestricted($restricted)
     {
         $this->restricted = $restricted;
@@ -116,7 +120,7 @@ class Page {
 
     /**
      * Get the value of active
-     */ 
+     */
     public function getActive()
     {
         return $this->active;
@@ -126,7 +130,7 @@ class Page {
      * Set the value of active
      *
      * @return  self
-     */ 
+     */
     public function setActive($active)
     {
         $this->active = $active;
@@ -136,7 +140,7 @@ class Page {
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -146,7 +150,7 @@ class Page {
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -156,7 +160,7 @@ class Page {
 
     /**
      * Get the value of title
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -166,7 +170,7 @@ class Page {
      * Set the value of title
      *
      * @return  self
-     */ 
+     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -176,7 +180,7 @@ class Page {
 
     /**
      * Get the value of path
-     */ 
+     */
     public function getPath()
     {
         return $this->path;
@@ -186,7 +190,7 @@ class Page {
      * Set the value of path
      *
      * @return  self
-     */ 
+     */
     public function setPath($path)
     {
         $this->path = $path;

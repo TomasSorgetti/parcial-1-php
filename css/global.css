@@ -10,6 +10,20 @@
 #menu.open {
   transform: translateX(0);
 }
+#hamburger.active {
+  position: relative;
+}
+#hamburger.active .bar:nth-child(1) {
+  position: absolute;
+  transform: rotate(45deg);
+}
+#hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+#hamburger.active .bar:nth-child(3) {
+  position: absolute;
+  transform: rotate(-45deg);
+}
 @media screen and (min-width: 1024px) {
   #header.isScrolled nav {
     max-width: 100vw;
