@@ -1,0 +1,17 @@
+<main>
+    <section class="min-h-[80vh] flex flex-col items-center gap-16 pt-50 pb-20 max-w-[1280px] mx-auto px-4">
+        <h1 class="text-3xl font-bold uppercase text-center md:text-5xl">Iniciar Sesión</h1>
+        <form action="" class=" flex flex-col gap-4 w-full max-w-[400px]">
+            <div class="flex flex-col gap-2 w-full text-left">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="abc@abc.com" class="border-1 border-[var(--primary-color)] p-2 rounded-md" required>
+            </div>
+            <div class="flex flex-col gap-2 w-full text-left">
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" placeholder="********" class="border-1 border-[var(--primary-color)] p-2 rounded-md" required>
+            </div>
+            <input type="submit" value="Iniciar Sesión" class="bg-[var(--primary-color)] text-white p-2 rounded-md mt-4 cursor-pointer">
+            <p class="w-full text-center">No tienes una cuenta? <a href="index.php?page=signup" class="text-[var(--primary-color)] underline">Registrate</a></p>
+        </form>
+    </section>
+</main>

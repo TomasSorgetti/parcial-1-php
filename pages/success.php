@@ -1,12 +1,13 @@
-<?php 
-    require_once "lib/classes/Product.php";
+<?php
+require_once "lib/classes/Product.php";
 
-    $procesador = Product::getProductById($_POST["processor"]);
-    $ram = Product::getProductById($_POST["ram"]);
-    $motherboard = Product::getProductById($_POST["motherboard"]);
+$procesador = Product::getProductById($_POST["processor"]);
+$ram = Product::getProductById($_POST["ram"]);
+$motherboard = Product::getProductById($_POST["motherboard"]);
 
-    $totalPrice = $procesador->getSale_price() + $ram->getSale_price() + $motherboard->getSale_price();
+$totalPrice = $procesador->getPrice() + $ram->getPrice() + $motherboard->getPrice();
 ?>
+
 <main>
     <section class="text-center flex flex-col justify-center items-center gap-8 my-32">
         <h1 class="uppercase font-bold text-5xl">Gracias por tu compra</h1>
@@ -19,21 +20,21 @@
             <li class="w-[300px] border-1 border-[var(--light-dark-color)] flex flex-col items-start justify-between py-6 px-4 rounded-md gap-4">
                 <div>
                     <h3 class="uppercase font-bold text-[var(--dark-text-color)]"><?= $procesador->getTitle() ?></h3>
-                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $procesador->getSale_price() ?></p>
+                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $procesador->getPrice() ?></p>
                 </div>
                 <img src="assets/images/products/<?= $procesador->getImage() ?>" alt="<?= $procesador->getTitle() ?>" draggable="false" loading="lazy">
             </li>
             <li class="w-[300px] border-1 border-[var(--light-dark-color)] flex flex-col items-start justify-between py-6 px-4 rounded-md gap-4">
                 <div>
                     <h3 class="uppercase font-bold text-[var(--dark-text-color)]"><?= $ram->getTitle() ?></h3>
-                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $ram->getSale_price() ?></p>
+                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $ram->getPrice() ?></p>
                 </div>
                 <img src="assets/images/products/<?= $ram->getImage() ?>" alt="<?= $ram->getTitle() ?>" draggable="false" loading="lazy">
             </li>
             <li class="w-[300px] border-1 border-[var(--light-dark-color)] flex flex-col items-start justify-between py-6 px-4 rounded-md gap-4">
                 <div>
                     <h3 class="uppercase font-bold text-[var(--dark-text-color)]"><?= $motherboard->getTitle() ?></h3>
-                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $motherboard->getSale_price() ?></p>
+                    <p class="text-[var(--light-text-color)] text-3xl font-bold mt-4">$<?= $motherboard->getPrice() ?></p>
                 </div>
                 <img src="assets/images/products/<?= $motherboard->getImage() ?>" alt="<?= $motherboard->getTitle() ?>" draggable="false" loading="lazy">
             </li>

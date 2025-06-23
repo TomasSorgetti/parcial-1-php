@@ -1,8 +1,8 @@
-<?php 
-    require_once 'lib/classes/Product.php'; 
-    $processors = Product::getProductsByCategory(1);
-    $rams = Product::getProductsByCategory(2);
-    $mothers = Product::getProductsByCategory(3);
+<?php
+require_once 'lib/classes/Product.php';
+$processors = Product::getProductsByCategory(1);
+$rams = Product::getProductsByCategory(2);
+$mothers = Product::getProductsByCategory(3);
 
 ?>
 

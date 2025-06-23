@@ -6,22 +6,44 @@ class Category
     private $name;
     private $path;
 
-    /** 
-     * 
-     */
-    public static function getAllCategories()
+
+    public static function getAllCategories(): array
     {
         $query = 'SELECT * FROM category';
 
         return Database::execute($query, [], self::class);
     }
 
-    public static function getCategoryByName($categoryName)
+    public static function getCategoryById($categoryId): self
+    {
+        $query = 'SELECT * FROM category WHERE id = :id';
+        $params = ['id' => $categoryId];
+
+        return Database::execute($query, $params, self::class)[0];
+    }
+
+    public static function getCategoryByName($categoryName): self
     {
         $query = 'SELECT * FROM category WHERE name = :name';
         $params = ['name' => $categoryName];
 
         return Database::execute($query, $params, self::class);
+    }
+
+    public static function insertCategory($name, $path): void
+    {
+        $query = 'INSERT INTO category (name, path) VALUES (:name, :path)';
+        $params = ['name' => $name, 'path' => $path];
+
+        Database::execute($query, $params, self::class);
+    }
+
+    public function deleteCategory(): void
+    {
+        $query = 'DELETE FROM category WHERE id = :id';
+        $params = ['id' => $this->id];
+
+        Database::execute($query, $params);
     }
 
     /**

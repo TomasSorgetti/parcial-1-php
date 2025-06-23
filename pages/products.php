@@ -29,7 +29,7 @@ $categories = Category::getAllCategories();
                 ?>
             </h2>
             <form id="filtersForm" method="GET" action="index.php" class="flex gap-4 items-end justify-between w-full px-4 lg:px-0">
-                <input type="text" name="cat" value="<?= htmlspecialchars($categoryQuery) ?>" hidden>
+                <input type="text" name="cat" value="all" hidden>
                 <input type="hidden" name="page" value="products">
 
                 <!-- SearchBar -->

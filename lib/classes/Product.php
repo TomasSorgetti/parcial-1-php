@@ -11,7 +11,6 @@ class Product
     private $stock;
     private $price;
     private $offer_price;
-    private $category;
 
     /**
      * Obtiene todos los productos con filtros, ordenamiento y paginación
@@ -26,7 +25,7 @@ class Product
     {
         // NOTA => No vuelvo a hacer paginación en mi vida.
 
-        // TODO => El search hace la busqueda con la categoria, deberia hacer la busqueda reseteando todo el query.
+        // TODO => El search hace la busqueda con la categoria, deberia hacer la busqueda reseteando todo el query. Estoy cansado jefe....
 
         $query = "SELECT product.* 
                   FROM product";
@@ -70,20 +69,11 @@ class Product
 
         $limit = (int)$prodPerPage;
         $offset = (int)(($pageQuery - 1) * $prodPerPage);
+
+        // TODO => falla el limit y offset, llega como string al query final
         $query .= " LIMIT $limit OFFSET $offset";
 
         $products = Database::execute($query, $params, self::class);
-
-        foreach ($products as $product) {
-            if ($product->id_category) {
-                $categoryData = Database::execute(
-                    'SELECT * FROM category WHERE id = :id',
-                    ['id' => $product->id_category],
-                    Category::class
-                );
-                $product->setCategory(!empty($categoryData) ? $categoryData[0] : null);
-            }
-        }
 
         return [
             "total_pages" => ceil($totalProducts / $prodPerPage),
@@ -111,18 +101,20 @@ class Product
 
         $product = $results[0];
 
-        if ($product->id_category) {
-            $categoryData = Database::execute(
-                'SELECT * FROM category WHERE id = :id',
-                ['id' => $product->id_category],
-                Category::class
-            );
-            $product->setCategory(!empty($categoryData) ? $categoryData[0] : null);
-        }
-
         return $product;
     }
 
+    public static function getProductsByCategory(int $id_category): array
+    {
+        $query = "SELECT * FROM product WHERE id_category = :id_category";
+        $params = ['id_category' => $id_category];
+        return Database::execute($query, $params, self::class);
+    }
+
+    public function getQuotePrice(int $quote = 12): int
+    {
+        return $this->price * $quote + ($this->price % $quote > 0 ? 1 : 0);
+    }
     /**
      * Obtiene el ID del producto
      */
@@ -264,7 +256,7 @@ class Product
      */
     public function getOfferPrice()
     {
-        return $this->offer_price;
+        return $this->offer_price ?? $this->price;
     }
 
     /**
@@ -281,15 +273,8 @@ class Product
      */
     public function getCategory()
     {
-        return $this->category;
-    }
+        $category = (new Category())->getCategoryById($this->id_category);
 
-    /**
-     * Setea la categoría del producto
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-        return $this;
+        return $category->getName();
     }
 }
