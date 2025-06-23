@@ -211,3 +211,9 @@
     transform: translate(600px, -200px);
   }
 }
+
+input,
+textarea {
+  border: 1px solid rgb(49, 49, 49) !important;
+  border-radius: 4px !important;
+}

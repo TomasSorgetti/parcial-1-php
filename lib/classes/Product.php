@@ -83,6 +83,12 @@ class Product
         ];
     }
 
+    public static function getProductsWithoutPagination(): array
+    {
+        $query = "SELECT * FROM product";
+        return Database::execute($query, [], self::class);
+    }
+
     /**
      * Obtiene un producto por su ID
      * @param string $id
