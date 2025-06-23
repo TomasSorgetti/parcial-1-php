@@ -67,15 +67,23 @@ $page = Page::getPage($pageQuery);
                         <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-categories">Categorías</a>
                     </li>
                     <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-users">Usuarios</a>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-brands">Marcas</a>
+                    </li>
+                    <li>
+                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-tags">Etiquetas</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+
     <?php
     include_once 'pages/' . $page->getPath() . '.php';
     ?>
+
+    <footer class="h-60 text-center flex justify-center items-center border-t-1 border-t-[var(--light-dark-color)]">
+        <?php echo ("<p>&copy; " . date('Y') . " Tomás Sorgetti. Todos los derechos reservados.</p>"); ?>
+    </footer>
 
     <script src="../lib/scripts/navbar.js"></script>
 </body>

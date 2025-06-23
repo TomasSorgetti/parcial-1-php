@@ -1,37 +1,37 @@
 <?php
 
-class Brand
+class Tag
 {
     private $id;
     private $name;
 
 
-    public static function getAllBrands(): array
+    public static function getAllTags(): array
     {
-        $query = 'SELECT * FROM brand';
+        $query = 'SELECT * FROM tag';
 
         return Database::execute($query, [], self::class);
     }
 
-    public static function getBrandById($brandId): self
+    public static function getTagById($tagId): self
     {
-        $query = 'SELECT * FROM brand WHERE id = :id';
-        $params = ['id' => $brandId];
+        $query = 'SELECT * FROM tag WHERE id = :id';
+        $params = ['id' => $tagId];
 
         return Database::execute($query, $params, self::class)[0];
     }
 
-    public static function insertBrand($name): void
+    public static function insertTag($name): void
     {
-        $query = 'INSERT INTO brand (name) VALUES (:name)';
+        $query = 'INSERT INTO tag (name) VALUES (:name)';
         $params = ['name' => $name];
 
         Database::execute($query, $params, self::class);
     }
 
-    public function deleteBrand(): void
+    public function deleteTag(): void
     {
-        $query = 'DELETE FROM brand WHERE id = :id';
+        $query = 'DELETE FROM tag WHERE id = :id';
         $params = ['id' => $this->id];
 
         Database::execute($query, $params);
