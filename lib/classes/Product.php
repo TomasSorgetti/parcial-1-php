@@ -1,182 +1,130 @@
 <?php
+
 class Product
 {
     private $id;
+    private $id_category;
+    private $id_brand;
     private $title;
-    private $list_price;
-    private $sale_price;
-    private $description;
     private $image;
+    private $description;
+    private $stock;
+    private $price;
+    private $offer_price;
     private $category;
 
     /**
-     * Obtiene la lista de productos existentes
-     * @param string $categoryQuery
-     * @param string $orderQuery
-     * @param int $pageQuery
-     * @return array []
+     * Obtiene todos los productos con filtros, ordenamiento y paginación
+     * @param string $search Término de búsqueda
+     * @param string $categoryQuery ID de categoría o 'all'
+     * @param string $orderQuery Orden: price_asc, price_desc, name_asc, name_desc
+     * @param int $pageQuery Página actual
+     * @param int $prodPerPage Productos por página
+     * @return array
      */
     public static function getAllProducts(string $search = "", string $categoryQuery = "all", string $orderQuery = "price_asc", int $pageQuery = 1, int $prodPerPage = 9): array
     {
-        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
+        // NOTA => No vuelvo a hacer paginación en mi vida.
 
-        //* el filter basicamente compara y si es true lo incluye en el array
-        $filtredProducts = array_filter($productList, function ($product) use ($search, $categoryQuery) {
-            //TODO=> verificar el trim en el condicional no en el toLowerCase
-            if ($search != "") {
-                $search = strtolower(trim($search));
-                $title = strtolower($product["title"]);
+        // TODO => El search hace la busqueda con la categoria, deberia hacer la busqueda reseteando todo el query.
 
-                if (strpos($title, $search) === false) {
-                    return false;
-                }
-            }
+        $query = "SELECT product.* 
+                  FROM product";
+        $params = [];
+        $conditions = [];
 
-            //TODO => agregar filtro por categoria solo si no es all
-            if ($categoryQuery != "all") {
-                if (strtolower($product["category"]) !== strtolower($categoryQuery)) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-        //* usort seria el equivalente a sort de js usort(array &$array, callable $value_compare_func): bool
-        // orderQuery puede ser price_asc | price_desc | name_asc | name_desc
-        usort($filtredProducts, function ($a, $b) use ($orderQuery) {
-            switch ($orderQuery) {
-                case "price_asc":
-                    if ($a["list_price"] < $b["list_price"]) {
-                        return -1;
-                    } elseif ($a["list_price"] > $b["list_price"]) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-
-                case "price_desc":
-                    if ($b["list_price"] < $a["list_price"]) {
-                        return -1;
-                    } elseif ($b["list_price"] > $a["list_price"]) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-
-                case "name_asc":
-                    return strcmp($a["title"], $b["title"]);
-
-                case "name_desc":
-                    return strcmp($b["title"], $a["title"]);
-
-                default:
-                    if ($a["list_price"] < $b["list_price"]) {
-                        return -1;
-                    } elseif ($a["list_price"] > $b["list_price"]) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-            }
-        });
-
-        $products = [];
-
-        foreach ($filtredProducts as $product) {
-            $newProduct = new self();
-            $newProduct->id = $product["id"];
-            $newProduct->title = $product["title"];
-            $newProduct->list_price = $product["list_price"];
-            $newProduct->sale_price = $product["sale_price"];
-            $newProduct->description = $product["description"];
-            $newProduct->image = $product["image"];
-            $newProduct->category = $product["category"];
-
-            $products[] = $newProduct;
+        if ($search !== "") {
+            $conditions[] = "product.title LIKE :search";
+            $params['search'] = '%' . htmlspecialchars($search) . '%';
         }
 
-        // todo => paginacion
-        // aray_slice(array $array, int $offset, int $length = 0, bool $preserve_keys = false): array
-        $paginatedProductList = array_slice($products, ($pageQuery - 1) * $prodPerPage, $prodPerPage);
+        if ($categoryQuery !== "all") {
+            $conditions[] = "product.id_category = :category";
+            $params['category'] = (int)$categoryQuery;
+        }
+
+        if (!empty($conditions)) {
+            $query .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        switch ($orderQuery) {
+            case "price_asc":
+                $query .= " ORDER BY product.price ASC";
+                break;
+            case "price_desc":
+                $query .= " ORDER BY product.price DESC";
+                break;
+            case "name_asc":
+                $query .= " ORDER BY product.title ASC";
+                break;
+            case "name_desc":
+                $query .= " ORDER BY product.title DESC";
+                break;
+            default:
+                $query .= " ORDER BY product.price ASC";
+                break;
+        }
+
+        $countQuery = str_replace("SELECT product.*", "SELECT COUNT(*) AS total", $query);
+        $totalProducts = Database::execute($countQuery, $params)[0]['total'];
+
+        $limit = (int)$prodPerPage;
+        $offset = (int)(($pageQuery - 1) * $prodPerPage);
+        $query .= " LIMIT $limit OFFSET $offset";
+
+        $products = Database::execute($query, $params, self::class);
+
+        foreach ($products as $product) {
+            if ($product->id_category) {
+                $categoryData = Database::execute(
+                    'SELECT * FROM category WHERE id = :id',
+                    ['id' => $product->id_category],
+                    Category::class
+                );
+                $product->setCategory(!empty($categoryData) ? $categoryData[0] : null);
+            }
+        }
 
         return [
-            "total_pages" => ceil(count($products) / $prodPerPage),
+            "total_pages" => ceil($totalProducts / $prodPerPage),
             "current_page" => $pageQuery,
-            "products" => $paginatedProductList,
-            "total_products" => count($products)
+            "products" => $products,
+            "total_products" => $totalProducts
         ];
     }
 
     /**
-     * Obtiene un producto por su id
+     * Obtiene un producto por su ID
      * @param string $id
-     * @return Product
+     * @return Product|null
      */
     public static function getProductById(string $id): ?self
     {
-        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
+        $query = "SELECT * FROM product WHERE id = :id";
+        $params = ['id' => (int)$id];
 
-        foreach ($productList as $product) {
-            if ($product["id"] === intval($id)) {
-                $newProduct = new self();
-                $newProduct->id = $product["id"];
-                $newProduct->title = $product["title"];
-                $newProduct->list_price = $product["list_price"];
-                $newProduct->sale_price = $product["sale_price"];
-                $newProduct->description = $product["description"];
-                $newProduct->image = $product["image"];
-                $newProduct->category = $product["category"];
+        $results = Database::execute($query, $params, self::class);
 
-                return $newProduct;
-            }
+        if (empty($results)) {
+            return null;
         }
 
-        return null;
-    }
+        $product = $results[0];
 
-    /**
-     * Obtiene productos por su categoria
-     * @param string $category
-     * @return array
-     */
-    public static function getProductsByCategory(int $category): array
-    {
-        $productList = json_decode(file_get_contents("lib/data/products.json"), true) ?? [];
-
-        $products = [];
-
-        foreach ($productList as $product) {
-            if ($product["category"] === $category) {
-                $newProduct = new self();
-                $newProduct->id = $product["id"];
-                $newProduct->title = $product["title"];
-                $newProduct->list_price = $product["list_price"];
-                $newProduct->sale_price = $product["sale_price"];
-                $newProduct->description = $product["description"];
-                $newProduct->image = $product["image"];
-                $newProduct->category = $product["category"];
-
-
-                $products[] = $newProduct;
-            }
+        if ($product->id_category) {
+            $categoryData = Database::execute(
+                'SELECT * FROM category WHERE id = :id',
+                ['id' => $product->id_category],
+                Category::class
+            );
+            $product->setCategory(!empty($categoryData) ? $categoryData[0] : null);
         }
 
-        return $products;
+        return $product;
     }
 
     /**
-     * Obtiene el precio de un producto segun sus cuotas
-     * @param int $quote
-     * @return int
-     */
-    public function getQuotePrice(int $quote = 12): int
-    {
-        return $this->list_price * $quote + ($this->list_price % $quote > 0 ? 1 : 0);
-    }
-
-    /**
-     * Get the value of id
+     * Obtiene el ID del producto
      */
     public function getId()
     {
@@ -184,19 +132,50 @@ class Product
     }
 
     /**
-     * Set the value of id
-     *
-     * @return  self
+     * Setea el ID del producto
      */
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 
     /**
-     * Get the value of title
+     * Obtiene el ID de la categoría
+     */
+    public function getIdCategory()
+    {
+        return $this->id_category;
+    }
+
+    /**
+     * Setea el ID de la categoría
+     */
+    public function setIdCategory($id_category)
+    {
+        $this->id_category = $id_category;
+        return $this;
+    }
+
+    /**
+     * Obtiene el ID de la marca
+     */
+    public function getIdBrand()
+    {
+        return $this->id_brand;
+    }
+
+    /**
+     * Setea el ID de la marca
+     */
+    public function setIdBrand($id_brand)
+    {
+        $this->id_brand = $id_brand;
+        return $this;
+    }
+
+    /**
+     * Obtiene el titulo del producto
      */
     public function getTitle()
     {
@@ -204,79 +183,16 @@ class Product
     }
 
     /**
-     * Set the value of title
-     *
-     * @return  self
+     * Setea el titulo del producto
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
     /**
-     * Get the value of list_price
-     */
-    public function getList_price()
-    {
-        return $this->list_price;
-    }
-
-    /**
-     * Set the value of list_price
-     *
-     * @return  self
-     */
-    public function setList_price($list_price)
-    {
-        $this->list_price = $list_price;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of sale_price
-     */
-    public function getSale_price()
-    {
-        return $this->sale_price;
-    }
-
-    /**
-     * Set the value of sale_price
-     *
-     * @return  self
-     */
-    public function setSale_price($sale_price)
-    {
-        $this->sale_price = $sale_price;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of image
+     * Obtiene la imagen del producto
      */
     public function getImage()
     {
@@ -284,19 +200,84 @@ class Product
     }
 
     /**
-     * Set the value of image
-     *
-     * @return  self
+     * Setea la imagen del producto
      */
     public function setImage($image)
     {
         $this->image = $image;
-
         return $this;
     }
 
     /**
-     * Get the value of category
+     * Obtiene la descripcion del producto
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Setea la descripcion del producto
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * Obtiene el stock del producto
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Setea el stock del producto
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+        return $this;
+    }
+
+    /**
+     * Obtiene el precio del producto
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Setea el precio del producto
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * Obtiene el precio de oferta del producto
+     */
+    public function getOfferPrice()
+    {
+        return $this->offer_price;
+    }
+
+    /**
+     * Setea el precio de oferta del producto
+     */
+    public function setOfferPrice($offer_price)
+    {
+        $this->offer_price = $offer_price;
+        return $this;
+    }
+
+    /**
+     * Obtiene la categoría del producto
      */
     public function getCategory()
     {
@@ -304,14 +285,11 @@ class Product
     }
 
     /**
-     * Set the value of category
-     *
-     * @return  self
+     * Setea la categoría del producto
      */
     public function setCategory($category)
     {
         $this->category = $category;
-
         return $this;
     }
-};
+}

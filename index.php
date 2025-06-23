@@ -1,10 +1,12 @@
 <?php
-require_once 'lib/classes/Page.php';
+require_once 'lib/utils/autoload.php';
 
 $pageQuery = $_GET['page'] ?? 'home';
 
 $page = Page::getPage($pageQuery);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

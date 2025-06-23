@@ -4,8 +4,6 @@ class Category
 {
     private $id;
     private $name;
-    private $background;
-    private $svg;
     private $path;
 
     /** 
@@ -13,45 +11,17 @@ class Category
      */
     public static function getAllCategories()
     {
-        $categoriesData = json_decode(file_get_contents("lib/data/categories.json"), true);
+        $query = 'SELECT * FROM category';
 
-        $categories = [];
-
-        foreach ($categoriesData as $category) {
-            //? deberia retornar un error si no encuentra nada
-            $newCategory = new self();
-            $newCategory->id = $category["id"];
-            $newCategory->name = $category["name"];
-            $newCategory->background = $category["background"];
-            $newCategory->svg = $category["svg"];
-            $newCategory->path = $category["path"];
-
-            $categories[] = $newCategory;
-        }
-
-        return $categories;
+        return Database::execute($query, [], self::class);
     }
 
     public static function getCategoryByName($categoryName)
     {
-        // TODO => usar el metodo getAllCategories() y filtrarlo en vez de leer el archivo de nuevo y crear una nueva instancia de Category (creo)
+        $query = 'SELECT * FROM category WHERE name = :name';
+        $params = ['name' => $categoryName];
 
-        $categoriesData = json_decode(file_get_contents("lib/data/categories.json"), true);
-
-        foreach ($categoriesData as $category) {
-            if ($category["name"] === intval($categoryName)) {
-                $newCategory = new self();
-                $newCategory->id = $category["id"];
-                $newCategory->name = $category["name"];
-                $newCategory->background = $category["background"];
-                $newCategory->svg = $category["svg"];
-                $newCategory->path = $category["path"];
-
-                return $newCategory;
-            }
-        }
-
-        return null;
+        return Database::execute($query, $params, self::class);
     }
 
     /**
@@ -90,46 +60,6 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of background
-     */
-    public function getBackground()
-    {
-        return $this->background;
-    }
-
-    /**
-     * Set the value of background
-     *
-     * @return  self
-     */
-    public function setBackground($background)
-    {
-        $this->background = $background;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of svg
-     */
-    public function getSvg()
-    {
-        return $this->svg;
-    }
-
-    /**
-     * Set the value of svg
-     *
-     * @return  self
-     */
-    public function setSvg($svg)
-    {
-        $this->svg = $svg;
 
         return $this;
     }

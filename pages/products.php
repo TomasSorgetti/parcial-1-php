@@ -9,6 +9,7 @@ $orderQuery = $_GET["order"] ?? "price_asc";
 $pageQuery = intval($_GET["sec"] ?? 1);
 
 $responseProducts = Product::getAllProducts($searchQuery, $categoryQuery, $orderQuery, $pageQuery);
+
 $categories = Category::getAllCategories();
 ?>
 <main>
@@ -107,7 +108,7 @@ $categories = Category::getAllCategories();
                                         <div class='flex flex-col gap-2'>
                                             <h3 class='font-bold'>" . $product->getTitle() . "</h3>
                                             <p class='text-[var(--dark-text-color)]'>" . cutText($product->getDescription(), 50) . "</p>
-                                            <p class='text-[var(--dark-text-color)]'>$ <span class='font-bold text-[var(--light-text-color)] text-2xl'>" . $product->getSale_price() . "</span></p>
+                                            <p class='text-[var(--dark-text-color)]'>$ <span class='font-bold text-[var(--light-text-color)] text-2xl'>" . $product->getPrice() . "</span></p>
                                         </div>
                                         <a class='text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full text-center uppercase font-bold' href='index.php?page=product&id=" . $product->getId() . "'>ver producto</a>
                                     </div>
