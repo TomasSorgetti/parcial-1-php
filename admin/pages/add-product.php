@@ -2,11 +2,13 @@
 $products = Product::getProductsWithoutPagination();
 $categories = Category::getAllCategories();
 $brands = Brand::getAllBrands();
+$tags = Tag::getAllTags();
 
 ?>
+
 <main>
     <section class="container mx-auto text-center">
-        <h1 class="mt-32">Añadir producto</h1>
+        <h1 class="text-3xl mt-32 font-bold uppercase text-center md:text-5xl">Añadir producto</h1>
         <form action="actions/products/add-product.php" method="POST" enctype="multipart/form-data" class="p-4 my-12 w-full max-w-[600px] mx-auto flex flex-col gap-4">
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="title">Nombre del producto:</label>
@@ -53,6 +55,17 @@ $brands = Brand::getAllBrands();
             <div class="flex flex-col items-start text-left w-full">
                 <label for="image">Imagen:</label>
                 <input type="file" name="image" id="image" accept="image/*" required class="cursor-pointer">
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-col gap-2 items-start text-left w-full">
+                <label for="tags">Etiquetas:</label>
+                <div class="flex flex-wrap gap-2">
+                    <?php foreach ($tags as $tag) : ?>
+                        <input type="checkbox" name="tags[]" id="tag-<?= $tag->getId() ?>" value="<?= $tag->getId() ?>">
+                        <label for="tag-<?= $tag->getId() ?>"><?= $tag->getName() ?></label>
+                    <?php endforeach; ?>
+                </div>
             </div>
 
             <div class="flex flex-col gap-2 items-start text-left w-full">

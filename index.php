@@ -45,6 +45,19 @@ $page = Page::getPage($pageQuery);
 
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
     <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
+        <?php
+        $isAdmin = $_SESSION['session']['role'] === "admin" || $_SESSION['session']['role'] === "superadmin";
+
+        if ($isAdmin) {
+            echo (
+                "<div class='bg-[var(--primary-color)]'>
+                    <div class='container mx-auto flex w-full justify-end'>
+                        <a href='admin/index.php' class='text-white font-bold py-1 cursor-pointer'>Dashboard</a>
+                    </div>
+                </div>"
+            );
+        }
+        ?>
         <nav class="max-w-[1280px] mx-auto px-4 border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out lg:px-0">
             <div class="flex justify-between items-center py-6 max-w-[1280px] mx-auto">
                 <!-- Logo -->
@@ -66,6 +79,17 @@ $page = Page::getPage($pageQuery);
                     </li>
                     <li>
                         <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=data">Datos</a>
+                    </li>
+                    <li>
+                        <?php
+                        $isLoggedIn = empty($_SESSION['session']);
+
+                        if (!$isLoggedIn) {
+                            echo ("<a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='lib/actions/auth/logout.php'>Logout</a>");
+                        } else {
+                            echo ("<a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='index.php?page=signin'>Login</a>");
+                        }
+                        ?>
                     </li>
                     <li>
                         <a class="uppercase text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] transition-all duration-500 ease-in-out hover:bg-[var(--alter-color)] hover:border-[var(--alter-color)] rounded-full" href="index.php?page=build">Armá tu pc</a>

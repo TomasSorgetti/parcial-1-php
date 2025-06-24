@@ -1,6 +1,6 @@
 <?php
 
-class Brand
+class User
 {
     private $id;
     private $username;
@@ -8,40 +8,12 @@ class Brand
     private $password;
     private $role;
 
-    public static function signup($username, $email, $password)
+    public static function getUser($email)
     {
-
-        $query = "INSERT INTO user (username, email, password) VALUES (:username, :email, :password)";
-        $params = ['username' => $username, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)];
-
-        $user = Database::execute($query, $params, self::class);
-
-        return [
-            'id' => $user->id,
-            'username' => $user->username,
-            'email' => $user->email
-        ];
-    }
-
-    public static function signin($email, $password)
-    {
-        $query = "SELECT * FROM user WHERE email = :email";
+        $query = 'SELECT * FROM user WHERE email = :email';
         $params = ['email' => $email];
 
-        $user = Database::execute($query, $params, self::class);
-        if (empty($user)) {
-            return "El email es incorrecto";
-        }
-
-        if (!password_verify($password, $user->password)) {
-            return "La contraseña es incorrecta";
-        }
-
-        return [
-            'id' => $user->id,
-            'username' => $user->username,
-            'email' => $user->email
-        ];
+        return Database::execute($query, $params, self::class)[0];
     }
 
     /**
@@ -100,6 +72,46 @@ class Brand
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of role
+     */ 
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
 
         return $this;
     }

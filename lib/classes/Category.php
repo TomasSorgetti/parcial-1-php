@@ -37,6 +37,13 @@ class Category
 
         Database::execute($query, $params, self::class);
     }
+    public static function updateCategory($categoryId, $categoryName, $categoryPath): void
+    {
+        $query = 'UPDATE category SET name = :name, path = :path WHERE id = :id';
+        $params = ['name' => $categoryName, 'path' => $categoryPath, 'id' => $categoryId];
+
+        Database::execute($query, $params);
+    }
 
     public function deleteCategory(): void
     {

@@ -29,6 +29,14 @@ class Tag
         Database::execute($query, $params, self::class);
     }
 
+    public static function updateTag($tagId, $tagName): void
+    {
+        $query = 'UPDATE tag SET name = :name WHERE id = :id';
+        $params = ['name' => $tagName, 'id' => $tagId];
+
+        Database::execute($query, $params, self::class);
+    }
+
     public function deleteTag(): void
     {
         $query = 'DELETE FROM tag WHERE id = :id';

@@ -29,6 +29,14 @@ class Brand
         Database::execute($query, $params, self::class);
     }
 
+    public static function updateBrand($brandId, $brandName): void
+    {
+        $query = 'UPDATE brand SET name = :name WHERE id = :id';
+        $params = ['name' => $brandName, 'id' => $brandId];
+
+        Database::execute($query, $params);
+    }
+
     public function deleteBrand(): void
     {
         $query = 'DELETE FROM brand WHERE id = :id';

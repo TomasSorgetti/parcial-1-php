@@ -11,6 +11,7 @@ class Product
     private $stock;
     private $price;
     private $offer_price;
+    private $tags;
 
     /**
      * Obtiene todos los productos con filtros, ordenamiento y paginación
@@ -96,16 +97,30 @@ class Product
      */
     public static function getProductById(string $id): ?self
     {
-        $query = "SELECT * FROM product WHERE id = :id";
-        $params = ['id' => (int)$id];
+        $query = "SELECT product.*, GROUP_CONCAT(tag.id) AS tag_ids, GROUP_CONCAT(tag.name) AS tag_names
+              FROM product
+              LEFT JOIN product_tag ON product.id = product_tag.product_id
+              LEFT JOIN tag ON product_tag.tag_id = tag.id
+              WHERE product.id = ?
+              GROUP BY product.id";
+        $params = [(int)$id];
 
         $results = Database::execute($query, $params, self::class);
 
-        if (empty($results)) {
+
+        if (!is_array($results) || empty($results)) {
             return null;
         }
 
         $product = $results[0];
+
+        if (!empty($product->tag_ids)) {
+            $ids = explode(',', $product->tag_ids);
+            $names = explode(',', $product->tag_names);
+            $product->tags = array_combine($ids, $names);
+        } else {
+            $product->tags = [];
+        }
 
         return $product;
     }
@@ -117,7 +132,7 @@ class Product
         return Database::execute($query, $params, self::class);
     }
 
-    public static function insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price): void
+    public static function insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): void
     {
         // Categoría
         $categoryQuery = 'SELECT id FROM category WHERE id = :id';
@@ -154,19 +169,126 @@ class Product
         ];
 
         Database::execute($query, $params, self::class);
+
+        $productIdQuery = 'SELECT LAST_INSERT_ID() AS id';
+        $productIdResult = Database::execute($productIdQuery);
+        $productId = $productIdResult[0]['id'];
+
+        if (!empty($tags)) {
+            $tagQuery = 'SELECT id FROM tag WHERE id = :id';
+            $validTags = [];
+            foreach ($tags as $tagId) {
+                $tagResult = Database::execute($tagQuery, ['id' => $tagId]);
+                if (!empty($tagResult)) {
+                    $validTags[] = $tagResult[0]['id'];
+                }
+            }
+
+            $badTags = array_diff($tags, $validTags);
+            if (!empty($badTags)) {
+                throw new Exception("Los tags con IDs " . implode(', ', $badTags) . " no existen.");
+            }
+
+            $tagInsertQuery = 'INSERT INTO product_tag (product_id, tag_id) VALUES (:product_id, :tag_id)';
+            foreach ($validTags as $tagId) {
+                Database::execute($tagInsertQuery, [
+                    'product_id' => $productId,
+                    'tag_id' => $tagId
+                ]);
+            }
+        }
+    }
+
+    public static function updateProductById(string $id, $id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): bool
+    {
+        $catQuery = 'SELECT id FROM category WHERE id = :id';
+        $catParams = ['id' => $id_category];
+        $category = Database::execute($catQuery, $catParams);
+        
+        if (empty($category)) {
+            throw new Exception("La categoría con ID $id_category no existe.");
+        }
+
+        $brandQuery = 'SELECT id FROM brand WHERE id = :id';
+        $brandParams = ['id' => $id_brand];
+        $brand = Database::execute($brandQuery, $brandParams);
+        if (empty($brand)) {
+            throw new Exception("La marca con ID $id_brand no está.");
+        }
+
+        $query = 'UPDATE product SET 
+              id_category = :id_category, 
+              id_brand = :id_brand, 
+              title = :title, 
+              image = :image, 
+              description = :description, 
+              stock = :stock, 
+              price = :price, 
+              offer_price = :offer_price 
+              WHERE id = :id';
+        $params = [
+            'id_category' => $id_category,
+            'id_brand' => $id_brand,
+            'title' => $title,
+            'image' => $image,
+            'description' => $description,
+            'stock' => $stock,
+            'price' => $price,
+            'offer_price' => $offer_price,
+            'id' => (int)$id
+        ];
+        Database::execute($query, $params);
+
+        $tagDeleteQuery = 'DELETE FROM product_tag WHERE product_id = :id';
+        $tagDeleteParams = ['id' => (int)$id];
+        Database::execute($tagDeleteQuery, $tagDeleteParams);
+
+        if (!empty($tags)) {
+            $tagQuery = 'SELECT id FROM tag WHERE id = :id';
+            $validTags = [];
+            foreach ($tags as $tagId) {
+                $tagResult = Database::execute($tagQuery, ['id' => $tagId]);
+                if (!empty($tagResult)) {
+                    $validTags[] = $tagResult[0]['id'];
+                }
+            }
+
+            $badTags = array_diff($tags, $validTags);
+            if (!empty($badTags)) {
+                throw new Exception("Los tags con IDs " . implode(', ', $badTags) . " no existen.");
+            }
+
+            $tagInsertQuery = 'INSERT INTO product_tag (product_id, tag_id) VALUES (:product_id, :tag_id)';
+            foreach ($validTags as $tagId) {
+                Database::execute($tagInsertQuery, [
+                    'product_id' => (int)$id,
+                    'tag_id' => $tagId
+                ]);
+            }
+        }
+
+        return true;
     }
 
     public function deleteProduct(): void
     {
+        //??? supongo que se podría cambiar en la db que se elimine en cascada cada tag
+        // todo => cambiar en la db delete on cascade
+
+        $tagQuery = 'DELETE FROM product_tag WHERE product_id = :id';
+        $tagParams = ['id' => $this->id];
+        Database::execute($tagQuery, $tagParams);
+
         $query = 'DELETE FROM product WHERE id = :id';
         $params = ['id' => $this->id];
-
         Database::execute($query, $params);
     }
+
     public function getQuotePrice(int $quote = 12): int
     {
         return $this->price * $quote + ($this->price % $quote > 0 ? 1 : 0);
     }
+
     /**
      * Obtiene el ID del producto
      */
@@ -328,5 +450,25 @@ class Product
         $category = (new Category())->getCategoryById($this->id_category);
 
         return $category->getName();
+    }
+
+    /**
+     * Get the value of tags
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set the value of tags
+     *
+     * @return  self
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
     }
 }

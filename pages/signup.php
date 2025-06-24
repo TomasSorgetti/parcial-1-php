@@ -1,7 +1,13 @@
 <main>
     <section class="min-h-[80vh] flex flex-col items-center gap-16 pt-50 pb-20 max-w-[1280px] mx-auto px-4">
         <h1 class="text-3xl font-bold uppercase text-center md:text-5xl">Registrarse</h1>
-        <form action="" class=" flex flex-col gap-4 w-full max-w-[400px]">
+        <form action="lib/actions/auth/signup.php" method="POST" class=" flex flex-col gap-4 w-full max-w-[400px]">
+            <?php
+            if (isset($_SESSION['signupError'])) {
+                echo '<p class="text-red-500 text-center">' . htmlspecialchars($_SESSION['signupError']) . '</p>';
+                unset($_SESSION['signupError']);
+            }
+            ?>
             <div class="flex flex-col gap-2 w-full text-left">
                 <label for="username">Nombre de usuario:</label>
                 <input type="text" name="username" id="username" placeholder="Juan Perez" class="border-1 border-[var(--primary-color)] p-2 rounded-md" required>

@@ -30,7 +30,13 @@ class Page
             }
 
             if ($page->getRestricted()) {
-                return self::createErrorPage(403);
+                $hasPermissions = Auth::verify($page->getRestricted());
+
+                if (!$hasPermissions) {
+                    return self::createErrorPage(403);
+                } else {
+                    return $page;
+                }
             }
 
             return $page;

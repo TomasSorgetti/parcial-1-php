@@ -1,6 +1,5 @@
 <?php
-require_once "../../../lib/classes/Database.php";
-require_once "../../../lib/classes/Brand.php";
+require_once "../../../lib/utils/autoload.php";
 
 $brandId = $_GET['id'] ?? null;
 

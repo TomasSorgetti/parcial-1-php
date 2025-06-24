@@ -47,7 +47,7 @@ $page = Page::getPage($pageQuery);
         <nav class="max-w-[1280px] mx-auto px-4 border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out lg:px-0">
             <div class="flex justify-between items-center py-6 max-w-[1280px] mx-auto">
                 <!-- Logo -->
-                <a href="index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)] z-60">Code Crafters</a>
+                <a href="../index.php?page=home" class="uppercase font-bold text-xl text-[var(--light-text-color)] z-60">Code Crafters</a>
                 <!-- Hamburger -->
                 <button id="hamburger" class="z-60 flex flex-col items-center justify-center gap-2 lg:hidden">
                     <div class="bar w-8 h-1 bg-[var(--light-text-color)]"></div>

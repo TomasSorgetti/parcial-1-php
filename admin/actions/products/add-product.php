@@ -1,12 +1,5 @@
 <?php
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', true);
-error_reporting(E_ALL);
-
-require_once "../../../lib/classes/Database.php";
-require_once "../../../lib/classes/Product.php";
-require_once "../../../lib/classes/Image.php";
+require_once "../../../lib/utils/autoload.php";
 
 $image = "";
 
@@ -24,8 +17,9 @@ try {
     $stock = trim($_POST['stock']);
     $price = trim($_POST['price']);
     $offer_price = trim($_POST['offer_price']);
+    $tags = $_POST['tags'];
 
-    Product::insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price);
+    Product::insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags);
 
     header("Location: ../../index.php?page=admin-products");
     exit();

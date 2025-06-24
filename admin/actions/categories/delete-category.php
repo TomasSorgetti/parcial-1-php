@@ -1,6 +1,5 @@
 <?php
-require_once "../../../lib/classes/Database.php";
-require_once "../../../lib/classes/Category.php";
+require_once "../../../lib/utils/autoload.php";
 
 $categoryId = $_GET['id'] ?? null;
 
