@@ -117,6 +117,52 @@ class Product
         return Database::execute($query, $params, self::class);
     }
 
+    public static function insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price): void
+    {
+        // Categoría
+        $categoryQuery = 'SELECT id FROM category WHERE id = :id';
+        $categoryParams = ['id' => $id_category];
+
+        $category = Database::execute($categoryQuery, $categoryParams);
+
+        if (empty($category)) {
+            throw new Exception("La categoría con ID $id_category no existe.");
+        }
+
+        // Marca
+        $brandQuery = 'SELECT id FROM brand WHERE id = :id';
+        $brandParams = ['id' => $id_brand];
+
+        $brand = Database::execute($brandQuery, $brandParams);
+
+        if (empty($brand)) {
+            throw new Exception("La marca con ID $id_brand no existe.");
+        }
+
+        // Producto
+        $query = 'INSERT INTO product (id_category, id_brand, title, image, description, stock, price, offer_price) 
+                  VALUES (:id_category, :id_brand, :title, :image, :description, :stock, :price, :offer_price)';
+        $params = [
+            'id_category' => $id_category,
+            'id_brand' => $id_brand,
+            'title' => $title,
+            'image' => $image,
+            'description' => $description,
+            'stock' => $stock,
+            'price' => $price,
+            'offer_price' => $offer_price
+        ];
+
+        Database::execute($query, $params, self::class);
+    }
+
+    public function deleteProduct(): void
+    {
+        $query = 'DELETE FROM product WHERE id = :id';
+        $params = ['id' => $this->id];
+
+        Database::execute($query, $params);
+    }
     public function getQuotePrice(int $quote = 12): int
     {
         return $this->price * $quote + ($this->price % $quote > 0 ? 1 : 0);

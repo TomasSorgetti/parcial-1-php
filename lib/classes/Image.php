@@ -18,5 +18,18 @@ class Image
         return $fileName;
     }
 
-    public static function delete() {}
+    public static function delete(string $dir, string $fileName): bool
+    {
+        $filePath = $dir . $fileName;
+
+        if (!file_exists($filePath)) {
+            throw new Exception("La imagen '$fileName' no existe en '$dir'");
+        }
+
+        if (!unlink($filePath)) {
+            throw new Exception("Error al eliminar la imagen '$fileName'");
+        }
+
+        return true;
+    }
 }

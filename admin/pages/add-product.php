@@ -7,7 +7,7 @@ $brands = Brand::getAllBrands();
 <main>
     <section class="container mx-auto text-center">
         <h1 class="mt-32">Añadir producto</h1>
-        <form action="actions/products/add-product.php" method="POST" class="p-4 my-12 w-full max-w-[600px] mx-auto flex flex-col gap-4">
+        <form action="actions/products/add-product.php" method="POST" enctype="multipart/form-data" class="p-4 my-12 w-full max-w-[600px] mx-auto flex flex-col gap-4">
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="title">Nombre del producto:</label>
                 <input type="text" name="title" placeholder="Titulo" required class="w-full">
@@ -41,8 +41,8 @@ $brands = Brand::getAllBrands();
                 </div>
 
                 <div class="flex flex-col gap-2 items-start text-left w-full">
-                    <label for="category">Marca:</label>
-                    <select name="category" id="category" class="w-full">
+                    <label for="brand">Marca:</label>
+                    <select name="brand" id="brand" class="w-full">
                         <?php foreach ($brands as $brand) : ?>
                             <option value="<?= $brand->getId() ?>"><?= $brand->getName() ?></option>
                         <?php endforeach; ?>
@@ -52,13 +52,15 @@ $brands = Brand::getAllBrands();
 
             <div class="flex flex-col items-start text-left w-full">
                 <label for="image">Imagen:</label>
-                <input type="file" name="image" id="image" required class="cursor-pointer">
+                <input type="file" name="image" id="image" accept="image/*" required class="cursor-pointer">
             </div>
 
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="description">Descripcion:</label>
                 <textarea name="description" id="description" cols="30" rows="10" required placeholder="Descripción..." class="w-full"></textarea>
             </div>
+
+            <input type="submit" value="Añadir producto" class="bg-[var(--primary-color)] text-white p-2 rounded-md mt-4 cursor-pointer">
         </form>
     </section>
 </main>

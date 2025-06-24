@@ -6,7 +6,7 @@ $products = Product::getProductsWithoutPagination();
     <section class="container mx-auto">
         <h1 class="mt-32">Productos</h1>
         <div class="mt-12 flex justify-between items-center">
-            <input type="text" name="search" value="search" placeholder="not implemented">
+            <input type="text" name="search" placeholder="not implemented">
             <a href="index.php?page=add-product">Agregar Producto</a>
         </div>
         <table class="w-full mt-20">
