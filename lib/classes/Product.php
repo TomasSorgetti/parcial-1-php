@@ -14,13 +14,14 @@ class Product
     private $tags;
 
     /**
-     * Obtiene todos los productos con filtros, ordenamiento y paginación
-     * @param string $search Término de búsqueda
-     * @param string $categoryQuery ID de categoría o 'all'
-     * @param string $orderQuery Orden: price_asc, price_desc, name_asc, name_desc
-     * @param int $pageQuery Página actual
-     * @param int $prodPerPage Productos por página
-     * @return array
+     * Obtiene todos los productos con filtros, ordenamiento y paginación.
+     *
+     * @param string $search Término de búsqueda (opcional).
+     * @param string $categoryQuery ID de categoría o 'all' (opcional).
+     * @param string $orderQuery Orden: price_asc, price_desc, name_asc, name_desc (opcional).
+     * @param int $pageQuery Página actual (opcional, por defecto 1).
+     * @param int $prodPerPage Productos por página (opcional, por defecto 9).
+     * @return array Arreglo con productos, página actual, total de páginas y total de productos.
      */
     public static function getAllProducts(string $search = "", string $categoryQuery = "all", string $orderQuery = "price_asc", int $pageQuery = 1, int $prodPerPage = 9): array
     {
@@ -84,6 +85,11 @@ class Product
         ];
     }
 
+    /**
+     * Obtiene todos los productos sin paginación.
+     *
+     * @return array Lista de objetos Product.
+     */
     public static function getProductsWithoutPagination(): array
     {
         $query = "SELECT * FROM product";
@@ -91,9 +97,10 @@ class Product
     }
 
     /**
-     * Obtiene un producto por su ID
-     * @param string $id
-     * @return Product|null
+     * Obtiene un producto por su ID, incluyendo sus tags.
+     *
+     * @param string $id ID del producto.
+     * @return self|null Instancia del producto encontrado o null si no existe.
      */
     public static function getProductById(string $id): ?self
     {
@@ -125,6 +132,12 @@ class Product
         return $product;
     }
 
+    /**
+     * Obtiene productos por ID de categoría.
+     *
+     * @param int $id_category ID de la categoría.
+     * @return array Lista de objetos Product.
+     */
     public static function getProductsByCategory(int $id_category): array
     {
         $query = "SELECT * FROM product WHERE id_category = :id_category";
@@ -132,6 +145,21 @@ class Product
         return Database::execute($query, $params, self::class);
     }
 
+    /**
+     * Inserta un nuevo producto en la base de datos.
+     *
+     * @param int $id_category ID de la categoría.
+     * @param int $id_brand ID de la marca.
+     * @param string $title Título del producto.
+     * @param string $image Nombre o ruta de la imagen.
+     * @param string $description Descripción del producto.
+     * @param int $stock Cantidad en stock.
+     * @param float $price Precio del producto.
+     * @param float|null $offer_price Precio de oferta (opcional).
+     * @param array $tags Lista de IDs de tags.
+     * @return void
+     * @throws Exception Si la categoría, marca o tags no existen.
+     */
     public static function insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): void
     {
         // Categoría
@@ -199,12 +227,28 @@ class Product
         }
     }
 
+    /**
+     * Actualiza un producto existente por su ID.
+     *
+     * @param string $id ID del producto.
+     * @param int $id_category ID de la categoría.
+     * @param int $id_brand ID de la marca.
+     * @param string $title Título del producto.
+     * @param string $image Nombre o ruta de la imagen.
+     * @param string $description Descripción del producto.
+     * @param int $stock Cantidad en stock.
+     * @param float $price Precio del producto.
+     * @param float|null $offer_price Precio de oferta (opcional).
+     * @param array $tags Lista de IDs de tags.
+     * @return bool Verdadero si la actualización fue exitosa.
+     * @throws Exception Si la categoría, marca o tags no existen.
+     */
     public static function updateProductById(string $id, $id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): bool
     {
         $catQuery = 'SELECT id FROM category WHERE id = :id';
         $catParams = ['id' => $id_category];
         $category = Database::execute($catQuery, $catParams);
-        
+
         if (empty($category)) {
             throw new Exception("La categoría con ID $id_category no existe.");
         }
@@ -270,6 +314,12 @@ class Product
         return true;
     }
 
+    /**
+     * Elimina un producto y sus tags asociados.
+     *
+     * @return void
+     * @todo Configurar eliminación en cascada en la base de datos para los tags.
+     */
     public function deleteProduct(): void
     {
         //??? supongo que se podría cambiar en la db que se elimine en cascada cada tag
@@ -284,6 +334,12 @@ class Product
         Database::execute($query, $params);
     }
 
+    /**
+     * Calcula el precio del producto en cuotas.
+     *
+     * @param int $quote Número de cuotas (por defecto 12).
+     * @return int Precio total en cuotas, redondeado hacia arriba.
+     */
     public function getQuotePrice(int $quote = 12): int
     {
         return $this->price * $quote + ($this->price % $quote > 0 ? 1 : 0);

@@ -10,11 +10,12 @@ class Page
     private $restricted;
 
     /**
-     * Obtiene una instancia de la clase Page si existe el path, sino devuelve la página 404
-     * @param string $pagePath 
-     * @return Page
+     * Obtiene una instancia de la clase Page según el path proporcionado, o devuelve una página de error.
+     *
+     * @param string $pagePath Ruta de la página a buscar.
+     * @return self Instancia de la página encontrada o una página de error (403, 404 o 503).
      */
-    public static function getPage(string $pagePath): Page
+    public static function getPage(string $pagePath): self
     {
         $query = 'SELECT * FROM page WHERE path = :path';
         $params = ['path' => $pagePath];
@@ -46,11 +47,12 @@ class Page
     }
 
     /**
-     * Crea una instancia de la clase Page de error
-     * @param int $type 
-     * @return Page
+     * Crea una instancia de la clase Page para una página de error.
+     *
+     * @param int $type Código de error HTTP (403, 404, 503, etc.).
+     * @return self Instancia de la página de error.
      */
-    private static function createErrorPage(int $type = 404): Page
+    private static function createErrorPage(int $type = 404): self
     {
         $page = new self();
         switch ($type) {

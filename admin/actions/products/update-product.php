@@ -12,13 +12,15 @@ try {
     $id = trim($_POST['id']);
     $tags = $_POST['tags'];
 
-    $image = trim($_POST['image']);
+    $image = trim($_POST['image']); // Imagen actual
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $newImage = Image::upload('../../../assets/images/products/', $_FILES['image']);
 
         if ($newImage) {
-            Image::delete('../../../assets/images/products/', $image);
+            if (!empty($image)) {
+                Image::delete('../../../assets/images/products/', $image);
+            }
             $image = $newImage;
         }
     }

@@ -3,7 +3,15 @@
 class Image
 {
 
-    public static function upload(string $dir, array $files)
+    /**
+     * Sube una imagen al directorio especificado.
+     *
+     * @param string $dir Directorio donde se guardará la imagen.
+     * @param array $files Información del archivo subido (de $_FILES).
+     * @return string Nombre del archivo generado (con timestamp).
+     * @throws Exception Si ocurre un error al subir la imagen.
+     */
+    public static function upload(string $dir, array $files): string
     {
         $ogName = explode('.', $files['name']);
 
@@ -18,6 +26,14 @@ class Image
         return $fileName;
     }
 
+    /**
+     * Elimina una imagen del directorio especificado.
+     *
+     * @param string $dir Directorio donde se encuentra la imagen.
+     * @param string $fileName Nombre del archivo a eliminar.
+     * @return bool Verdadero si la imagen se eliminó correctamente.
+     * @throws Exception Si la imagen no existe o no se puede eliminar.
+     */
     public static function delete(string $dir, string $fileName): bool
     {
         $filePath = $dir . $fileName;

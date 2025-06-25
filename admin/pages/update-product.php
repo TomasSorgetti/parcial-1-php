@@ -76,9 +76,17 @@ if (!$product) {
 
             <!-- Imagen -->
             <div class="flex flex-col items-start text-left w-full">
-                <label for="image">Image:</label>
+                <label for="image">Imagen:</label>
                 <input type="file" name="image" id="image" accept="image/*" class="cursor-pointer text-gray-500">
-                <p class="text-gray-500">Imagen actual: <?= htmlspecialchars($product->getImage()) ?></p>
+
+                <input type="hidden" name="image" value="<?= htmlspecialchars($product->getImage()) ?>">
+
+                <?php if ($product->getImage()): ?>
+                    <p class="text-gray-500">Imagen actual: <?= htmlspecialchars($product->getImage()) ?></p>
+                    <img src="../assets/images/products/<?= htmlspecialchars($product->getImage()) ?>" alt="Imagen actual" class="mt-2 max-w-xs border rounded">
+                <?php else: ?>
+                    <p class="text-red-500">Este producto no tiene una imagen.</p>
+                <?php endif; ?>
             </div>
 
             <!-- Tags -->

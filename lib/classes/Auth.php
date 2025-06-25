@@ -3,7 +3,15 @@
 class Auth
 {
 
-    public static function signin($email, $password)
+    /**
+     * Inicia sesión verificando email y contraseña.
+     *
+     * @param string $email Email del usuario.
+     * @param string $password Contraseña del usuario.
+     * @return array Datos de la sesión del usuario (id, username, email, role) evitando la contraseña.
+     * @throws Exception Si el usuario no existe o la contraseña es incorrecta.
+     */
+    public static function signin(string $email, string $password): array
     {
         $user = User::getUser($email);
 
@@ -29,7 +37,16 @@ class Auth
         return $sessionData;
     }
 
-    public static function signup($username, $email, $password)
+    /**
+     * Registra un nuevo usuario.
+     *
+     * @param string $username Nombre de usuario.
+     * @param string $email Email del usuario.
+     * @param string $password Contraseña del usuario.
+     * @return void
+     * @throws Exception Si el email ya está en uso.
+     */
+    public static function signup(string $username, string $email, string $password): void
     {
         $foundUser = User::getUser($email);
 
@@ -48,14 +65,25 @@ class Auth
         Database::execute($query, $params, User::class);
     }
 
-    public static function logout()
+    /**
+     * Cierra la sesión del usuario actual.
+     *
+     * @return void
+     */
+    public static function logout(): void
     {
         if (isset($_SESSION['session'])) {
             unset($_SESSION['session']);
         }
     }
 
-    public static function verify($level = 0): bool
+    /**
+     * Verifica si el usuario tiene permisos de administrador.
+     *
+     * @param int $level Nivel de autorización requerido, 0 por defecto.
+     * @return bool True si el usuario tiene permisos de admin o superadmin, en caso contrario False.
+     */
+    public static function verify(int $level = 0): bool
     {
         if (!$level) {
             return false;

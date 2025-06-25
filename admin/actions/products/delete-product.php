@@ -10,7 +10,9 @@ try {
         throw new Exception("Error: Producto no encontrado.");
     }
 
-    Image::delete('../../../assets/images/products/', $product->getImage());
+    if ($product->getImage()) {
+        Image::delete('../../../assets/images/products/', $product->getImage());
+    }
 
     $product->deleteProduct();
 

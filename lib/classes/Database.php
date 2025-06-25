@@ -16,7 +16,13 @@ class Database
         echo ("pong");
     }
 
-    public static function getConnection()
+    /**
+     * Obtiene una conexión a la base de datos utilizando PDO.
+     *
+     * @return PDO Instancia de la conexión PDO.
+     * @throws Exception Si no se puede establecer la conexión.
+     */
+    public static function getConnection(): PDO
     {
         if (self::$db == null) {
             try {
@@ -28,7 +34,16 @@ class Database
         return self::$db;
     }
 
-    public static function execute($query, $params = [], $entity = '')
+    /**
+     * Ejecuta una consulta SQL en la base de datos.
+     *
+     * @param string $query Consulta SQL a ejecutar.
+     * @param array $params Parámetros para la consulta preparada (opcional).
+     * @param string $entity Nombre de la clase para mapear resultados (opcional, usado en consultas SELECT).
+     * @return mixed Resultado de la consulta: array para SELECT, int para INSERT (ID insertado), true para otras consultas.
+     * @throws Exception Si ocurre un error en la consulta.
+     */
+    public static function execute(string $query, array $params = [], string $entity = ''): mixed
     {
         try {
             $conn = self::getConnection();

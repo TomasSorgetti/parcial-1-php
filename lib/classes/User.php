@@ -8,12 +8,49 @@ class User
     private $password;
     private $role;
 
-    public static function getUser($email)
+    /**
+     * Obtiene un usuario por su correo electrónico.
+     *
+     * @param string $email Correo electrónico del usuario.
+     * @return self Instancia del usuario encontrado.
+     */
+    public static function getUser($email): self
     {
         $query = 'SELECT * FROM user WHERE email = :email';
         $params = ['email' => $email];
 
         return Database::execute($query, $params, self::class)[0];
+    }
+
+    /**
+     * Obtiene todos los usuarios de la base de datos.
+     *
+     * @return array Lista de objetos User.
+     */
+    public static function getAllUsers(): array
+    {
+        $query = 'SELECT id, username, email, role FROM user';
+        return Database::execute($query, [], self::class);
+    }
+
+    /**
+     * Actualiza el rol de un usuario por su correo electrónico.
+     *
+     * @param string $email Correo electrónico del usuario.
+     * @param string $role Nuevo rol del usuario.
+     * @return void
+     */
+    public static function updateUser($email, $role) {}
+
+    /**
+     * Elimina un usuario de la base de datos (soft delete pendiente).
+     *
+     * @return void
+     * @todo Implementar soft delete en lugar de eliminación total.
+     */
+    public static function deleteUser(): void
+    {
+        //TODO => el borrado no debe ser un delete total, sino un soft delete
     }
 
     /**
@@ -78,7 +115,7 @@ class User
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -88,7 +125,7 @@ class User
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -98,7 +135,7 @@ class User
 
     /**
      * Get the value of role
-     */ 
+     */
     public function getRole()
     {
         return $this->role;
@@ -108,7 +145,7 @@ class User
      * Set the value of role
      *
      * @return  self
-     */ 
+     */
     public function setRole($role)
     {
         $this->role = $role;
