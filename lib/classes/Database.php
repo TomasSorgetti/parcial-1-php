@@ -71,7 +71,6 @@ class Database
 
             return true;
         } catch (PDOException $error) {
-            // die("Error al ejecutar la consulta: " . $error->getMessage());
             throw $error;
         }
     }

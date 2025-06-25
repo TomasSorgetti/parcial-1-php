@@ -60,7 +60,7 @@ class Alert
         $class = $typeClasses[$alert['type']] ?? 'bg-gray-100 border-gray-500 text-gray-700';
 
         // Agregar ID único y transición para animación
-        return "<div id='alert-$index' class='alert flex items-center border-l-4 p-4 rounded-md shadow-md $class mb-2 transition-opacity duration-500' role='alert' aria-live='assertive'>" .
+        return "<div id='alert-$index' class='alert w-full flex items-center justify-between border-l-4 p-4 rounded-md shadow-md $class mb-2 transition-opacity duration-500' role='alert' aria-live='assertive'>" .
             "<p>" . htmlspecialchars($alert['msg']) . "</p>" .
             "<button type='button' class='close ml-4 text-3xl cursor-pointer text-gray-700 hover:text-gray-900' onclick='this.parentElement.style.opacity=\"0\"; setTimeout(() => this.parentElement.style.display=\"none\", 500)'>×</button>" .
             "</div>";

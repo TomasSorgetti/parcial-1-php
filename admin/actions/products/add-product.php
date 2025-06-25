@@ -26,7 +26,13 @@ try {
     exit();
 } catch (Exception $error) {
     $deleteImage = Image::delete('../../../assets/images/products/', $image);
-    Alert::add('danger', "No se pudo agregar el producto");
+
+    if (strpos($error->getMessage(), 'Duplicate entry') !== false) {
+        Alert::add('danger', "Ya existe un producto con el mismo nombre.");
+    } else {
+        Alert::add('danger', "No se pudo agregar el producto");
+    }
+
     header("Location: ../../index.php?page=admin-products");
     exit();
 }

@@ -12,7 +12,11 @@ try {
     header("Location: ../../index.php?page=admin-categories");
     exit();
 } catch (Exception $error) {
-    Alert::add('danger', "No se pudo agregar la categoría");
+    if (strpos($error->getMessage(), 'Duplicate entry') !== false) {
+        Alert::add('danger', "Ya existe una categoría con el mismo nombre o path.");
+    } else {
+        Alert::add('danger', "No se pudo agregar la categoría");
+    }
     header("Location: ../../index.php?page=admin-categories");
     exit();
 }

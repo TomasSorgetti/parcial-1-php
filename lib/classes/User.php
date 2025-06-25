@@ -23,12 +23,17 @@ class User
      * @param string $email Correo electrónico del usuario.
      * @return self Instancia del usuario encontrado.
      */
-    public static function getUser($email): self
+    public static function getUser(string $email, ?string $username = null): self | null
     {
         $query = 'SELECT * FROM user WHERE email = :email';
         $params = ['email' => $email];
 
-        return Database::execute($query, $params, self::class)[0];
+        if ($username) {
+            $query .= ' OR username = :username';
+            $params['username'] = $username;
+        }
+
+        return Database::execute($query, $params, self::class)[0] ?? null;
     }
 
     /**

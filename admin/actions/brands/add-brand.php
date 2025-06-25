@@ -11,7 +11,11 @@ try {
     header("Location: ../../index.php?page=admin-brands");
     exit();
 } catch (Exception $error) {
-    Alert::add('danger', "No se pudo agregar la Marca");
-    header("Location: ../../index.php?page=admin-categories");
+    if (strpos($error->getMessage(), 'Duplicate entry') !== false) {
+        Alert::add('danger', "Ya existe una marca con el mismo nombre.");
+    } else {
+        Alert::add('danger', "No se pudo agregar la marca");
+    }
+    header("Location: ../../index.php?page=admin-brands");
     exit();
 }

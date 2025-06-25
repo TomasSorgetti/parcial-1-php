@@ -13,7 +13,7 @@ class Auth
      */
     public static function signin(string $email, string $password): array
     {
-        $user = User::getUser($email);
+        $user = User::getUser($email, null);
 
         if (!$user) {
             throw new Exception("El usuario no existe.");
@@ -48,10 +48,13 @@ class Auth
      */
     public static function signup(string $username, string $email, string $password): void
     {
-        $foundUser = User::getUser($email);
+        $foundUser = User::getUser($email, $username);
 
-        if ($foundUser) {
+        if ($foundUser && $foundUser->getEmail() === $email) {
             throw new Exception("El email ya está en uso.");
+        }
+        if ($foundUser && $foundUser->getUsername() === $username) {
+            throw new Exception("El nombre de usuario ya esta en uso.");
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

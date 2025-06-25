@@ -9,7 +9,7 @@ try {
     Auth::signup($username, $email, $password);
 
     header('Location: ../../../index.php?page=signin');
-} catch (Exception $e) {
+} catch (Exception $error) {
     $_SESSION["signupError"] = $error->getMessage();
 
     header('Location: ../../../index.php?page=signup');

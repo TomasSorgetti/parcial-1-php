@@ -13,6 +13,6 @@ try {
     exit();
 } catch (Exception $error) {
     Alert::add('danger', "No se pudo actualizar la Marca");
-    header("Location: ../../index.php?page=admin-categories");
+    header("Location: ../../index.php?page=admin-brands");
     exit();
 }

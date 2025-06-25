@@ -16,6 +16,6 @@ try {
     exit();
 } catch (Exception $error) {
     Alert::add('danger', $error->getMessage());
-    header("Location: ../../index.php?page=admin-categories");
+    header("Location: ../../index.php?page=admin-brands");
     exit();
 }

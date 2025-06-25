@@ -76,14 +76,14 @@ class Tag
      */
     public static function deleteTag(string $tagId): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar tags.");
+
+        $query = 'DELETE FROM tag WHERE id = :id';
+        $params = ['id' => $tagId];
+
         try {
-            $isAdmin = User::isAdmin();
-
-            if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar tags.");
-
-            $query = 'DELETE FROM tag WHERE id = :id';
-            $params = ['id' => $tagId];
-
             Database::execute($query, $params);
         } catch (PDOException $error) {
             if (strpos($error->getMessage(), 'foreign key constraint fails') !== false) {
