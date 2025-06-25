@@ -43,6 +43,11 @@ $page = Page::getPage($pageQuery);
 </head>
 
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
+
+    <div class="fixed top-20 right-20 z-50 flex flex-col space-y-2 w-80">
+        <?php echo Alert::get(); ?>
+    </div>
+
     <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
         <nav class="max-w-[1280px] mx-auto px-4 border-b-2 border-b-[var(--primary-color)] transition-all duration-500 ease-in-out lg:px-0">
             <div class="flex justify-between items-center py-6 max-w-[1280px] mx-auto">

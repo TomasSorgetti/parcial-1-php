@@ -162,6 +162,10 @@ class Product
      */
     public static function insertProduct($id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para crear un producto.");
+
         // Categoría
         $categoryQuery = 'SELECT id FROM category WHERE id = :id';
         $categoryParams = ['id' => $id_category];
@@ -245,6 +249,10 @@ class Product
      */
     public static function updateProductById(string $id, $id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags): bool
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para modificar un producto.");
+
         $catQuery = 'SELECT id FROM category WHERE id = :id';
         $catParams = ['id' => $id_category];
         $category = Database::execute($catQuery, $catParams);
@@ -322,8 +330,11 @@ class Product
      */
     public function deleteProduct(): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar un producto.");
+
         //??? supongo que se podría cambiar en la db que se elimine en cascada cada tag
-        // todo => cambiar en la db delete on cascade
 
         $tagQuery = 'DELETE FROM product_tag WHERE product_id = :id';
         $tagParams = ['id' => $this->id];

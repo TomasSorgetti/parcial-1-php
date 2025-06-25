@@ -1,20 +1,16 @@
 <?php
-require_once "../../../lib/classes/Database.php";
-require_once "../../../lib/classes/Tag.php";
+require_once "../../../lib/utils/autoload.php";
 
 $tagId = $_GET['id'] ?? null;
 
 try {
-    $tag = Tag::getTagById($tagId);
+    Tag::deleteTag($tagId);
 
-    if ($tag === null) {
-        die("Error: Marca no encontrada.");
-    }
-
-    $tag->deleteTag();
-    
+    Alert::add('success', 'Etiqueta eliminada correctamente.');
     header("Location: ../../index.php?page=admin-tags");
     exit();
 } catch (Exception $error) {
-    die($error->getMessage());
+    Alert::add('danger', $error->getMessage());
+    header("Location: ../../index.php?page=admin-tags");
+    exit();
 }

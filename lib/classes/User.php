@@ -8,6 +8,15 @@ class User
     private $password;
     private $role;
 
+    public static function isAdmin()
+    {
+        $role = $_SESSION['session']['role'];
+
+        if (!$role) return false;
+
+        return $role === 'admin' || $role === 'superadmin';
+    }
+
     /**
      * Obtiene un usuario por su correo electrónico.
      *
@@ -29,6 +38,7 @@ class User
      */
     public static function getAllUsers(): array
     {
+        // TODO => unicamente el admin deberia poder obtener todos los usuarios
         $query = 'SELECT id, username, email, role FROM user';
         return Database::execute($query, [], self::class);
     }

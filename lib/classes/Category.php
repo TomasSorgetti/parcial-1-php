@@ -56,6 +56,10 @@ class Category
      */
     public static function insertCategory(string $name, string $path): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para crear una categoría.");
+
         $query = 'INSERT INTO category (name, path) VALUES (:name, :path)';
         $params = ['name' => $name, 'path' => $path];
 
@@ -72,6 +76,10 @@ class Category
      */
     public static function updateCategory(int $categoryId, string $categoryName, string $categoryPath): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para modificar una categoría.");
+
         $query = 'UPDATE category SET name = :name, path = :path WHERE id = :id';
         $params = ['name' => $categoryName, 'path' => $categoryPath, 'id' => $categoryId];
 
@@ -85,10 +93,21 @@ class Category
      */
     public function deleteCategory(): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar una categoría.");
+
         $query = 'DELETE FROM category WHERE id = :id';
         $params = ['id' => $this->id];
 
-        Database::execute($query, $params);
+        try {
+            Database::execute($query, $params);
+        } catch (PDOException $error) {
+            if (strpos($error->getMessage(), 'foreign key constraint fails') !== false) {
+                throw new Exception("la Categoría está asociada a uno o más productos.");
+            }
+            throw $error;
+        }
     }
 
     /**

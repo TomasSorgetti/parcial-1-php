@@ -40,6 +40,10 @@ class Brand
      */
     public static function insertBrand(string $name): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para crear una marca.");
+
         $query = 'INSERT INTO brand (name) VALUES (:name)';
         $params = ['name' => $name];
 
@@ -55,6 +59,10 @@ class Brand
      */
     public static function updateBrand(int $brandId, string $brandName): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para modificar una marca.");
+
         $query = 'UPDATE brand SET name = :name WHERE id = :id';
         $params = ['name' => $brandName, 'id' => $brandId];
 
@@ -68,10 +76,21 @@ class Brand
      */
     public function deleteBrand(): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar una marca.");
+
         $query = 'DELETE FROM brand WHERE id = :id';
         $params = ['id' => $this->id];
 
-        Database::execute($query, $params);
+        try {
+            Database::execute($query, $params);
+        } catch (PDOException $error) {
+            if (strpos($error->getMessage(), 'foreign key constraint fails') !== false) {
+                throw new Exception("la Marca está asociada a uno o más productos.");
+            }
+            throw $error;
+        }
     }
 
     /**

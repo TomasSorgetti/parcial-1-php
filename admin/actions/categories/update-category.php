@@ -9,8 +9,12 @@ try {
 
     Category::updateCategory($categoryId, $categoryName, $categoryPath);
 
+    Alert::add('success', "Categoría actualizada correctamente.");
+
     header("Location: ../../index.php?page=admin-categories");
     exit();
 } catch (Exception $error) {
-    die("No se pudo eliminar la categoría: " . $error->getMessage());
+    Alert::add('danger', "No se pudo actualizar la categoría");
+    header("Location: ../../index.php?page=admin-categories");
+    exit();
 }

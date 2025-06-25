@@ -6,8 +6,13 @@ $categoryPath = trim($_POST['path']);
 
 try {
     Category::insertCategory($categoryName, $categoryPath);
+
+    Alert::add('success', "Categoría agregada correctamente.");
+
     header("Location: ../../index.php?page=admin-categories");
     exit();
 } catch (Exception $error) {
-    die("No se pudo agregar la categoría: " . $error->getMessage());
+    Alert::add('danger', "No se pudo agregar la categoría");
+    header("Location: ../../index.php?page=admin-categories");
+    exit();
 }

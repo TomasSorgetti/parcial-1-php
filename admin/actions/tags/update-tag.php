@@ -6,8 +6,13 @@ $tagId = $_POST['id'];
 
 try {
     Tag::updateTag($tagId, $tagName);
+
+    Alert::add('success', 'Etiqueta actualizada correctamente.');
+
     header("Location: ../../index.php?page=admin-tags");
     exit();
 } catch (Exception $error) {
-    die("No se pudo actualizar la Marca: " . $error->getMessage());
+    Alert::add('danger', "No se pudo actualizar la Etiqueta");
+    header("Location: ../../index.php?page=admin-tags");
+    exit();
 }

@@ -16,8 +16,12 @@ try {
 
     $product->deleteProduct();
 
+    Alert::add('success', 'Producto eliminado correctamente.');
+
     header("Location: ../../index.php?page=admin-products");
     exit();
 } catch (Exception $error) {
-    die($error->getMessage());
+    Alert::add('danger', "No se pudo eliminar el producto");
+    header("Location: ../../index.php?page=admin-products");
+    exit();
 }

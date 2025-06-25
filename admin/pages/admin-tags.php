@@ -4,6 +4,7 @@ $tags = Tag::getAllTags();
 <main>
     <section class="container mx-auto">
         <h1 class="text-3xl my-32 font-bold uppercase text-center md:text-5xl">Etiquetas</h1>
+
         <table class="w-full mt-20">
             <tbody class="w-full flex flex-col items-start gap-2">
                 <?php foreach ($tags as $tag) : ?>

@@ -39,7 +39,8 @@ class Image
         $filePath = $dir . $fileName;
 
         if (!file_exists($filePath)) {
-            throw new Exception("La imagen '$fileName' no existe en '$dir'");
+            // throw new Exception("La imagen '$fileName' no existe en '$dir'");
+            return true;
         }
 
         if (!unlink($filePath)) {

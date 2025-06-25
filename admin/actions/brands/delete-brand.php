@@ -9,8 +9,13 @@ try {
         die("Error: Marca no encontrada.");
     }
     $brand->deleteBrand();
+
+    Alert::add('success', "Marca eliminada correctamente.");
+
     header("Location: ../../index.php?page=admin-brands");
     exit();
 } catch (Exception $error) {
-    die("No se pudo eliminar la Marca: " . $error->getMessage());
+    Alert::add('danger', $error->getMessage());
+    header("Location: ../../index.php?page=admin-categories");
+    exit();
 }

@@ -9,8 +9,13 @@ try {
         die("Error: Categoría no encontrada.");
     }
     $category->deleteCategory();
+
+    Alert::add('success', "Categoría eliminada correctamente.");
+
     header("Location: ../../index.php?page=admin-categories");
     exit();
 } catch (Exception $error) {
-    die("No se pudo eliminar la categoría: " . $error->getMessage());
+    Alert::add('danger', $error->getMessage());
+    header("Location: ../../index.php?page=admin-categories");
+    exit();
 }

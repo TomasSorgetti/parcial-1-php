@@ -27,8 +27,12 @@ try {
 
     Product::updateProductById($id, $id_category, $id_brand, $title, $image, $description, $stock, $price, $offer_price, $tags);
 
+    Alert::add('success', 'Producto modificado correctamente.');
+
     header("Location: ../../index.php?page=admin-products");
     exit();
 } catch (Exception $error) {
-    die("No se pudo modificar el producto: " . $error->getMessage());
+    Alert::add('danger', "No se pudo modificar el producto");
+    header("Location: ../../index.php?page=admin-products");
+    exit();
 }

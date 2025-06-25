@@ -47,21 +47,21 @@ class Database
     {
         try {
             $conn = self::getConnection();
-            $stmt = $conn->prepare($query);
+            $statement = $conn->prepare($query);
 
             if (!empty($params)) {
-                $stmt->execute($params);
+                $statement->execute($params);
             } else {
-                $stmt->execute();
+                $statement->execute();
             }
 
             $tipe = strtoupper(substr($query, 0, strpos($query, ' ')));
 
             if ($tipe == 'SELECT') {
                 if ($entity != '') {
-                    return $stmt->fetchAll(PDO::FETCH_CLASS, $entity);
+                    return $statement->fetchAll(PDO::FETCH_CLASS, $entity);
                 } else {
-                    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $statement->fetchAll(PDO::FETCH_ASSOC);
                 }
             }
 
@@ -70,8 +70,9 @@ class Database
             }
 
             return true;
-        } catch (Exception $error) {
-            die("Error en la consulta: " . $error->getMessage());
+        } catch (PDOException $error) {
+            // die("Error al ejecutar la consulta: " . $error->getMessage());
+            throw $error;
         }
     }
 }

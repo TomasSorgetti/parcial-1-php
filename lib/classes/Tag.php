@@ -40,6 +40,10 @@ class Tag
      */
     public static function insertTag($name): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para crear tags.");
+
         $query = 'INSERT INTO tag (name) VALUES (:name)';
         $params = ['name' => $name];
 
@@ -55,6 +59,10 @@ class Tag
      */
     public static function updateTag($tagId, $tagName): void
     {
+        $isAdmin = User::isAdmin();
+
+        if (!$isAdmin) throw new Exception("Necesitas ser admin para modificar tags.");
+
         $query = 'UPDATE tag SET name = :name WHERE id = :id';
         $params = ['name' => $tagName, 'id' => $tagId];
 
@@ -66,12 +74,23 @@ class Tag
      *
      * @return void
      */
-    public function deleteTag(): void
+    public static function deleteTag(string $tagId): void
     {
-        $query = 'DELETE FROM tag WHERE id = :id';
-        $params = ['id' => $this->id];
+        try {
+            $isAdmin = User::isAdmin();
 
-        Database::execute($query, $params);
+            if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar tags.");
+
+            $query = 'DELETE FROM tag WHERE id = :id';
+            $params = ['id' => $tagId];
+
+            Database::execute($query, $params);
+        } catch (PDOException $error) {
+            if (strpos($error->getMessage(), 'foreign key constraint fails') !== false) {
+                throw new Exception("la Etiqueta está asociada a uno o más productos.");
+            }
+            throw $error;
+        }
     }
 
     /**
