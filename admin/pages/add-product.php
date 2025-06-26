@@ -12,49 +12,54 @@ $tags = Tag::getAllTags();
         <form action="actions/products/add-product.php" method="POST" enctype="multipart/form-data" class="p-4 my-12 w-full max-w-[600px] mx-auto flex flex-col gap-4">
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="title">Nombre del producto:</label>
-                <input type="text" name="title" placeholder="Titulo" required class="w-full">
+                <input type="text" name="title" placeholder="Titulo" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
             </div>
 
             <div class="flex flex-col gap-2 items-start text-left w-full md:flex-row md:gap-4">
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="stock">Stock:</label>
-                    <input type="number" name="stock" placeholder="0" required class="w-full">
+                    <input type="number" name="stock" placeholder="0" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
                 </div>
 
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="price">Precio:</label>
-                    <input type="number" name="price" placeholder="0" required class="w-full">
+                    <input type="number" name="price" placeholder="0" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
                 </div>
 
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="offer_price">Precio de oferta:</label>
-                    <input type="number" name="offer_price" placeholder="0" class="w-full">
+                    <input type="number" name="offer_price" placeholder="0" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
                 </div>
             </div>
+
 
             <div class="flex flex-col gap-2 items-start text-left w-full md:flex-row md:gap-4">
+                <!-- Categoría -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="category">Categoría:</label>
-                    <select name="category" id="category" class="w-full">
+                    <select name="category" id="category" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913]">
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
+                            <option value="<?= $category->getId() ?>" class="text-black"><?= $category->getName() ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
 
+                <!-- Marca -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="brand">Marca:</label>
-                    <select name="brand" id="brand" class="w-full">
+                    <select name="brand" id="brand" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913]">
                         <?php foreach ($brands as $brand) : ?>
-                            <option value="<?= $brand->getId() ?>"><?= $brand->getName() ?></option>
+                            <option value="<?= $brand->getId() ?>" class="text-black"><?= $brand->getName() ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
 
+            <!-- Image -->
             <div class="flex flex-col items-start text-left w-full">
                 <label for="image">Imagen:</label>
-                <input type="file" name="image" id="image" accept="image/*" required class="cursor-pointer">
+                <input type="file" name="image" id="image" accept="image/*" required class="cursor-pointer text-gray-500 my-4 px-4 py-3 rounded-sm border border-[#D9D9D913]">
+                <img id="imagePreview" class="mt-4 max-w-[200px] hidden" alt="Vista previa de la imagen">
             </div>
 
             <!-- Tags -->
@@ -62,7 +67,7 @@ $tags = Tag::getAllTags();
                 <label for="tags">Etiquetas:</label>
                 <div class="flex flex-wrap gap-2">
                     <?php foreach ($tags as $tag) : ?>
-                        <input type="checkbox" name="tags[]" id="tag-<?= $tag->getId() ?>" value="<?= $tag->getId() ?>">
+                        <input type="checkbox" name="tags[]" id="tag-<?= $tag->getId() ?>" value="<?= $tag->getId() ?>" class="cursor-pointer">
                         <label for="tag-<?= $tag->getId() ?>"><?= $tag->getName() ?></label>
                     <?php endforeach; ?>
                 </div>
@@ -70,10 +75,29 @@ $tags = Tag::getAllTags();
 
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="description">Descripcion:</label>
-                <textarea name="description" id="description" cols="30" rows="10" required placeholder="Descripción..." class="w-full"></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" required placeholder="Descripción..." class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500"></textarea>
             </div>
 
             <input type="submit" value="Añadir producto" class="bg-[var(--primary-color)] text-white p-2 rounded-md mt-4 cursor-pointer">
         </form>
     </section>
 </main>
+
+<script>
+    document.getElementById('image').addEventListener('change', function(e) {
+        const preview = document.getElementById('imagePreview');
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            preview.classList.add('hidden');
+        }
+    });
+</script>

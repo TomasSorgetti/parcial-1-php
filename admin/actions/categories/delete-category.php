@@ -8,6 +8,7 @@ try {
     if ($category === null) {
         die("Error: Categoría no encontrada.");
     }
+    // TODO => cambiar a metodo estatico y evitar el getCategoryById
     $category->deleteCategory();
 
     Alert::add('success', "Categoría eliminada correctamente.");

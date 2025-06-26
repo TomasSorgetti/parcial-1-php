@@ -33,6 +33,6 @@ try {
         Alert::add('danger', "No se pudo agregar el producto");
     }
 
-    header("Location: ../../index.php?page=admin-products");
+    header("Location: ../../index.php?page=add-product");
     exit();
 }

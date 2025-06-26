@@ -6,20 +6,17 @@ $tags = Tag::getAllTags();
 $productId = $_GET["id"] ?? null;
 $product = Product::getProductById($productId);
 
-//? deberia hacer un die, mandar a 404 o mostrar mensaje???
 if (!$product) {
     die("Error: Producto no encontrado.");
 }
-
 ?>
 <main>
     <section class="container mx-auto text-center">
         <!-- Title -->
-        <h1 class="text-3xl mt-32 font-bold uppercase text-center md:text-5xl"><?= $product->getTitle() ?></h1>
+        <h1 class="text-3xl mt-32 font-bold uppercase text-center md:text-5xl"><?= htmlspecialchars($product->getTitle()) ?></h1>
 
         <!-- Form -->
         <form action="actions/products/update-product.php" method="POST" enctype="multipart/form-data" class="p-4 my-12 w-full max-w-[600px] mx-auto flex flex-col gap-4">
-
             <input type="hidden" name="id" value="<?= htmlspecialchars($product->getId()) ?>">
 
             <!-- Nombre del producto -->
@@ -77,16 +74,10 @@ if (!$product) {
             <!-- Imagen -->
             <div class="flex flex-col items-start text-left w-full">
                 <label for="image">Imagen:</label>
-                <input type="file" name="image" id="image" accept="image/*" class="cursor-pointer text-gray-500">
-
-                <input type="hidden" name="image" value="<?= htmlspecialchars($product->getImage()) ?>">
-
-                <?php if ($product->getImage()): ?>
-                    <p class="text-gray-500">Imagen actual: <?= htmlspecialchars($product->getImage()) ?></p>
-                    <img src="../assets/images/products/<?= htmlspecialchars($product->getImage()) ?>" alt="Imagen actual" class="mt-2 max-w-xs border rounded">
-                <?php else: ?>
-                    <p class="text-red-500">Este producto no tiene una imagen.</p>
-                <?php endif; ?>
+                <input type="file" name="image" id="image" accept="image/*" class="cursor-pointer text-gray-500 my-4 px-4 py-3 rounded-sm border border-[#D9D9D913]">
+                <input type="hidden" name="current_image" value="<?= htmlspecialchars($product->getImage()) ?>">
+                <p id="imageName" class="text-gray-500"><?= $product->getImage() ? htmlspecialchars($product->getImage()) : 'Ningún archivo seleccionado' ?></p>
+                <img id="imagePreview" src="<?= $product->getImage() ? '../assets/images/products/' . htmlspecialchars($product->getImage()) : '' ?>" alt="Vista previa de la imagen" class="mt-2 max-w-[200px] <?= $product->getImage() ? '' : 'hidden' ?>">
             </div>
 
             <!-- Tags -->
@@ -116,3 +107,27 @@ if (!$product) {
         </form>
     </section>
 </main>
+
+<script>
+    document.getElementById('image').addEventListener('change', function(e) {
+        const preview = document.getElementById('imagePreview');
+        const imageName = document.getElementById('imageName');
+        const file = e.target.files[0];
+
+        if (file) {
+            imageName.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            const currentImage = '<?= $product->getImage() ? htmlspecialchars($product->getImage()) : "Ningún archivo seleccionado" ?>';
+            imageName.textContent = currentImage;
+            preview.src = '<?= $product->getImage() ? "../assets/images/products/" . htmlspecialchars($product->getImage()) : "" ?>';
+            preview.classList.toggle('hidden', !preview.src);
+        }
+    });
+</script>

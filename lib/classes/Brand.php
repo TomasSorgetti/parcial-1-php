@@ -76,6 +76,8 @@ class Brand
      */
     public function deleteBrand(): void
     {
+        // TODO => cambiar a metodo estatico
+
         $isAdmin = User::isAdmin();
 
         if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar una marca.");

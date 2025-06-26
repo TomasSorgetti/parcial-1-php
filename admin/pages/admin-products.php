@@ -12,9 +12,9 @@ $products = Product::getProductsWithoutPagination();
         <table class="w-full my-20">
             <tbody class="w-full flex flex-col items-start gap-2">
                 <?php foreach ($products as $product) : ?>
-                    <tr class="w-full flex items-center justify-between bg-[#D9D9D913] p-4 rounded-sm">
+                    <tr class="w-full flex flex-col items-center justify-between bg-[#D9D9D913] p-4 rounded-sm md:flex-row">
                         <td class="font-bold uppercase"><?= $product->getTitle() ?></td>
-                        <td class="flex gap-8 ">
+                        <td class="flex gap-8 mt-8 md:mt-0">
                             <a href="index.php?page=update-product&id=<?= $product->getId() ?>" role="button" class="bg-[var(--primary-color)] px-4 py-2 rounded-sm">Editar</a>
                             <a href="actions/products/delete-product.php?id=<?= $product->getId() ?>" role="button" class="bg-red-400 px-4 py-2 rounded-sm">Eliminar</a>
                         </td>

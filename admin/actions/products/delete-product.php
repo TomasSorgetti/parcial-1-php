@@ -14,6 +14,7 @@ try {
         Image::delete('../../../assets/images/products/', $product->getImage());
     }
 
+    // TODO => cambiar a metodo estatico y evitar el getProductById
     $product->deleteProduct();
 
     Alert::add('success', 'Producto eliminado correctamente.');

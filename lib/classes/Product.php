@@ -330,6 +330,7 @@ class Product
      */
     public function deleteProduct(): void
     {
+        // TODO => cambiar a metodo estatico
         $isAdmin = User::isAdmin();
 
         if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar un producto.");

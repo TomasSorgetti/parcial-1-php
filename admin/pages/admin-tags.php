@@ -8,7 +8,7 @@ $tags = Tag::getAllTags();
         <table class="w-full mt-20">
             <tbody class="w-full flex flex-col items-start gap-2">
                 <?php foreach ($tags as $tag) : ?>
-                    <tr class="w-full flex items-center justify-between bg-[#D9D9D913] p-4 rounded-sm">
+                    <tr class="w-full flex flex-col items-center justify-between bg-[#D9D9D913] p-4 rounded-sm md:flex-row">
                         <td class="flex-1">
                             <div id="display-<?= $tag->getId() ?>" class="tag-display">
                                 <?= $tag->getName() ?>
@@ -20,7 +20,7 @@ $tags = Tag::getAllTags();
                                 <button type="button" class="cancel-update bg-gray-400 px-2 py-1 ml-2 rounded-sm text-white cursor-pointer" data-id="<?= $tag->getId() ?>">Cancelar</button>
                             </form>
                         </td>
-                        <td class="flex gap-8">
+                        <td class="flex gap-8 mt-8 md:mt-0">
                             <button type="button" class="update-button bg-[var(--primary-color)] px-4 py-2 rounded-sm cursor-pointer" data-id="<?= $tag->getId() ?>">Editar</button>
                             <a href="actions/tags/delete-tag.php?id=<?= $tag->getId() ?>" role="button" class="bg-red-400 px-4 py-2 rounded-sm cursor-pointer">Eliminar</a>
                         </td>
@@ -28,8 +28,8 @@ $tags = Tag::getAllTags();
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <form action="actions/tags/add-tag.php" method="POST" class="my-20 p-4 w-full flex justify-between">
-            <input type="text" name="name" placeholder="Nombre de Etiqueta" required class="w-1/3 px-4 py-3 rounded-sm border border-[#D9D9D913]">
+        <form action="actions/tags/add-tag.php" method="POST" class="my-20 p-4 w-full flex justify-between flex-col gap-4 md:flex-row">
+            <input type="text" name="name" placeholder="Nombre de Etiqueta" required class="w-full md:w-1/3 px-4 py-3 rounded-sm border border-[#D9D9D913]">
             <button type="submit" class="bg-[var(--primary-color)] px-4 py-2 rounded-sm cursor-pointer">Agregar</button>
         </form>
     </section>

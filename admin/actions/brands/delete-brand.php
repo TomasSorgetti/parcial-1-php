@@ -8,6 +8,8 @@ try {
     if ($brand === null) {
         die("Error: Marca no encontrada.");
     }
+
+    // TODO => cambiar a metodo estatico y evitar el getBrandById
     $brand->deleteBrand();
 
     Alert::add('success', "Marca eliminada correctamente.");
