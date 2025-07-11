@@ -8,9 +8,10 @@ $categoryQuery = $_GET["cat"] ?? "all";
 $orderQuery = $_GET["order"] ?? "price_asc";
 $pageQuery = intval($_GET["sec"] ?? 1);
 
+$categories = Category::getAllCategories();
+
 $responseProducts = Product::getAllProducts($searchQuery, $categoryQuery, $orderQuery, $pageQuery);
 
-$categories = Category::getAllCategories();
 ?>
 <main>
     <section class="h-[70vh] text-center flex flex-col justify-center items-center gap-8 bg-[url('assets/images/products_bg.webp')] bg-center bg-no-repeat px-4 md:px-8 lg:px-0">
@@ -24,12 +25,12 @@ $categories = Category::getAllCategories();
                 if ($categoryQuery == "all") {
                     echo ("Todos los productos");
                 } else {
-                    echo ($categories[$categoryQuery - 1]->getName());
+                    echo (Category::getCategoryById(intval($categoryQuery))->getName());
                 }
                 ?>
             </h2>
             <form id="filtersForm" method="GET" action="index.php" class="flex gap-4 items-end justify-between w-full px-4 lg:px-0">
-                <input type="text" name="cat" value="all" hidden>
+                <input type="text" name="cat" value="<?= $categoryQuery ?? "all" ?>" hidden>
                 <input type="hidden" name="page" value="products">
 
                 <!-- SearchBar -->
@@ -95,7 +96,7 @@ $categories = Category::getAllCategories();
                 <!-- PRODUCTOS -->
                 <div class="w-full flex justify-center flex-wrap gap-4 pt-4 lg:justify-start">
                     <?php
-                    if (count($responseProducts["products"]) === 0) {
+                    if ($responseProducts["total_products"] == 0) {
                         echo ("<p class='mt-10 text-[var(--dark-text-color)] w-full text-center'>No se encontraron productos</p>");
                     } else {
                         foreach ($responseProducts["products"] as $product) {

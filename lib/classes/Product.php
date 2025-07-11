@@ -72,7 +72,6 @@ class Product
         $limit = (int)$prodPerPage;
         $offset = (int)(($pageQuery - 1) * $prodPerPage);
 
-        // TODO => falla el limit y offset, llega como string al query final
         $query .= " LIMIT $limit OFFSET $offset";
 
         $products = Database::execute($query, $params, self::class);

@@ -1,0 +1,6 @@
+
+- email: tomassorgetti456@gmail.com
+- password: admin
+- role: superadmin
+
+- cualquier usuario creado via formulario de registro obtiene el rol "user" automáticamente

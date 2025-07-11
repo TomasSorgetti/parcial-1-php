@@ -61,23 +61,31 @@ $page = Page::getPage($pageQuery);
                 </button>
 
                 <!-- Menu -->
-                <ul id="menu" class="fixed top-0 right-0 w-full h-screen bg-[var(--background-color)] flex flex-col items-center justify-center gap-12 z-40 lg:static lg:w-auto lg:h-auto lg:flex-row lg:bg-transparent">
-                    <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=dashboard">Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-products">Productos</a>
-                    </li>
-                    <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-categories">Categorías</a>
-                    </li>
-                    <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-brands">Marcas</a>
-                    </li>
-                    <li>
-                        <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-tags">Etiquetas</a>
-                    </li>
-                </ul>
+                <?php
+                $isAdmin = User::isAdmin();
+
+                if ($isAdmin) {
+                    echo (
+                        '<ul id="menu" class="fixed top-0 right-0 w-full h-screen bg-[var(--background-color)] flex flex-col items-center justify-center gap-12 z-40 lg:static lg:w-auto lg:h-auto lg:flex-row lg:bg-transparent">
+                            <li>
+                                <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=dashboard">Dashboard</a>
+                            </li>
+                            <li>
+                                <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-products">Productos</a>
+                            </li>
+                            <li>
+                                <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-categories">Categorías</a>
+                            </li>
+                            <li>
+                                <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-brands">Marcas</a>
+                            </li>
+                            <li>
+                                <a class="uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]" href="index.php?page=admin-tags">Etiquetas</a>
+                            </li>
+                        </ul>'
+                    );
+                }
+                ?>
             </div>
         </nav>
     </header>

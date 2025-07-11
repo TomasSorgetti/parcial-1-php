@@ -10,11 +10,9 @@ class User
 
     public static function isAdmin()
     {
-        $role = $_SESSION['session']['role'];
+        if (!isset($_SESSION['session']['role'])) return false;
 
-        if (!$role) return false;
-
-        return $role === 'admin' || $role === 'superadmin';
+        return in_array($_SESSION['session']['role'], ['admin', 'superadmin']);
     }
 
     /**

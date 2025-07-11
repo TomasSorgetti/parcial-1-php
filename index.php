@@ -46,7 +46,7 @@ $page = Page::getPage($pageQuery);
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
     <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
         <?php
-        $isAdmin = $_SESSION['session']['role'] === "admin" || $_SESSION['session']['role'] === "superadmin";
+        $isAdmin = User::isAdmin();
 
         if ($isAdmin) {
             echo (
