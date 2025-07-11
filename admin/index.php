@@ -24,7 +24,7 @@ $page = Page::getPage($pageQuery);
         :root {
       --background-color: #000000;
       --light-text-color: #ffffff;
-      --dark-text-color: #C2C2C2;
+      --dark-text-color: #dadada;
       
       --light-dark-color: #171717;
       --primary-color:rgb(116, 12, 207);
