@@ -29,11 +29,12 @@ $tags = Tag::getAllTags();
             </tbody>
         </table>
         <form action="actions/tags/add-tag.php" method="POST" class="my-20 p-4 w-full flex justify-between flex-col gap-4 md:flex-row">
-            <input type="text" name="name" placeholder="Nombre de Etiqueta" required class="w-full md:w-1/3 px-4 py-3 rounded-sm border border-[#D9D9D913]">
+            <input type="text" name="name" placeholder="Nombre de Etiqueta" required class="w-full md:w-1/3 px-4 py-3 border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
             <button type="submit" class="bg-[var(--primary-color)] px-4 py-2 rounded-sm cursor-pointer">Agregar</button>
         </form>
     </section>
 </main>
+
 <script>
     document.querySelectorAll('.update-button').forEach(button => {
         button.addEventListener('click', () => {

@@ -26,7 +26,7 @@ $product = Product::getProductById($productId);
                 ?>
             </div>
             <p class="text-[var(--dark-text-color)]"><?= $product->getDescription() ?></p>
-            <p>Marca: <?php echo $product->getIdBrand() ?></p>
+            <p>Marca: <?php echo Brand::getBrandById($product->getIdBrand())->getName() ?></p>
             <div class="w-full h-[1px] bg-[var(--primary-color)]"></div>
             <p class="text-[var(--dark-text-color)]">Precio especial <span class="font-bold text-[var(--primary-color)] text-3xl">$<?= $product->getOfferPrice() ?></span></p>
             <div class="w-4/5 h-[1px] bg-[var(--primary-color)]"></div>

@@ -32,8 +32,8 @@ $categories = Category::getAllCategories();
         </table>
         <form action="actions/categories/add-category.php" method="POST" class="my-20 p-2 w-full flex justify-between flex-col gap-8 md:flex-row">
             <div class="w-full flex flex-col items-center gap-4 md:flex-row">
-                <input type="text" name="name" placeholder="Nombre de categoría" required class="w-full md:w-1/3 px-4 py-3 rounded-sm border border-[#D9D9D913]">
-                <input type="text" name="path" placeholder="Path de categoría" required class="w-full md:w-1/3 px-4 py-3 rounded-sm border border-[#D9D9D913]">
+                <input type="text" name="name" placeholder="Nombre de categoría" required class="w-full md:w-1/3 px-4 py-3 border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
+                <input type="text" name="path" placeholder="Path de categoría" required class="w-full md:w-1/3 px-4 py-3 border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
             </div>
             <button type="submit" class="bg-[var(--primary-color)] px-8 py-2 cursor-pointer rounded-sm">Agregar</button>
         </form>

@@ -47,7 +47,7 @@
 
         <div class="relative px-4 grid gap-4 max-w-[800px] mx-auto py-20 grid-rows-3 grid-cols-1 md:grid-cols-5 md:grid-rows-2 h-[700px] md:px-8 md:h-[600px] lg:h-[700px] lg:max-w-[1000px]">
             <!-- Procesadores -->
-            <a href="index.php?page=products&cat=1" class="relative bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-2 md:row-span-2">
+            <a href="index.php?page=products&cat=2" class="relative bg-black rounded-[20px] py-8 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-2 md:row-span-2">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">Procesadores</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex items-end overflow-hidden">
                     <div class="relative flex items-center justify-center mt-10">
@@ -82,7 +82,7 @@
             </a>
 
             <!-- Motherboards -->
-            <a href="index.php?page=products&cat=3" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
+            <a href="index.php?page=products&cat=1" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">motherboards</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[4rem] translate-y-[1rem]">
@@ -352,7 +352,7 @@
             </a>
 
             <!-- Memorias RAM -->
-            <a href="index.php?page=products&cat=2" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
+            <a href="index.php?page=products&cat=3" class="relative bg-black rounded-[20px] p-4 border-1 border-[var(--light-dark-color)] overflow-hidden group col-span-5 row-span-1 md:col-span-3 md:row-span-1">
                 <h3 class="absolute top top-4 left-4 z-20 text-2xl font-bold uppercase text-white">memorias ram</h3>
                 <div class="absolute top-0 left-0 w-full h-full flex justify-end overflow-hidden">
                     <div class="relative flex items-center justify-center max-w-[80%] translate-x-[1rem] translate-y-[1rem]">

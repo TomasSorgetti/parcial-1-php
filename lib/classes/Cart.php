@@ -47,7 +47,7 @@ class Cart
     {
         $total = 0;
         foreach (self::get() as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $total += $item['price'];
         }
         return $total;
     }

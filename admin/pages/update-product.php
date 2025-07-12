@@ -22,26 +22,26 @@ if (!$product) {
             <!-- Nombre del producto -->
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="title">Nombre del producto:</label>
-                <input type="text" name="title" value="<?= htmlspecialchars($product->getTitle()) ?>" placeholder="Titulo" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
+                <input type="text" name="title" value="<?= htmlspecialchars($product->getTitle()) ?>" placeholder="Titulo" required class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
             </div>
 
             <div class="flex flex-col gap-2 items-start text-left w-full md:flex-row md:gap-4">
                 <!-- Stock -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="stock">Stock:</label>
-                    <input type="number" name="stock" value="<?= htmlspecialchars($product->getStock()) ?>" placeholder="0" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
+                    <input type="number" name="stock" value="<?= htmlspecialchars($product->getStock()) ?>" placeholder="0" required class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
                 </div>
 
                 <!-- Precio -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="price">Precio:</label>
-                    <input type="number" name="price" value="<?= htmlspecialchars($product->getPrice()) ?>" placeholder="0" required class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
+                    <input type="number" name="price" value="<?= htmlspecialchars($product->getPrice()) ?>" placeholder="0" required class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
                 </div>
 
                 <!-- Precio de oferta -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="offer_price">Precio de oferta:</label>
-                    <input type="number" name="offer_price" value="<?= htmlspecialchars($product->getOfferPrice() ?? '') ?>" placeholder="0" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500">
+                    <input type="number" name="offer_price" value="<?= htmlspecialchars($product->getOfferPrice() ?? '') ?>" placeholder="0" class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
                 </div>
             </div>
 
@@ -49,9 +49,9 @@ if (!$product) {
                 <!-- Categoría -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="category">Categoría:</label>
-                    <select name="category" id="category" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913]">
+                    <select name="category" id="category" class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category->getId() ?>" <?= $category->getId() == $product->getIdCategory() ? 'selected' : '' ?> class="text-black">
+                            <option value="<?= $category->getId() ?>" <?= $category->getId() == $product->getIdCategory() ? 'selected' : '' ?> class="text-white">
                                 <?= htmlspecialchars($category->getName()) ?>
                             </option>
                         <?php endforeach; ?>
@@ -61,9 +61,9 @@ if (!$product) {
                 <!-- Marca -->
                 <div class="flex flex-col gap-2 items-start text-left w-full">
                     <label for="brand">Marca:</label>
-                    <select name="brand" id="brand" class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913]">
+                    <select name="brand" id="brand" class="text-[var(--dark-text-color)] w-full h-[48px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)]">
                         <?php foreach ($brands as $brand) : ?>
-                            <option value="<?= $brand->getId() ?>" <?= $brand->getId() == $product->getIdBrand() ? 'selected' : '' ?> class="text-black">
+                            <option value="<?= $brand->getId() ?>" <?= $brand->getId() == $product->getIdBrand() ? 'selected' : '' ?> class="text-white">
                                 <?= htmlspecialchars($brand->getName()) ?>
                             </option>
                         <?php endforeach; ?>
@@ -99,7 +99,7 @@ if (!$product) {
             <!-- Descripción -->
             <div class="flex flex-col gap-2 items-start text-left w-full">
                 <label for="description">Descripción:</label>
-                <textarea name="description" id="description" cols="30" rows="10" placeholder="Descripción..." class="w-full px-4 py-3 rounded-sm border border-[#D9D9D913] text-gray-500"><?= htmlspecialchars($product->getDescription() ?? '') ?></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" placeholder="Descripción..." class="text-[var(--dark-text-color)] w-full h-[200px] border-b-1 border-[var(--primary-color)] bg-[var(--background-color)] resize-none"><?= htmlspecialchars($product->getDescription() ?? '') ?></textarea>
             </div>
 
             <!-- Boton -->
