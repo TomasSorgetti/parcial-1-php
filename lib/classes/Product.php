@@ -24,6 +24,7 @@ class Product
      * @return Product Instancia del producto creado.
      * @throws Exception Si ocurre un error al crear el producto.
      * @throws Exception Si la categoría, marca o tags no existen.
+     * @throws Exception Si la categoría, marca o tags no existen.
      */
     public static function createProduct($productData): self
     {
@@ -380,19 +381,17 @@ class Product
      */
     public function deleteProduct(): void
     {
-        // TODO => cambiar a metodo estatico
         $isAdmin = User::isAdmin();
 
         if (!$isAdmin) throw new Exception("Necesitas ser admin para eliminar un producto.");
 
-        //??? supongo que se podría cambiar en la db que se elimine en cascada cada tag
 
         $tagQuery = 'DELETE FROM product_tag WHERE product_id = :id';
         $tagParams = ['id' => $this->id];
         Database::execute($tagQuery, $tagParams);
 
         $query = 'DELETE FROM product WHERE id = :id';
-        $params = ['id' => $this->id];
+        $params = ['id' => $this->getId()];
         Database::execute($query, $params);
     }
 

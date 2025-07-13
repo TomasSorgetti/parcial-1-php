@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-06-2025 a las 19:49:38
+-- Tiempo de generación: 13-07-2025 a las 23:02:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -96,13 +96,15 @@ INSERT INTO `page` (`id`, `path`, `title`, `active`, `restricted`) VALUES
 (6, 'success', 'Se enviaron los datos', 1, 0),
 (7, 'signin', 'Iniciar sesión', 1, 0),
 (8, 'signup', 'Registrarse', 1, 0),
-(9, 'dashboard', 'Dashboard', 1, 1),
-(10, 'admin-categories', 'Categorías', 1, 1),
-(11, 'admin-brands', 'Marcas', 1, 1),
-(12, 'admin-tags', 'Etiquetas', 1, 1),
-(13, 'admin-products', 'Productos', 1, 1),
-(14, 'add-product', 'Añadir producto', 1, 1),
-(15, 'update-product', 'Modificar producto', 1, 1);
+(9, 'dashboard', 'Dashboard', 1, 2),
+(10, 'admin-categories', 'Categorías', 1, 2),
+(11, 'admin-brands', 'Marcas', 1, 2),
+(12, 'admin-tags', 'Etiquetas', 1, 2),
+(13, 'admin-products', 'Productos', 1, 2),
+(14, 'add-product', 'Añadir producto', 1, 2),
+(15, 'update-product', 'Modificar producto', 1, 2),
+(16, 'checkout', 'Checkout', 1, 1),
+(17, 'profile', 'Perfil de usuario', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -150,6 +152,26 @@ INSERT INTO `product` (`id`, `id_category`, `id_brand`, `title`, `image`, `descr
 (21, 1, 6, 'Mother ASUS ROG STRIX Z890-E GAMING WIFI LGA1851', '1750865955.png', 'Placa base ASUS ROG STRIX Z890-E con socket LGA1851, diseñada para Intel Core de 15ta generación. Ofrece soporte para DDR5, PCIe 5.0, WiFi 6E y USB 4.0. Con un VRM robusto, es ideal para gaming de alto nivel y configuraciones personalizadas.', 20, 700.00, 700.00),
 (22, 1, 6, 'Mother ASUS ROG MAXIMUS Z790 HERO LGA1700 DDR5', '1750865972.png', 'La ASUS ROG MAXIMUS Z790 HERO con socket LGA1700 es compatible con procesadores Intel Core de 12ta/13ta generación. Soporta DDR5, PCIe 5.0 y WiFi 6E. Con refrigeración avanzada y conectividad premium, es perfecta para gaming y workstations de alto rendimiento.', 20, 700.00, 700.00),
 (23, 1, 6, 'Mother ASUS ROG STRIX Z890-F GAMING WIFI LGA1851', '1750865994.png', 'Placa base ASUS ROG STRIX Z890-F con socket LGA1851 para procesadores Intel Core de última generación. Soporta DDR5, PCIe 5.0 y WiFi 7, con un diseño optimizado para gaming. Incluye conectividad avanzada y refrigeración eficiente para un rendimiento estable.', 20, 700.00, 700.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `product_purchase`
+--
+
+CREATE TABLE `product_purchase` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `purchase_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `product_purchase`
+--
+
+INSERT INTO `product_purchase` (`id`, `purchase_id`, `product_id`, `quantity`) VALUES
+(12, 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -224,6 +246,27 @@ INSERT INTO `product_tag` (`id`, `product_id`, `tag_id`) VALUES
 (153, 23, 4),
 (155, 1, 1),
 (156, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `user_id`, `date`, `amount`) VALUES
+(12, 1, '2025-07-13', 1930.00),
+(13, 1, '2025-07-13', 369.00);
 
 -- --------------------------------------------------------
 
@@ -306,12 +349,27 @@ ALTER TABLE `product`
   ADD KEY `id_brand` (`id_brand`);
 
 --
+-- Indices de la tabla `product_purchase`
+--
+ALTER TABLE `product_purchase`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchease_id` (`purchase_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indices de la tabla `product_tag`
 --
 ALTER TABLE `product_tag`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `tag_id` (`tag_id`);
+
+--
+-- Indices de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indices de la tabla `tag`
@@ -336,37 +394,49 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `product_purchase`
+--
+ALTER TABLE `product_purchase`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `product_tag`
 --
 ALTER TABLE `product_tag`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+
+--
+-- AUTO_INCREMENT de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -386,11 +456,24 @@ ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `product_purchase`
+--
+ALTER TABLE `product_purchase`
+  ADD CONSTRAINT `product_purchase_ibfk_1` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_purchase_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `product_tag`
 --
 ALTER TABLE `product_tag`
   ADD CONSTRAINT `product_tag_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `product_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

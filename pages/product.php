@@ -37,7 +37,7 @@ $product = Product::getProductById($productId);
             <form action="lib/actions/cart/addToCart.php" method="POST">
                 <input type="hidden" name="productId" value="<?= $product->getId() ?>">
                 <label for="quantity">Cantidad:</label>
-                <input type="number" name="quantity" id="quantity" min="1" max="10" value="1" class=" border-2 border-gray-700 text-center w-24"></label>
+                <input type="number" name="quantity" id="quantity" min="1" value="1" class=" border-2 border-gray-700 text-center w-24"></label>
                 <input type="submit" value="Agregar al carrito" class="text-[var(--light-text-color)] px-6 py-3 bg-[var(--primary-color)] rounded-full text-center uppercase font-bold cursor-pointer">
             </form>
         </div>

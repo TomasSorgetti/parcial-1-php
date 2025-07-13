@@ -9,6 +9,10 @@ $product = Product::getProductById($productId);
 if (!$product) {
     die("Error: Producto no encontrado.");
 }
+
+echo "<pre class=''>";
+print_r($product);
+echo "</pre>";
 ?>
 <main>
     <section class="container mx-auto text-center">

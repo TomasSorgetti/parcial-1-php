@@ -4,9 +4,9 @@ $purchases = Purchase::getByUserId($user->getId());
 
 ?>
 
-<main class="mt-8 container mx-auto">
+<main class="mt-8 container mx-auto p-4">
     <h1 class="mt-32 text-3xl font-bold uppercase text-center md:text-5xl">Perfil de usuario</h1>
-    <p>Nombre de usuario: <?= $user->getUsername() ?></p>
+    <p class="mt-12">Nombre de usuario: <?= $user->getUsername() ?></p>
     <p>Email: <?= $user->getEmail() ?></p>
     <p>Rol: <?= $user->getRole() ?></p>
 
