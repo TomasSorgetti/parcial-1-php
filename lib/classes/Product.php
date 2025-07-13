@@ -4,14 +4,54 @@ class Product
 {
     private $id;
     private $id_category;
+    private Category $category;
     private $id_brand;
+    private Brand $brand;
     private $title;
     private $image;
     private $description;
     private $stock;
     private $price;
     private $offer_price;
-    private $tags;
+    private array $tags;
+
+    private static $createValues = ['id', 'id_category', 'id_brand', 'title', 'image', 'description', 'stock', 'price', 'offer_price'];
+
+    /**
+     * Crea un nuevo producto a partir de los datos proporcionados.
+     * 
+     * @param array $productData Datos del producto.
+     * @return Product Instancia del producto creado.
+     * @throws Exception Si ocurre un error al crear el producto.
+     * @throws Exception Si la categoría, marca o tags no existen.
+     */
+    public static function createProduct($productData): self
+    {
+        // Product
+        $newProduct = new self();
+
+        foreach (self::$createValues as $value) {
+            $newProduct->{$value} = $productData[$value];
+        }
+
+        // Categoría
+        $newProduct->category = Category::getCategoryById($productData['id_category']);
+
+        // Marca
+        $newProduct->brand = Brand::getBrandById($productData['id_brand']);
+
+        // tags
+        $tagIds = !empty($productData['tags']) ? explode(",", $productData['tags']) : [];
+
+        $tags = [];
+        foreach ($tagIds as $tagId) {
+            $tags[] = Tag::getTagById($tagId);
+        };
+
+        $newProduct->tags = $tags;
+
+        return $newProduct;
+    }
 
     /**
      * Obtiene todos los productos con filtros, ordenamiento y paginación.
@@ -26,8 +66,6 @@ class Product
     public static function getAllProducts(string $search = "", string $categoryQuery = "all", string $orderQuery = "price_asc", int $pageQuery = 1, int $prodPerPage = 9): array
     {
         // NOTA => No vuelvo a hacer paginación en mi vida.
-
-        // TODO => El search hace la busqueda con la categoria, deberia hacer la busqueda reseteando todo el query. Estoy cansado jefe....
 
         $query = "SELECT product.* 
                   FROM product";
@@ -74,7 +112,13 @@ class Product
 
         $query .= " LIMIT $limit OFFSET $offset";
 
-        $products = Database::execute($query, $params, self::class);
+        $productList = Database::execute($query, $params);
+
+        $products = [];
+
+        foreach ($productList as $product) {
+            $products[] = self::createProduct($product);
+        }
 
         return [
             "total_pages" => ceil($totalProducts / $prodPerPage),
@@ -92,7 +136,15 @@ class Product
     public static function getProductsWithoutPagination(): array
     {
         $query = "SELECT * FROM product";
-        return Database::execute($query, [], self::class);
+        $productList = Database::execute($query, []);
+
+        $products = [];
+
+        foreach ($productList as $product) {
+            $products[] = self::createProduct($product);
+        }
+
+        return $products;
     }
 
     /**
@@ -103,7 +155,7 @@ class Product
      */
     public static function getProductById(string $id): ?self
     {
-        $query = "SELECT product.*, GROUP_CONCAT(tag.id) AS tag_ids, GROUP_CONCAT(tag.name) AS tag_names
+        $query = "SELECT product.*, GROUP_CONCAT(tag.id) as tags
               FROM product
               LEFT JOIN product_tag ON product.id = product_tag.product_id
               LEFT JOIN tag ON product_tag.tag_id = tag.id
@@ -111,8 +163,7 @@ class Product
               GROUP BY product.id";
         $params = [(int)$id];
 
-        $results = Database::execute($query, $params, self::class);
-
+        $results = Database::execute($query, $params);
 
         if (!is_array($results) || empty($results)) {
             return null;
@@ -120,15 +171,7 @@ class Product
 
         $product = $results[0];
 
-        if (!empty($product->tag_ids)) {
-            $ids = explode(',', $product->tag_ids);
-            $names = explode(',', $product->tag_names);
-            $product->tags = array_combine($ids, $names);
-        } else {
-            $product->tags = [];
-        }
-
-        return $product;
+        return self::createProduct($product);
     }
 
     /**
@@ -141,7 +184,15 @@ class Product
     {
         $query = "SELECT * FROM product WHERE id_category = :id_category";
         $params = ['id_category' => $id_category];
-        return Database::execute($query, $params, self::class);
+        $productList = Database::execute($query, $params);
+
+        $products = [];
+
+        foreach ($productList as $product) {
+            $products[] = self::createProduct($product);
+        }
+
+        return $products;
     }
 
     /**
@@ -510,16 +561,6 @@ class Product
     }
 
     /**
-     * Obtiene la categoría del producto
-     */
-    public function getCategory()
-    {
-        $category = (new Category())->getCategoryById($this->id_category);
-
-        return $category->getName();
-    }
-
-    /**
      * Get the value of tags
      */
     public function getTags(): array
@@ -535,6 +576,46 @@ class Product
     public function setTags($tags)
     {
         $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of brand
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Set the value of brand
+     *
+     * @return  self
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
 
         return $this;
     }

@@ -21,7 +21,7 @@ $product = Product::getProductById($productId);
             <div class="flex gap-2 flex-wrap">
                 <?php
                 foreach ($product->getTags() as $tag) {
-                    echo ("<span class='text-[var(--primary-color)] text-2xl font-bold'>$tag</span>");
+                    echo ("<span class='text-[var(--primary-color)] text-2xl font-bold'>" . $tag->getName() . "</span>");
                 }
                 ?>
             </div>
