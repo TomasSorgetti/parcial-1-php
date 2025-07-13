@@ -219,3 +219,43 @@
 #cart.active {
   transform: translateX(0px);
 }
+
+.dropdown-menu {
+  display: none;
+}
+
+.relative:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-menu {
+  min-width: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu {
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.relative:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdown-menu {
+  display: none;
+  min-width: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  top: 100%;
+  left: 0;
+}
+
+.relative:hover .dropdown-menu {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}

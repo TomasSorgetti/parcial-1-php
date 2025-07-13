@@ -1,6 +1,9 @@
+# Admin user
+    - email: tomassorgetti456@gmail.com
+    - password: admin
+    - role: superadmin
 
-- email: tomassorgetti456@gmail.com
-- password: admin
-- role: superadmin
-
-- cualquier usuario creado via formulario de registro obtiene el rol "user" automáticamente
+# Client User
+    - email: tomassorgetti@gmail.coma
+    - password: asdasd
+    - role: user

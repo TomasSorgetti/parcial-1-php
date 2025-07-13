@@ -45,6 +45,6 @@ $cartItems = Cart::get();
             ?>
         </div>
         <p class="font-bold text-3xl">Total: $<?php echo Cart::getTotal(); ?></p>
-        <a href="lib/actions/cart/buyCart.php" class="cursor-pointer w-full text-center bg-[var(--primary-color)] py-2 rounded-sm">Finalizar compra</a>
+        <a href="lib/actions/cart/purchase.php" class="cursor-pointer w-full text-center bg-[var(--primary-color)] py-2 rounded-sm">Finalizar compra</a>
     </section>
 </main>

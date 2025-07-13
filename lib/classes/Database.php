@@ -70,14 +70,14 @@ class Database
     {
         try {
             $conn = self::getConnection();
-            // Verificar si la conexión está activa
             if (!$conn->getAttribute(PDO::ATTR_CONNECTION_STATUS)) {
                 throw new PDOException('Conexión perdida con la base de datos.', 'HY000');
             }
             $statement = $conn->prepare($query);
             $statement->execute($params);
 
-            $type = strtoupper(substr($query, 0, strpos($query, ' ') ?: strlen($query)));
+            $trimmedQuery = trim($query);
+            $type = strtoupper(substr($trimmedQuery, 0, strpos($trimmedQuery, ' ') ?: strlen($trimmedQuery)));
 
             if ($type === 'SELECT') {
                 return $entity ? $statement->fetchAll(PDO::FETCH_CLASS, $entity) : $statement->fetchAll();
@@ -89,12 +89,15 @@ class Database
 
             return true;
         } catch (PDOException $error) {
-            // Verificar si el error es de conexión
             if (in_array($error->getCode(), ['1045', '2002', 'HY000'])) {
                 self::handleConnectionError($error);
             }
-            // Re-lanzar para errores de SQL (consultas erróneas)
             throw $error;
         }
+    }
+
+    public static function getLastInsertId(): int
+    {
+        return self::getConnection()->lastInsertId();
     }
 }

@@ -80,6 +80,15 @@ class Auth
         }
     }
 
+    public static function getUserId()
+    {
+        if (isset($_SESSION['session'])) {
+            return $_SESSION['session']['id'];
+        }
+
+        return null;
+    }
+
     /**
      * Verifica si el usuario tiene permisos de administrador.
      *
@@ -91,7 +100,9 @@ class Auth
         if (!$level) {
             return false;
         }
-
+        if ($level === 1) {
+            return true;
+        }
         if (isset($_SESSION['session'])) {
             if ($_SESSION['session']['role'] === "admin" || $_SESSION['session']['role'] === "superadmin") {
                 return true;

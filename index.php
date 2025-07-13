@@ -4,6 +4,8 @@ require_once 'lib/utils/autoload.php';
 $pageQuery = $_GET['page'] ?? 'home';
 
 $page = Page::getPage($pageQuery);
+
+Auth::verify($page->getRestricted());
 ?>
 
 
@@ -43,6 +45,11 @@ $page = Page::getPage($pageQuery);
 </head>
 
 <body class="bg-[var(--background-color)] text-[var(--light-text-color)]">
+
+    <div class="fixed top-20 right-20 z-50 flex flex-col space-y-2 w-80">
+        <?php echo Alert::get(); ?>
+    </div>
+
     <header id="header" class="fixed top-0 left-0 w-full z-30 bg-[var(--transparent-black-color)]">
         <?php
         $isAdmin = User::isAdmin();
@@ -81,10 +88,20 @@ $page = Page::getPage($pageQuery);
                     </li>
                     <li>
                         <?php
-                        $isLoggedIn = empty($_SESSION['session']);
+                        $isLoggedIn = !empty($_SESSION['session']);
 
-                        if (!$isLoggedIn) {
-                            echo ("<a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='lib/actions/auth/logout.php'>Logout</a>");
+                        if ($isLoggedIn) {
+                            echo ("
+                            <div class='relative'>
+                                <button id='dropdownbutton' class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)] focus:outline-none'>
+                                    Profile
+                                </button>
+                                <div id='dropdownmenu' class='dropdown-menu hidden absolute top-8 left-0 bg-[var(--background-color)] border border-gray-700 rounded-lg p-4 flex flex-col gap-2 z-10'>
+                                    <a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='index.php?page=profile'>Profile</a>
+                                    <a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='lib/actions/auth/logout.php'>Logout</a>
+                                </div>
+                            </div>
+                            ");
                         } else {
                             echo ("<a class='uppercase hover:text-[var(--primary-color)] text-[var(--dark-text-color)]' href='index.php?page=signin'>Login</a>");
                         }
